@@ -1,0 +1,8 @@
+{
+  "runId": "34060209561-1",
+  "siteId": "8785ef5e-0899-40a0-94f7-17d8e50524b1",
+  "repository": "lmsmenezes2020-arch/metropole-brasil",
+  "expiresAt": 1788729608857,
+  "algorithm": "RSA-OAEP-256+A256GCM",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA4jqCsCSBswFHr1Z6m1Th\nvR4qG5lac27/HELM+ClBVYmD2QZt45/xcZLM71sLmvLUMQY9B1OZIvZUsZV3ft4h\nCcz31Ic5zOPUcEtDLT9x6Wqa0YufP6GDGnBN9ekS1kMUfQbU4lwY58CTt5dnOnWs\nU2Ui5Mk8ALdynJFcXooRPazNVWjdOBbqEUr66nBIqYtzUagMntxQ+1xiGakKrVH5\nZzRWzaX1tqH2/rx6Rb4Qyh2LQN4xto8+DP74+mjccIpnmwL5/+yOAnHAd7T/fadC\nI4bi4Xi99gI+Cyj0XfC7iSetZ6xwJA8pmkFxgBkoXVGfzbhS/WcRNbYPkivrF44N\nMPB6k9j7IQWasF9TubEVZ6zOG/LwceYFgOle1AJncdeMpPqo1cB8nhZQELC0toa9\nIfDdRKvQEW3gyrMzycBxnP6KUAzMNfTR6EPVj+S4Iyt88FSGKXHEyKYqz24Ny4OJ\n94KlXySVj9OrFq3d/HlpxvGUweI9vIaZYRiYGGpkA5D5AgMBAAE=\n-----END PUBLIC KEY-----\n"
+}
