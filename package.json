@@ -1,0 +1,18 @@
+{
+  "name": "metropole-brasil-servidor",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Metrópole Brasil com salas HTTPS e salvamento atômico no servidor.",
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "node server/local.mjs",
+    "test": "node --test test/*.test.mjs",
+    "build": "node scripts/check.mjs",
+    "deploy": "netlify deploy --build --prod",
+    "test:http": "node test/client-http.mjs"
+  },
+  "dependencies": { "@netlify/blobs": "11.0.2" },
+  "devDependencies": { "@netlify/functions": "latest", "netlify-cli": "latest" }
+}
