@@ -1,0 +1,37 @@
+name: Publicar e verificar Netlify existente
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publicar-netlify.yml'
+permissions:
+  contents: write
+concurrency:
+  group: metropole-producao-netlify
+  cancel-in-progress: false
+jobs:
+  publicar:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir página e 29 testes de regras e servidor
+        run: |
+          npm run build
+          npm test
+      - name: Testar seis clientes HTTP e reconexão em ambiente isolado
+        run: npm run test:http
+      - name: Publicar no site autorizado com credencial temporária criptografada
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/deploy-bridge.mjs
+      - name: Testar criação, entrada, construção e recuperação no servidor público
+        run: node test/production-smoke.mjs
