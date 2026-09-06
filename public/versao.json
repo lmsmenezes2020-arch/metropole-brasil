@@ -1,0 +1,6 @@
+{
+  "app": "metropole",
+  "version": "4.0.0",
+  "apiVersion": 4,
+  "requiresServer": true
+}

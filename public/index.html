@@ -1,0 +1,2024 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#2458ed" name="theme-color"/><meta content="Metrópole Brasil: 40 casas, ruas brasileiras, capital inicial de R$ 25 milhões, construção livre e salas online." name="description"/><title>Metrópole — Brasil Milionário 4.0</title><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232458ed'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia' font-size='44' fill='%23ffffff'%3EM%3C/text%3E%3C/svg%3E" rel="icon"/><style>/* Metrópole — Brasil Milionário 4.0: construção livre, economia em reais e layout ampliado. */
+:root {
+ --bg:#edf3ff;--paper:#ffffff;--ink:#142549;--muted:#556785;--line:#d9e3f3;
+ --green:#2458ed;--lime:#c3fb77;--gold:#ffbb32;--danger:#cc3149;
+ --shadow:0 12px 35px #253f7710;--radius:20px;
+ font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ color:var(--ink);background:var(--bg);font-synthesis:none;
+}
+*{box-sizing:border-box}
+html{min-width:280px;scroll-padding-top:16px}
+body{margin:0;min-width:280px;background:radial-gradient(ellipse at 5% 5%,#dfe8ff 0,transparent 38%),radial-gradient(ellipse at 100% 45%,#d7f7ef 0,transparent 40%),var(--bg)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;color:inherit;touch-action:manipulation}
+button:disabled{opacity:.45;cursor:not-allowed}
+button,input,select,textarea{outline-offset:4px;border-radius:12px}
+:focus-visible{outline:3px solid #bb42ff}
+a{color:inherit}h1,h2,h3,p{margin:0}
+input,select,textarea{background:white;border:1px solid var(--line);padding:12px 13px;width:100%;color:var(--ink);min-width:0}
+label{font-size:11px;font-weight:750;display:block;margin-bottom:7px}
+.hidden{display:none!important}.shell{max-width:1400px;margin:auto;padding:0 28px;width:100%}
+header{height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #cddbf3}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-1px;font-size:25px;text-decoration:none;flex-shrink:0}
+.brandmark{display:grid;place-items:center;background:linear-gradient(135deg,#346aff,#5b28e4);color:white;width:40px;height:40px;border-radius:12px;font-family:Georgia,serif;font-size:29px;box-shadow:3px 3px 0 #76e8cd}
+.brand small{display:block;font-size:8px;letter-spacing:2.5px;font-weight:800;margin-top:2px;color:#4c6590}
+.head-actions{display:flex;align-items:center;gap:8px;min-width:0}
+.pill,.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+.pill{padding:7px 10px;border:1px solid var(--line);border-radius:30px;background:#ffffffba;letter-spacing:.4px;line-height:1.35}
+.dot{width:7px;height:7px;flex-shrink:0;border-radius:50%;background:#0fac8a;display:inline-block;box-shadow:0 0 0 3px #0fac8a12}.dot.off{background:#ef9d12}
+.btn{border:1px solid var(--line);background:white;padding:12px 16px;font-weight:750;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .15s,box-shadow .15s;line-height:1.4;min-width:0;max-width:100%;text-align:center}
+.btn:hover:not(:disabled){background:#edf2ff;box-shadow:0 3px 12px #234db115}
+.btn.primary{background:linear-gradient(120deg,#275ff5,#3946dd);color:#fff;border-color:#2757ea;box-shadow:0 4px 12px #2857e824}
+.btn.primary:hover:not(:disabled){background:#1649da}
+.btn.accent{background:#bffa73;color:#153819;border-color:#a9de68}
+.btn.danger{color:#b62c42;border-color:#f1bfc8;background:#fff0f3}
+.btn.sm{font-size:11px;padding:8px 11px;border-radius:9px}
+.btn.ghost{background:transparent;box-shadow:none}.btn.full{width:100%}
+.muted{color:var(--muted)}.micro{font-size:11px;line-height:1.6}.bodycopy{font-size:14px;line-height:1.7;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);min-width:0}
+.landing{padding:42px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:44px;align-items:center}
+.hero-copy{min-width:0}.hero-copy .eyebrow{color:#3355c9;margin-bottom:18px;font-size:10px}
+.hero-copy h1{font-size:clamp(38px,4.4vw,64px);letter-spacing:-2.9px;line-height:1.03;font-weight:850;margin-bottom:18px}
+.hero-copy h1 em{color:#2657e8;font-family:Georgia,serif;font-weight:400}
+.hero-copy>.bodycopy{max-width:470px;font-size:14px}
+.entry{margin-top:23px;padding:22px;max-width:490px}.entry h2{font-size:17px;margin-bottom:18px;letter-spacing:-.3px}
+.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.row>input{flex:1}.row>.btn{flex-shrink:0}
+.fieldrow{display:grid;grid-template-columns:minmax(0,1fr) 138px;gap:12px}.entry .btn.full{margin-top:12px}
+.sep{display:flex;align-items:center;gap:10px;font-size:10px;color:var(--muted);margin:15px 0}.sep:before,.sep:after{content:'';height:1px;background:var(--line);flex:1}
+.roominput{text-transform:uppercase;letter-spacing:3px;font-weight:800}
+.helper{font-size:11px;line-height:1.65;margin-top:12px;color:var(--muted)}
+.alert{background:#fff4df;border:1px solid #edd3a0;padding:12px 14px;border-radius:12px;color:#805714;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.hero-board{position:relative;background:#192e60;border:1px solid #304b84;padding:12px;border-radius:24px;min-width:0;box-shadow:0 20px 50px #244b8c25}
+.hero-board .board{pointer-events:none;--board-fit:100%}
+.floating-card{position:relative;margin:12px 0 0;background:#fff;border:0;padding:12px 16px;border-radius:14px;display:flex;gap:13px;align-items:center}
+.floating-icon{font-size:26px;color:#20451b;background:var(--lime);padding:6px 12px;border-radius:11px}
+.floating-card strong{display:block;font-size:16px}.features{display:flex;gap:18px;margin-top:23px;flex-wrap:wrap}
+.features span{font-size:11px;font-weight:700;display:flex;gap:7px;align-items:center}.features i{font-style:normal;color:#3263ee}
+footer{padding:16px 0 22px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.page-title{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:18px 0 16px}
+.page-title h1{font-size:26px;letter-spacing:-.9px}.page-title p{font-size:11px;color:var(--muted);margin-top:5px}
+.summary-pill{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.gamegrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start;max-width:1130px;margin:auto}
+.board-wrap{padding:12px;min-width:0;max-width:100%;position:relative;align-self:start}
+.board-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;flex-wrap:wrap}
+.board-toolbar>span{font-size:10px;color:var(--muted)}
+.board-tools{display:flex;gap:5px;align-items:center;min-width:0}
+.board-tools .btn{font-size:10px;padding:7px 9px}
+.board-viewport{width:100%;max-width:100%;margin:0 auto;position:relative;overflow:visible;min-width:0;line-height:normal}
+.board{width:var(--board-fit,100%);max-width:100%;min-width:0;aspect-ratio:1;position:relative;display:grid;grid-template-columns:1.65fr repeat(9,minmax(0,1fr)) 1.65fr;grid-template-rows:1.65fr repeat(9,minmax(0,1fr)) 1.65fr;gap:2px;background:#192d5a;border:2px solid #192d5a;border-radius:11px;padding:2px;isolation:isolate;margin:0 auto;container-type:inline-size}
+.tile{position:relative;background:#f5f8ff;border:0;border-radius:4px;text-align:center;padding:3px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;min-height:0;overflow:visible;color:#13274a;line-height:1.12;font-family:inherit}
+.tile.color{background:var(--group-tint,#f0ebff);padding-top:11px}
+.tile.color:before{content:'';position:absolute;top:0;left:0;right:0;height:8px;background:var(--group-color);border-radius:3px 3px 0 0}
+.tile[data-side=left].color{padding:2px 10px 2px 2px}.tile[data-side=left].color:before{inset:0 0 0 auto;width:7px;height:auto;border-radius:0 3px 3px 0}
+.tile[data-side=right].color{padding:2px 2px 2px 10px}.tile[data-side=right].color:before{inset:0 auto 0 0;width:7px;height:auto;border-radius:3px 0 0 3px}
+.tile:hover{z-index:6;outline:2px solid #20e6ce;outline-offset:-2px}
+.tile.focus{box-shadow:inset 0 0 0 2.5px #051e46;outline:2px solid #4ff8c3;outline-offset:-2px;z-index:3}
+.tile-name{font-size:clamp(6px,1.58cqw,11px);font-weight:850;line-height:1.1;display:block;max-width:100%;overflow-wrap:normal;hyphens:none;text-wrap:balance}
+.tile-long{display:none}.tile-short{display:inline}
+.tile-price{font-size:clamp(5px,1.3cqw,9px);font-weight:650;line-height:1.12;white-space:nowrap;color:#355171;max-width:100%}
+.tile-icon{font-size:clamp(10px,3cqw,20px);line-height:1;display:block;color:#334fac;font-weight:800}
+.tile[data-type=chance]{background:#f1dfff}.tile[data-type=chance] .tile-icon{color:#9c2edf}
+.tile[data-type=tax]{background:#ffe3e8}.tile[data-type=tax] .tile-icon{color:#d73862}
+.tile[data-type=rail]{background:#dce9ff}.tile[data-type=rail] .tile-icon{color:#2259d1}
+.tile[data-type=utility]{background:#caf6fc}.tile[data-type=utility] .tile-icon{color:#087f9a}
+.tile[data-type=bonus]{background:#d9fac4}.tile[data-type=bonus] .tile-icon{color:#2d860f}
+.tile[data-type=start]{background:#c8ff6e;color:#203b14}.tile[data-type=start] .tile-price{color:#294b18}.tile[data-type=start] .tile-icon{color:#244415}
+.tile[data-type=free]{background:#16cda2;color:#073e34}.tile[data-type=free] .tile-icon{color:#054d40}
+.tile[data-type=jail]{background:#ffc055;color:#4b3108}.tile[data-type=jail] .tile-icon{color:#664109}
+.tile[data-type=gotojail]{background:#f9517f;color:white}.tile[data-type=gotojail] .tile-icon{color:white}
+.tile-owner{position:absolute;top:0;right:0;font-size:clamp(6px,1.4cqw,9px);line-height:1;color:var(--owner-color);text-shadow:0 0 2px white,0 0 2px white;pointer-events:none;background:#ffffffbd;border-radius:3px;padding:1px;z-index:3}
+.tile-owner:empty{display:none}.tile-level{position:absolute;bottom:0;right:0;padding:1px 2px;font-size:clamp(6px,1.35cqw,9px);line-height:1;letter-spacing:0;color:#093d43;background:#ffffffdb;border-radius:3px;z-index:4;pointer-events:none}
+.tile-level:empty{display:none}
+.board-center{grid-column:2/11;grid-row:2/11;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:16px;text-align:center;background:radial-gradient(ellipse at 0 0,#276bfd 0,transparent 75%),linear-gradient(145deg,#233fa3,#102655 88%);border:1px solid #4773c3;border-radius:6px;gap:clamp(5px,1.8cqw,13px);min-width:0;min-height:0;color:white}
+.board-center:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#c1e6ff12 1px,transparent 1px),linear-gradient(90deg,#c1e6ff12 1px,transparent 1px);background-size:25px 25px;pointer-events:none}
+.board-center:after{content:'';position:absolute;width:45%;height:45%;right:-24%;bottom:10%;border:1px solid #69ebff3a;border-radius:50%;box-shadow:0 0 0 35px #52dbff09,0 0 0 70px #52dbff09;pointer-events:none}
+.board-center>*{z-index:1;max-width:100%}.board-brand{font-size:clamp(21px,7cqw,48px);font-weight:850;letter-spacing:-1.8px;line-height:1.05;color:#fff}
+.board-sub{font-size:clamp(6px,1.45cqw,9px);letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-top:5px;color:#83e9ec}
+.skyline{display:flex;align-items:flex-end;justify-content:center;gap:clamp(3px,.9cqw,6px);height:clamp(25px,13cqw,86px);opacity:1;margin:4px 0;flex-shrink:0}
+.building{width:clamp(17px,5.5cqw,38px);background:#50d4dd;border:2px solid #a0f4ff;border-bottom:none;position:relative;box-shadow:4px 0 0 #16325b}
+.building:after{content:'';position:absolute;inset:6px 4px;background:repeating-linear-gradient(0deg,transparent,transparent 5px,#113b72 5px,#113b72 8px)}
+.building:nth-child(1){height:48%;background:#bcff75;border-color:#e0ffb7}.building:nth-child(2){height:80%;background:#42c3ff;border-color:#8bdbff}.building:nth-child(3){height:100%;background:#a386ff;border-color:#d8cfff}.building:nth-child(4){height:66%;background:#f967b5;border-color:#ffabd5}.building:nth-child(5){height:42%;background:#ffcb62;border-color:#ffe6b0}
+.dice-pair{display:flex;gap:10px;justify-content:center}.die{width:clamp(29px,7.5cqw,51px);height:clamp(29px,7.5cqw,51px);background:#fff;border:1px solid #a2c6ed;border-bottom:3px solid #a8c9eb;border-radius:10px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:clamp(2px,.65cqw,4px);padding:clamp(5px,1.3cqw,9px);box-shadow:0 6px 16px #020e4c30;transform:rotate(-7deg)}
+.die:last-child{transform:rotate(7deg)}.pip{border-radius:50%;background:#2459df;visibility:hidden}.pip.on{visibility:visible}.dice-pair.rolling .die{animation:shake .18s 4}
+.center-label{font-size:clamp(7px,1.65cqw,11px);letter-spacing:1.4px;text-transform:uppercase;font-weight:800;line-height:1.35;color:#cbfda1}
+.center-status{font-size:clamp(7px,1.7cqw,11px);line-height:1.35;color:#dceaff;max-width:90%;min-height:12px}
+#centerAction{width:85%;display:flex;justify-content:center;min-height:0}#centerAction:empty{display:none}
+#centerAction .btn{background:#c3fc76;border:1px solid #d9ffab;color:#153e27;padding:8px 15px;font-size:clamp(9px,2cqw,13px);border-radius:10px;box-shadow:0 4px 12px #06184340;min-height:32px;max-width:100%}
+#centerAction .btn:hover{background:#d7ff9e}#centerAction .pill{background:#ffffff15;color:#c4d6f7;border-color:#ffffff22;font-size:9px}
+#lastCardButton{max-width:95%;font-size:clamp(7px,1.6cqw,10px);padding:5px 7px;background:#ffffff15;color:white;border-color:#ffffff40}
+.pawn-layer{position:absolute;inset:0;pointer-events:none;z-index:7}
+.pawn{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);height:var(--pawn-size,14px);width:var(--pawn-size,14px);display:grid;place-items:center;background:var(--pc);border:1.5px solid #fff;border-radius:50%;color:white;font-size:var(--pawn-font,8px);font-weight:900;box-shadow:0 1px 4px #10213a88;transition:left .5s cubic-bezier(.4,0,.2,1),top .5s cubic-bezier(.4,0,.2,1);line-height:1}
+.pawn.active{outline:1.5px solid #fff;box-shadow:0 0 0 2.5px var(--pc),0 1px 5px #10213a;z-index:2}
+.board-legend{display:flex;justify-content:space-between;gap:8px;margin-top:10px;font-size:10px;line-height:1.5;color:var(--muted);align-items:center;flex-wrap:wrap}
+.group-colors{display:inline-flex;gap:4px;align-items:center}.group-colors i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--swatch);border:1px solid #0d2c6b15}
+.sidebar{display:flex;flex-direction:column;gap:14px;min-width:0}.panel{padding:18px}
+.action-card{padding:20px;background:linear-gradient(150deg,#ecf0ff,#f4f7ff);border-color:#bfcffa;border-top:4px solid #4560fa}
+.action-card .eyebrow{font-size:9px;letter-spacing:1.05px;margin-bottom:10px;color:#405dba}
+.action-card h2{font-size:22px;letter-spacing:-.5px;margin-bottom:8px;line-height:1.18;overflow-wrap:anywhere}
+.action-card p{font-size:12px;line-height:1.6;color:#4d6080;margin-bottom:15px}
+.actions{display:flex;flex-direction:column;gap:8px}.action-card.wait{background:white;border-color:var(--line);border-top-color:#9dabe0}
+.section-header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:13px;flex-wrap:wrap}
+.section-header h2,.section-header h3{font-size:14px;letter-spacing:-.2px}.section-header .btn{padding:6px 8px}
+.playerlist{display:flex;flex-direction:column;gap:7px}.person{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;padding:10px;background:white;position:relative;min-width:0}
+.avatar{flex:0 0 auto;width:32px;height:32px;border-radius:10px;color:white;background:var(--pc);display:grid;place-items:center;font-size:16px}
+.person-info{flex:1;min-width:0}.person-name{font-size:12px;font-weight:800;overflow-wrap:anywhere}.person-sub{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4}
+.person-money{font-size:13px;font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap}.person.turn{border-color:#98b3ff;background:#eef3ff}.person.eliminated{opacity:.48}
+.person.turn:before{content:'';position:absolute;left:-1px;top:12px;bottom:12px;width:3px;background:#3b66ee;border-radius:4px}
+.empty-seat{padding:14px;border:1px dashed #c7d6ef;border-radius:12px;font-size:12px;color:#64769a}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:13px}.stat{background:#eff4ff;padding:11px;border-radius:12px;min-width:0}
+.stat span{font-size:9px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}.stat strong{font-size:19px;letter-spacing:-.5px;overflow-wrap:anywhere}
+.mini-properties{display:flex;gap:6px;flex-wrap:wrap}.mini-prop{height:32px;width:28px;border-radius:5px;border:1px solid var(--line);background:linear-gradient(var(--group-color) 0 8px,white 8px);font-size:12px;padding-top:8px;color:#254173}
+.bottomgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;margin:20px auto 28px;max-width:1130px}
+.feed{height:200px;overflow:auto;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin}.feed-line{display:flex;gap:8px;font-size:11px;line-height:1.6;border-bottom:1px solid #edf0f7;padding-bottom:7px;overflow-wrap:anywhere}
+.feed-line time{color:#6f82a0;font-size:9px;white-space:nowrap;padding-top:2px}.feed-line.success{color:#127256}.feed-line.money{color:#63612a}.feed-line.alert{border:none;padding:7px;border-radius:7px}.feed-line.card{box-shadow:none;border:0;background:#f3eafa;padding:7px}
+.chat-feed{height:160px;overflow:auto;scrollbar-width:thin;display:flex;flex-direction:column;gap:8px;margin-bottom:12px}.chat-msg{font-size:12px;line-height:1.5;overflow-wrap:anywhere}.chat-msg b{font-size:10px;color:#3559b5}.chat-msg div{background:#edf2ff;border-radius:3px 10px 10px 10px;padding:7px 10px;margin-top:3px;width:fit-content;max-width:100%}.chat-form{display:flex;gap:7px}.chat-form input{font-size:13px}
+.connection-banner{margin-top:12px}
+.lobby{max-width:970px;margin:28px auto 45px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}.lobby-main{padding:28px}.lobby-main h1{font-size:29px;letter-spacing:-1px;margin:12px 0 8px}
+.room-code-box{background:linear-gradient(135deg,#edf0ff,#dcf8f0);border:1px dashed #92acd3;border-radius:15px;padding:18px;text-align:center;margin:23px 0}
+.room-code-box .code{font-size:36px;font-weight:850;letter-spacing:7px;display:block;margin:8px 0 14px;color:#2558d7}.lobby-side{padding:25px;display:flex;flex-direction:column;gap:23px}
+.rules-list{counter-reset:rule;display:flex;flex-direction:column;gap:16px}.rule{display:flex;gap:11px;font-size:12px;line-height:1.6}.rule:before{counter-increment:rule;content:counter(rule,decimal-leading-zero);font-size:11px;font-weight:850;color:#4b71d9;padding-top:2px}.rule b{display:block}
+.modal-backdrop{position:fixed;inset:0;background:#061737b3;backdrop-filter:blur(5px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:white;border-radius:23px;box-shadow:0 25px 100px #0003;width:100%;max-width:620px;max-height:90vh;max-height:90dvh;overflow:auto;border:1px solid #d4e0f3;min-width:0}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:23px 23px 17px}.modal-head h2{font-size:24px;letter-spacing:-.6px;overflow-wrap:anywhere}.modal-head .eyebrow{font-size:9px;margin-bottom:8px;color:#4364b2}.modal-body{padding:0 23px 23px;min-width:0}
+.close{width:34px;height:34px;padding:0;flex-shrink:0;font-size:22px;background:#edf2ff;border:0;border-radius:50%}
+.deed-banner{height:11px;background:var(--group-color);border-radius:23px 23px 0 0}.rent-table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12px}.rent-table td{padding:10px 1px;border-bottom:1px solid var(--line)}.rent-table td:last-child{text-align:right;font-weight:700}.rent-table tr.selected{color:#173eb2;background:#edf2ff}
+.deed-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}.trade-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:18px 0}.trade-side{background:#f0f4fd;padding:13px;border-radius:12px;min-width:0}.trade-side h3{font-size:12px;margin-bottom:12px}.check-list{display:flex;flex-direction:column;gap:8px;margin:12px 0;max-height:180px;overflow:auto}.check-list label{display:flex;align-items:center;gap:7px;font-size:11px;line-height:1.4;font-weight:500}.check-list input{width:15px;height:15px;flex-shrink:0;margin:0;padding:0}
+.winner{background:linear-gradient(145deg,#e6ebff,#dbfbdf);text-align:center;padding:24px;border-radius:16px}.winner .cup{font-size:42px;color:#8a6500}.winner h3{font-size:28px;letter-spacing:-1px;margin:8px}.ranking{display:flex;justify-content:space-between;gap:13px;border-bottom:1px solid var(--line);padding:13px 0;font-size:13px}
+.toast-wrap{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:7px;width:min(92%,440px);pointer-events:none}.toast{background:#183c7a;color:white;padding:11px 16px;font-size:12px;line-height:1.6;border-radius:12px;box-shadow:0 8px 30px #0002;animation:toastin .2s}.toast.error{background:#9c2941}
+.timer{font-variant-numeric:tabular-nums;background:#fff2cc;color:#855705;border-radius:8px;padding:4px 8px;font-weight:750}.mobile-action{display:none}
+.busy-overlay{position:fixed;inset:0;display:grid;place-items:center;background:#edf3ffda;z-index:130;backdrop-filter:blur(5px);padding:20px}.busy-box{background:white;border:1px solid var(--line);border-radius:20px;padding:30px;max-width:340px;text-align:center;line-height:1.6}.spinner{width:30px;height:30px;border:3px solid #d1ddf8;border-top-color:#335fef;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 15px}
+.inspect-asset{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);min-width:0}.asset-chip{width:9px;height:35px;border-radius:5px;background:var(--group-color);flex-shrink:0}.inspect-asset strong{display:block;font-size:12px;overflow-wrap:anywhere}.inspect-asset small{font-size:10px;color:var(--muted)}.inspect-asset .btn{margin-left:auto;flex-shrink:0}.mode-note{font-size:10px;line-height:1.6;margin-top:9px;color:#586d94}.only-file{display:none}.file-mode .only-file{display:block}
+.event-card{background:#e7fbea;border:1px solid #afdfb8;border-radius:18px;padding:22px}.event-card.reverse{background:#ffecf0;border-color:#efb8c5}.event-card p{font-size:19px;line-height:1.6;margin:16px 0}.event-card .eyebrow{font-size:11px}
+.catalog-group{margin:18px 0}.catalog-group h3{font-size:13px;display:flex;gap:8px;align-items:center}.catalog-group h3 i{width:13px;height:13px;border-radius:4px;display:inline-block;background:var(--swatch);flex-shrink:0}
+/* Full-board mode never enlarges beyond the visible viewport. */
+body.board-focus{overflow:hidden}
+.board-focus .board-wrap{position:fixed;inset:10px;z-index:80;display:flex;flex-direction:column;align-items:stretch;justify-content:center;margin:0;background:#f5f8ff;border:1px solid #b6c9eb;box-shadow:0 0 0 100vmax #101f49eb;padding:10px;border-radius:16px}
+.board-focus .board-viewport{flex:0 0 auto;min-height:0}.board-focus .board-toolbar{flex-shrink:0}.board-focus .board-legend{flex-shrink:0;justify-content:center}
+.board-focus .mobile-action{display:none}.board-focus .board-tools [data-ui=zoom]{background:#203a74;color:white;border-color:#203a74}
+@keyframes shake{0%,100%{transform:rotate(-9deg) translateY(0)}50%{transform:rotate(17deg) translateY(-7px)}}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes toastin{from{opacity:0;transform:translateY(-6px)}}
+@container (max-width:430px){
+ .tile{border-radius:3px;padding:1px}
+ .tile.color{padding:6px 1px 1px}.tile.color:before{height:5px}
+ .tile[data-side=left].color{padding:1px 6px 1px 1px}.tile[data-side=left].color:before{width:4px}
+ .tile[data-side=right].color{padding:1px 1px 1px 6px}.tile[data-side=right].color:before{width:4px}
+ .tile-name{font-size:1.8cqw;line-height:1.08}.tile-price{font-size:1.48cqw}
+ .tile[data-side=left] .tile-icon,.tile[data-side=right] .tile-icon{display:none}
+ .tile[data-side=corner] .tile-icon{display:block;font-size:4.4cqw}
+ .tile:not(.color):not([data-side=corner]) .tile-icon{font-size:3.4cqw}
+ .board-center{padding:9px;gap:2cqw}.board-brand{font-size:7.6cqw;letter-spacing:-1px}
+ .skyline{height:12cqw;margin:2px 0}.building{border-width:1.5px}
+ .board-sub{letter-spacing:1.3px}.center-label{letter-spacing:.7px}
+ #centerAction .btn{padding:6px 10px;min-height:28px}
+ .tile-level{font-size:1.7cqw;padding:0 1px}.tile-owner{font-size:1.7cqw;padding:0 1px}
+}
+@container(max-width:300px){.board-center .skyline{display:none}.board-brand{font-size:8cqw}.board-center{gap:2.4cqw}#lastCardButton{padding:2px 5px}#centerAction .btn{min-height:24px;font-size:3cqw;padding:4px 8px}}
+@media(min-width:981px){.sidebar{max-height:calc(100svh - 160px);overflow-y:auto;scrollbar-width:thin;padding-right:3px}.gamegrid .board-wrap{justify-self:stretch}}
+@media(max-width:980px){.shell{padding:0 18px}.landing{gap:24px}.hero-copy h1{font-size:43px}.gamegrid{grid-template-columns:minmax(0,1fr) 285px;gap:12px}.panel{padding:15px}.action-card{padding:16px}.action-card h2{font-size:20px}.board-toolbar>span:nth-child(2){display:none}}
+@media(max-width:740px){
+ .shell{padding:0 12px}header{height:62px}.brand{font-size:22px;gap:8px}.brandmark{width:33px;height:33px;font-size:25px;border-radius:10px}.brand small{font-size:7px;letter-spacing:2px}.head-actions{gap:6px}.head-actions>.pill{display:none}.head-actions .btn{font-size:10px;padding:8px 9px}
+ .landing{grid-template-columns:minmax(0,1fr);max-width:540px;margin:auto;gap:22px;padding:26px 0 30px}.hero-copy h1{font-size:44px;letter-spacing:-2px}.hero-copy .eyebrow{font-size:9px}.entry{max-width:none;padding:19px}.entry label{font-size:10px}.fieldrow{grid-template-columns:minmax(0,1fr) 120px;gap:10px}.hero-board{width:100%;max-width:540px;padding:9px;border-radius:20px}.floating-card{padding:10px 12px}.floating-card strong{font-size:14px}.floating-card .micro{font-size:9px}.features{gap:14px}.features span{font-size:10px}
+ .page-title{margin:12px 0 12px;gap:8px;align-items:center}.page-title h1{font-size:21px;letter-spacing:-.6px}.page-title p{font-size:10px;max-width:240px}.summary-pill{gap:5px;max-width:155px}.summary-pill .pill{font-size:8px;padding:5px 7px}.summary-pill .btn{font-size:9px;padding:5px 7px}
+ .gamegrid{grid-template-columns:minmax(0,1fr);gap:13px}.board-wrap{padding:8px;border-radius:17px}.board-toolbar{margin-bottom:8px;gap:5px}.board-toolbar>.pill{font-size:9px;padding:6px 8px}.board-tools{gap:5px}.board-tools .btn{font-size:10px;padding:7px 8px}
+ .board-legend{font-size:9px;gap:5px;margin-top:8px}.group-colors{gap:3px}.group-colors i{width:8px;height:8px}
+ .sidebar{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;max-height:none;overflow:visible}.panel{padding:18px}.action-card{padding:18px}.action-card h2{font-size:22px}.action-card .actions{display:flex;flex-direction:column}.action-card .btn{padding:12px}
+ .bottomgrid{grid-template-columns:minmax(0,1fr);gap:13px;margin:15px 0 22px}
+ .mobile-action{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:8px;z-index:60;padding:10px 12px max(10px,env(safe-area-inset-bottom));background:#fffffff5;border-top:1px solid #c7d7f7;backdrop-filter:blur(12px);box-shadow:0 -5px 18px #234c9311;min-height:63px}
+ .mobile-action>div{min-width:0;flex:1}.mobile-action strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}.mobile-action small{font-size:10px;color:var(--muted);display:block;margin-top:3px}.mobile-action .btn{font-size:12px;padding:11px 16px;max-width:62vw;flex-shrink:0}
+ .in-game{padding-bottom:90px}.lobby{grid-template-columns:minmax(0,1fr);margin-top:20px;gap:15px}.lobby-main,.lobby-side{padding:22px}
+ .modal-backdrop{padding:10px}.modal{max-height:94dvh;border-radius:18px}.modal-head{padding:20px 17px 14px}.modal-head h2{font-size:21px}.modal-body{padding:0 17px 20px}.trade-cols{gap:8px}.trade-side{padding:10px}.deed-actions{grid-template-columns:minmax(0,1fr)}
+ .row.mobile-stack{flex-direction:column;align-items:stretch}.event-card p{font-size:17px}.board-focus .board-wrap{inset:7px;padding:8px}.board-focus .board-legend{font-size:9px}footer{font-size:9px}
+}
+@media(max-width:365px){.shell{padding:0 8px}.brand{font-size:19px}.brandmark{width:29px;height:29px;font-size:23px}.brand small{font-size:6px}.head-actions .btn{padding:8px;font-size:9px}.page-title h1{font-size:18px}.page-title p{font-size:9px}.summary-pill{max-width:127px}.page-title .pill{font-size:7px;letter-spacing:0}.board-toolbar>.pill{font-size:8px}.board-tools .btn{font-size:9px;padding:7px}.board-legend .legend-symbols{font-size:8px}.fieldrow{grid-template-columns:minmax(0,1fr) 112px}.hero-copy h1{font-size:38px}.entry{padding:16px}.features{gap:10px}.features span{font-size:9px}}
+@media(max-height:500px) and (min-width:600px){
+ .in-game header{height:44px}.in-game .brandmark{width:27px;height:27px;font-size:22px}.in-game .brand{font-size:20px}.in-game .page-title{margin:7px 0}.in-game .page-title h1{font-size:19px}.in-game .page-title p{display:none}
+ .gamegrid{grid-template-columns:minmax(0,1fr) minmax(240px,36%);gap:12px}.sidebar{max-height:calc(100svh - 100px);overflow:auto;display:flex;padding-right:3px}.in-game .mobile-action{display:none}.in-game{padding-bottom:0}.board-legend{margin-top:5px;font-size:8px}.board-toolbar{margin-bottom:6px}.board-toolbar .btn{padding:5px 8px}.board-toolbar .pill{padding:4px 7px}.group-colors i{width:7px;height:7px}.board-focus .board-legend{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* MANUAL COMPLETO 2.0 */
+.rules-body .rule-section{margin:0 0 25px;padding:0 0 20px;border-bottom:1px solid var(--line)}
+.rules-body .rule-number{font-size:11px;font-weight:800;color:var(--green)}
+.rules-body h2{font-size:21px;line-height:1.25;margin:7px 0 12px;color:var(--green)}
+.rules-body h3{font-size:15px;margin:18px 0 7px;color:var(--green)}
+.rules-body p{font-size:13px;line-height:1.75;margin:0 0 12px}
+.rules-body p.rule-sub{font-size:9px;letter-spacing:.7px;line-height:1.5}
+.rules-body p.small{font-size:11px}
+.rules-body .rule-call{background:#eef3e8;border-left:3px solid var(--green);padding:13px 14px;border-radius:8px;font-size:12px;line-height:1.7;margin:16px 0}
+.rules-body .rule-table-wrap{width:100%;overflow-x:auto;margin:16px 0}
+.rules-body .rule-table{border-collapse:collapse;width:100%;min-width:460px;font-size:11px;line-height:1.55}
+.rules-body .rule-table th{background:var(--green);color:white;padding:9px;font-size:9px;text-align:left}
+.rules-body .rule-table td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.rules-body .rule-table tr:nth-child(even){background:#f2f5ed}
+.rules-body #regra-8 .rule-table{min-width:750px}
+.rules-body a{color:var(--green);text-underline-offset:2px}
+
+.rules-body .rule-call{background:#eef3ff}.rules-body .rule-table tr:nth-child(even){background:#f1f5ff}
+
+/* BRASIL 3.0 — width-first board, readable financial panels and opt-in chat */
+.shell{max-width:1760px;padding:0 24px}.gamegrid{max-width:none;grid-template-columns:minmax(0,1fr) 350px;gap:20px}.board-wrap{padding:14px}
+.board{max-width:none;width:var(--board-fit,100%);margin:0 auto}.board-viewport.magnified{overflow:auto;max-height:78dvh;border-radius:12px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+.board-viewport.magnified .board{margin:0}.board-hint{font-size:12px;color:var(--muted);line-height:1.4;margin:9px 0 0}
+.sidebar{max-height:none;overflow:visible;padding:0}.page-title h1{font-size:30px}.page-title p{font-size:13px}.panel{padding:20px}
+.tile-name{font-size:clamp(7px,1.58cqw,15px);overflow-wrap:anywhere}.tile-price{font-size:clamp(6px,1.3cqw,12px)}
+.board-brand{font-size:clamp(28px,7.6cqw,74px)}.board-sub{font-size:clamp(8px,1.5cqw,16px)}.center-label{font-size:clamp(9px,1.6cqw,17px)}.center-status{font-size:clamp(9px,1.6cqw,18px)}
+#centerAction .btn{font-size:clamp(11px,1.8cqw,19px);min-height:40px;padding:12px 20px}.board .die{width:clamp(35px,7cqw,80px);height:clamp(35px,7cqw,80px)}
+.person{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px}.person-money{grid-column:2;font-size:16px;justify-self:start;white-space:nowrap}.person .remove-player{grid-column:3;grid-row:1 / 3;font-size:11px;padding:7px 8px}.person .avatar{grid-row:1 / 3}.person-name{font-size:14px}.person-sub{font-size:11px}.person-info{min-width:0}
+.stats{grid-template-columns:minmax(0,1fr);gap:9px}.stat{padding:14px}.stat strong{font-size:clamp(17px,1.6vw,22px);overflow-wrap:anywhere}.stat span{font-size:11px}.section-header h2{font-size:17px}
+.modal{max-width:720px}.bodycopy{font-size:15px}.modal-body .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.build-now{background:#eff7ff;border:1px solid #c7dffc;border-radius:14px;padding:16px;margin:16px 0}.portfolio-asset{padding:12px 0 18px;border-bottom:1px solid var(--line)}.portfolio-asset .inspect-asset{border:0}.portfolio-asset .helper{margin-top:8px}.rent-table th{text-align:left;padding:10px 0}.rent-table th:last-child{text-align:right}.company-formula{padding:18px;background:#eaf4ff;border:1px solid #c4dcff;border-radius:16px;margin:18px 0}.company-formula span{font-size:11px;font-weight:800;display:block}.company-formula strong{font-size:28px;display:block;margin:8px 0}.company-formula p strong,.company-formula p b{font-size:inherit;display:inline}
+.chat-panel{min-width:0}.chat-head{gap:9px;align-items:center}.chat-head .row{flex-shrink:0;gap:4px}.chat-head .btn{font-size:11px;padding:7px}.chat-feed{height:280px}.chat-form .btn{flex-shrink:0;padding:10px 13px}.chat-msg{font-size:14px}.chat-msg.mine{align-self:flex-end;max-width:90%}.chat-msg .sticker-message{background:linear-gradient(135deg,#f4edff,#e7f4ff);border:1px solid #d9d8ff;padding:12px 16px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:6px;width:fit-content}.sticker-message>span{font-size:48px;line-height:1.1}.sticker-message>strong{font-size:13px;color:#243e77}
+.sticker-picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;padding:12px 0;max-height:240px;overflow:auto}.sticker-choice{border:1px solid var(--line);background:#f8faff;border-radius:12px;padding:8px 3px;display:flex;flex-direction:column;align-items:center;gap:4px}.sticker-choice span{font-size:30px}.sticker-choice small{font-size:9px;line-height:1.15}.sticker-choice:hover{background:#def3ff}
+.floating-chat{position:fixed;right:20px;bottom:20px;z-index:85;width:min(400px,calc(100vw - 24px));box-shadow:0 16px 70px #13274a55;padding:16px;max-height:80dvh;overflow:auto}.floating-chat .chat-feed{height:min(270px,35dvh)}
+.chat-fab{position:fixed;bottom:22px;right:22px;z-index:85;box-shadow:0 8px 25px #133b7555;border:1px solid #173cbd;background:#2458ed;color:white;border-radius:50px;font-size:24px;padding:13px 17px;min-width:58px;min-height:58px}.chat-fab span{font-size:12px}
+#reactionLayer{position:fixed;inset:0;z-index:87;pointer-events:none;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;padding:22px;gap:10px}.floating-reaction{background:#fffffff2;border:2px solid #d8c9ff;box-shadow:0 10px 40px #12305833;border-radius:24px;padding:12px 18px;display:flex;flex-direction:column;align-items:center;max-width:190px;animation:reaction-in 3.5s ease both}.floating-reaction>span{font-size:56px}.floating-reaction b{font-size:14px}.floating-reaction small{font-size:10px;color:var(--muted);margin-top:4px}
+@keyframes reaction-in{0%{opacity:0;transform:translateY(50px) scale(.75)}15%,78%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-55px) scale(.9)}}
+@media(max-width:1100px){.shell{padding:0 16px}.gamegrid{grid-template-columns:minmax(0,1fr);gap:16px}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.sidebar>section:last-child{grid-column:1/-1}.sidebar>section:last-child .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.gamegrid .board-wrap{width:100%;max-width:100%;justify-self:center}}
+@media(max-width:740px){.shell{padding:0 9px}.board-wrap{padding:6px}.board-toolbar{gap:6px}.board-toolbar>.pill{font-size:8px;padding:5px 7px}.board-tools .btn{font-size:10px;padding:6px 7px}.board-tools{gap:4px}.page-title h1{font-size:23px}.page-title p{font-size:11px}.board-hint{font-size:11px}.sidebar{display:flex;flex-direction:column}.sidebar>section{width:100%}.person{grid-template-columns:34px minmax(0,1fr) auto}.person-money{font-size:15px}.stat strong{font-size:20px}.stats,.sidebar>section:last-child .stats{grid-template-columns:minmax(0,1fr)}.modal-body .stats{grid-template-columns:minmax(0,1fr)}.floating-chat{right:10px;bottom:88px;width:calc(100vw - 20px);max-height:72dvh}.chat-fab{bottom:89px;right:14px}.chat-feed{height:230px}.chat-head h2{font-size:15px}.chat-head .micro{font-size:10px}.chat-head .btn{font-size:10px;padding:6px}.chat-form .btn{padding:10px}.chat-form input{font-size:14px}.board-focus .chat-fab{bottom:16px}.board-focus .floating-chat{bottom:16px}.board-focus .board-wrap{padding:6px}.board-focus .board-hint{display:none}#reactionLayer{padding:12px}.floating-reaction{max-width:150px;padding:10px 13px}.floating-reaction>span{font-size:44px}.floating-reaction b{font-size:12px}#centerAction .btn{padding:7px 9px;min-height:30px}.board .die{border-radius:10px}}
+@media(max-height:500px) and (min-width:600px){.gamegrid{grid-template-columns:minmax(0,1fr) 290px}.sidebar{display:flex;max-height:none;overflow:visible}.floating-chat{bottom:10px;max-height:92dvh}.chat-fab{bottom:12px}.board-focus .board-hint{display:none}}
+@media(prefers-reduced-motion:reduce){.floating-reaction{animation:none}}
+
+.tile-price:empty{display:none}
+@container(max-width:330px){
+ .tile[data-side=left] .tile-name,.tile[data-side=right] .tile-name{font-size:1.9cqw;line-height:1.05}
+ .tile[data-side=left] .tile-price,.tile[data-side=right] .tile-price{font-size:1.55cqw;line-height:1.05}
+ .tile[data-side=left],.tile[data-side=right]{gap:0}
+ .tile:not(.color):not([data-side=corner]) .tile-name{font-size:1.9cqw}
+}
+/* 3.1: legible contract panels, on both mobile and desktop. */
+.finance-gap{margin-top:14px}.finance-heading{font-size:18px;margin:22px 0 12px}.finance-menu{display:flex;flex-wrap:wrap;gap:9px;margin:17px 0}.finance-menu>.btn{flex:1 1 150px;white-space:normal;line-height:1.45}.finance-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.finance-consent{display:flex;align-items:flex-start;gap:10px;margin:18px 0;font-size:13px;line-height:1.6;font-weight:500}.finance-consent input{width:20px;height:20px;flex:0 0 20px;margin:4px 0;padding:0}.loan-card{border:1px solid #cedaf0;border-radius:16px;padding:17px;margin:12px 0;background:#f7faff}.loan-card.overdue{border-color:#dc4949;background:#fff4f1}.loan-card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;font-size:14px}.loan-balance{display:block;font-size:27px;line-height:1.3;margin-top:12px;overflow-wrap:anywhere}.loan-card .helper{font-size:13px;line-height:1.7;margin-bottom:14px}.loan-preview{background:#edf3ff;border:1px solid #cedcf7;border-radius:16px;padding:20px;margin:18px 0;overflow-wrap:anywhere}.loan-preview>span{display:block;letter-spacing:1px;font-size:11px;font-weight:800;line-height:1.6}.loan-preview>strong{display:block;font-size:30px;margin:8px 0;line-height:1.25}.loan-preview p{font-size:14px;line-height:1.7}.finance-warning{background:#fff3e4;border:1px solid #edbd81;border-radius:14px;padding:17px;margin:16px 0;font-size:17px}.finance-warning .helper{font-size:13px;margin-bottom:14px}.finance-history{padding:14px;border:1px solid var(--line);border-radius:12px;margin:20px 0}.finance-history summary{font-weight:750;cursor:pointer;font-size:14px}#financePanel .stat strong{font-size:clamp(14px,1.5vw,21px);overflow-wrap:anywhere}#loanForm label{line-height:1.5}#loanForm input,#loanForm select{font-size:16px}
+@media(max-width:420px){.loan-preview>strong{font-size:26px}.loan-balance{font-size:24px}.finance-columns{gap:10px}.finance-menu>.btn{flex-basis:100%}.loan-card{padding:14px}.loan-card-head .pill{font-size:9px}#financePanel .stat strong{font-size:17px}}
+
+.pawn-layer{overflow:hidden;border-radius:inherit}
+
+</style><meta name="metropole-version" content="3.1-reconexao-contratos"/></head>
+<body><div class="shell"><header><a class="brand" href="#" id="brandLink"><span class="brandmark">M</span><span>metrópole<small>BRASIL MILIONÁRIO</small></span></a><div class="head-actions"><span class="pill"><span class="dot" id="connectionDot"></span><span id="connectionLabel">JOGO DE TABULEIRO</span></span><button class="btn ghost sm" data-ui="rules">Como jogar ↗</button><button class="btn ghost sm hidden" data-ui="exit" id="exitButton">Sair</button></div></header><main id="app"></main><footer><span>Metrópole · Brasil Milionário 4.0 · servidor</span><span>Valores fictícios · Sem apostas · Sem vínculo com as marcas</span></footer></div><div class="mobile-action hidden" id="mobileBar"></div><div id="modalRoot"></div><div aria-live="polite" class="toast-wrap" id="toastRoot"></div><div id="busyRoot"></div><div aria-hidden="true" id="reactionLayer"></div><button aria-label="Abrir conversa" class="chat-fab hidden" data-ui="chatToggle" id="chatFab">💬 <span id="chatUnread"></span></button><script>
+
+/* Metrópole — motor de regras compartilhado; sem bibliotecas externas. */
+(function(root,factory){ if(typeof module==='object'&&module.exports) module.exports=factory(); else root.Metro=factory(); })(typeof globalThis!=='undefined'?globalThis:this,function(){
+'use strict';
+const COLORS=['#7649e8','#ed781a','#009f90','#e53287','#2772e8','#967900'];
+const TOKENS=['◆','●','▲','✦','✚','■'];
+const GROUPS={
+  "conexao": {
+    "name": "Batel · Curitiba",
+    "color": "#a651ef",
+    "colorName": "Lilás",
+    "build": 450000
+  },
+  "comunidade": {
+    "name": "Praia do Canto · Vitória",
+    "color": "#05b9e5",
+    "colorName": "Azul-claro",
+    "build": 600000
+  },
+  "robotica": {
+    "name": "Savassi e Lourdes · BH",
+    "color": "#f52d98",
+    "colorName": "Rosa",
+    "build": 750000
+  },
+  "empreendedor": {
+    "name": "Orlas do Nordeste",
+    "color": "#ff871a",
+    "colorName": "Laranja",
+    "build": 900000
+  },
+  "inteligencia": {
+    "name": "Moinhos de Vento · Porto Alegre",
+    "color": "#f53e51",
+    "colorName": "Vermelho",
+    "build": 1000000
+  },
+  "sustentavel": {
+    "name": "Litoral de Santa Catarina",
+    "color": "#f4c818",
+    "colorName": "Amarelo",
+    "build": 1200000
+  },
+  "inteligente": {
+    "name": "Jardins · São Paulo",
+    "color": "#0ebc83",
+    "colorName": "Verde",
+    "build": 1500000
+  },
+  "premium": {
+    "name": "Orla do Rio de Janeiro",
+    "color": "#2852ef",
+    "colorName": "Azul-escuro",
+    "build": 1800000
+  }
+};
+const STARTING_CASH=25000000, PASS_START=2000000, JAIL_FEE=500000, HOTEL_LEVEL=5, BID_MIN=200000, BID_STEP=100000;
+const cashfmt=v=>"R$ "+Math.round(v).toLocaleString("pt-BR");
+const STICKERS=[{"id": "deal", "emoji": "🤝", "label": "Fechado!"}, {"id": "rich", "emoji": "🤑", "label": "Bom negócio!"}, {"id": "home", "emoji": "🏠", "label": "Casa nova!"}, {"id": "hotel", "emoji": "🏨", "label": "Virou hotel!"}, {"id": "laugh", "emoji": "😂", "label": "Essa foi boa!"}, {"id": "wow", "emoji": "😮", "label": "Que jogada!"}, {"id": "dice", "emoji": "🎲", "label": "Boa sorte!"}, {"id": "oops", "emoji": "😅", "label": "Apertou o caixa!"}, {"id": "clap", "emoji": "👏", "label": "Mandou bem!"}, {"id": "party", "emoji": "🎉", "label": "Vamos jogar!"}, {"id": "thinking", "emoji": "🤔", "label": "Pensando…"}, {"id": "heart", "emoji": "💚", "label": "Valeu, turma!"}];
+const TILES=[
+  {
+    "name": "Início",
+    "short": "Início",
+    "type": "start",
+    "icon": "↗"
+  },
+  {
+    "name": "Rua Comendador Araújo",
+    "short": "C. Araújo",
+    "city": "Curitiba · PR",
+    "type": "property",
+    "group": "conexao",
+    "price": 1200000,
+    "rents": [
+      48000,
+      144000,
+      300000,
+      540000,
+      840000,
+      1200000
+    ]
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Avenida do Batel",
+    "short": "Batel",
+    "city": "Curitiba · PR",
+    "type": "property",
+    "group": "conexao",
+    "price": 1400000,
+    "rents": [
+      56000,
+      168000,
+      350000,
+      630000,
+      980000,
+      1400000
+    ]
+  },
+  {
+    "name": "Imposto sobre patrimônio",
+    "short": "Imposto",
+    "type": "tax",
+    "icon": "▤",
+    "amount": 2000000
+  },
+  {
+    "name": "Metrô de São Paulo",
+    "short": "Metrô SP",
+    "type": "rail",
+    "price": 2000000,
+    "rate": 40000,
+    "icon": "⇆"
+  },
+  {
+    "name": "Rua Desembargador Sampaio",
+    "short": "D. Sampaio",
+    "city": "Vitória · ES",
+    "type": "property",
+    "group": "comunidade",
+    "price": 1600000,
+    "rents": [
+      64000,
+      192000,
+      400000,
+      720000,
+      1120000,
+      1600000
+    ]
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Avenida Rio Branco",
+    "short": "Rio Branco",
+    "city": "Vitória · ES",
+    "type": "property",
+    "group": "comunidade",
+    "price": 1800000,
+    "rents": [
+      72000,
+      216000,
+      450000,
+      810000,
+      1260000,
+      1800000
+    ]
+  },
+  {
+    "name": "Avenida Saturnino de Brito",
+    "short": "Saturnino",
+    "city": "Vitória · ES",
+    "type": "property",
+    "group": "comunidade",
+    "price": 2000000,
+    "rents": [
+      80000,
+      240000,
+      500000,
+      900000,
+      1400000,
+      2000000
+    ]
+  },
+  {
+    "name": "Auditoria",
+    "short": "Auditoria",
+    "type": "jail",
+    "icon": "⊞"
+  },
+  {
+    "name": "Rua Fernandes Tourinho",
+    "short": "F. Tourinho",
+    "city": "Belo Horizonte · MG",
+    "type": "property",
+    "group": "robotica",
+    "price": 2200000,
+    "rents": [
+      88000,
+      264000,
+      550000,
+      990000,
+      1540000,
+      2200000
+    ]
+  },
+  {
+    "name": "Cemig",
+    "short": "Cemig",
+    "type": "utility",
+    "price": 2500000,
+    "rate": 50000,
+    "icon": "ϟ"
+  },
+  {
+    "name": "Rua Alagoas",
+    "short": "Alagoas",
+    "city": "Belo Horizonte · MG",
+    "type": "property",
+    "group": "robotica",
+    "price": 2400000,
+    "rents": [
+      96000,
+      288000,
+      600000,
+      1080000,
+      1680000,
+      2400000
+    ]
+  },
+  {
+    "name": "Avenida do Contorno",
+    "short": "Contorno",
+    "city": "Belo Horizonte · MG",
+    "type": "property",
+    "group": "robotica",
+    "price": 2600000,
+    "rents": [
+      104000,
+      312000,
+      650000,
+      1170000,
+      1820000,
+      2600000
+    ]
+  },
+  {
+    "name": "Rumo Logística",
+    "short": "Rumo",
+    "type": "rail",
+    "price": 2400000,
+    "rate": 60000,
+    "icon": "⇆"
+  },
+  {
+    "name": "Avenida Boa Viagem",
+    "short": "Boa Viagem",
+    "city": "Recife · PE",
+    "type": "property",
+    "group": "empreendedor",
+    "price": 2800000,
+    "rents": [
+      112000,
+      336000,
+      700000,
+      1260000,
+      1960000,
+      2800000
+    ]
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Avenida Beira-Mar",
+    "short": "Beira-Mar",
+    "city": "Fortaleza · CE",
+    "type": "property",
+    "group": "empreendedor",
+    "price": 3000000,
+    "rents": [
+      120000,
+      360000,
+      750000,
+      1350000,
+      2100000,
+      3000000
+    ]
+  },
+  {
+    "name": "Avenida Oceânica",
+    "short": "Oceânica",
+    "city": "Salvador · BA",
+    "type": "property",
+    "group": "empreendedor",
+    "price": 3200000,
+    "rents": [
+      128000,
+      384000,
+      800000,
+      1440000,
+      2240000,
+      3200000
+    ]
+  },
+  {
+    "name": "Praça Livre",
+    "short": "P. Livre",
+    "type": "free",
+    "icon": "♧"
+  },
+  {
+    "name": "Rua Padre Chagas",
+    "short": "P. Chagas",
+    "city": "Porto Alegre · RS",
+    "type": "property",
+    "group": "inteligencia",
+    "price": 3400000,
+    "rents": [
+      136000,
+      408000,
+      850000,
+      1530000,
+      2380000,
+      3400000
+    ]
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Rua 24 de Outubro",
+    "short": "24 Outubro",
+    "city": "Porto Alegre · RS",
+    "type": "property",
+    "group": "inteligencia",
+    "price": 3600000,
+    "rents": [
+      144000,
+      432000,
+      900000,
+      1620000,
+      2520000,
+      3600000
+    ]
+  },
+  {
+    "name": "Rua Marquês do Pombal",
+    "short": "M. Pombal",
+    "city": "Porto Alegre · RS",
+    "type": "property",
+    "group": "inteligencia",
+    "price": 3800000,
+    "rents": [
+      152000,
+      456000,
+      950000,
+      1710000,
+      2660000,
+      3800000
+    ]
+  },
+  {
+    "name": "Correios",
+    "short": "Correios",
+    "type": "rail",
+    "price": 2800000,
+    "rate": 80000,
+    "icon": "✉"
+  },
+  {
+    "name": "Avenida dos Búzios",
+    "short": "Búzios",
+    "city": "Jurerê · Florianópolis · SC",
+    "type": "property",
+    "group": "sustentavel",
+    "price": 4000000,
+    "rents": [
+      160000,
+      480000,
+      1000000,
+      1800000,
+      2800000,
+      4000000
+    ]
+  },
+  {
+    "name": "Avenida dos Salmões",
+    "short": "Salmões",
+    "city": "Jurerê · Florianópolis · SC",
+    "type": "property",
+    "group": "sustentavel",
+    "price": 4200000,
+    "rents": [
+      168000,
+      504000,
+      1050000,
+      1890000,
+      2940000,
+      4200000
+    ]
+  },
+  {
+    "name": "Sabesp",
+    "short": "Sabesp",
+    "type": "utility",
+    "price": 2500000,
+    "rate": 50000,
+    "icon": "≈"
+  },
+  {
+    "name": "Avenida Atlântica",
+    "short": "Atlântica",
+    "city": "Balneário Camboriú · SC",
+    "type": "property",
+    "group": "sustentavel",
+    "price": 4600000,
+    "rents": [
+      184000,
+      552000,
+      1150000,
+      2070000,
+      3220000,
+      4600000
+    ]
+  },
+  {
+    "name": "Vá para a Auditoria",
+    "short": "Vá auditar",
+    "type": "gotojail",
+    "icon": "⇥"
+  },
+  {
+    "name": "Rua Haddock Lobo",
+    "short": "H. Lobo",
+    "city": "São Paulo · SP",
+    "type": "property",
+    "group": "inteligente",
+    "price": 5000000,
+    "rents": [
+      200000,
+      600000,
+      1250000,
+      2250000,
+      3500000,
+      5000000
+    ]
+  },
+  {
+    "name": "Rua Oscar Freire",
+    "short": "Oscar Freire",
+    "city": "São Paulo · SP",
+    "type": "property",
+    "group": "inteligente",
+    "price": 5400000,
+    "rents": [
+      216000,
+      648000,
+      1350000,
+      2430000,
+      3780000,
+      5400000
+    ]
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Rua Colômbia",
+    "short": "Colômbia",
+    "city": "São Paulo · SP",
+    "type": "property",
+    "group": "inteligente",
+    "price": 5800000,
+    "rents": [
+      232000,
+      696000,
+      1450000,
+      2610000,
+      4060000,
+      5800000
+    ]
+  },
+  {
+    "name": "Azul Linhas Aéreas",
+    "short": "Azul",
+    "type": "rail",
+    "price": 3200000,
+    "rate": 100000,
+    "icon": "✈"
+  },
+  {
+    "name": "Brasil em Jogo — Sorte ou Revés",
+    "short": "Sorte / Revés",
+    "type": "chance",
+    "icon": "✦"
+  },
+  {
+    "name": "Avenida Vieira Souto",
+    "short": "Vieira Souto",
+    "city": "Ipanema · Rio de Janeiro · RJ",
+    "type": "property",
+    "group": "premium",
+    "price": 6500000,
+    "rents": [
+      260000,
+      780000,
+      1625000,
+      2925000,
+      4550000,
+      6500000
+    ]
+  },
+  {
+    "name": "Bônus de investimento",
+    "short": "Bônus",
+    "type": "bonus",
+    "icon": "+",
+    "amount": 1500000
+  },
+  {
+    "name": "Avenida Delfim Moreira",
+    "short": "D. Moreira",
+    "city": "Leblon · Rio de Janeiro · RJ",
+    "type": "property",
+    "group": "premium",
+    "price": 7500000,
+    "rents": [
+      300000,
+      900000,
+      1875000,
+      3375000,
+      5250000,
+      7500000
+    ]
+  }
+].map((t,id)=>({...t,id}));
+const CARDS=[
+  {
+    "kind": "Sorte",
+    "title": "Bom negócio",
+    "text": "Sua negociação rendeu um prêmio. Receba R$ 1.500.000 do banco.",
+    "cash": 1500000
+  },
+  {
+    "kind": "Revés",
+    "title": "Reforma inesperada",
+    "text": "Uma manutenção emergencial custou R$ 800.000. Pague ao banco.",
+    "cash": -800000
+  },
+  {
+    "kind": "Sorte",
+    "title": "Recomeço promissor",
+    "text": "Avance para o Início e receba R$ 2.000.000.",
+    "move": 0
+  },
+  {
+    "kind": "Sorte",
+    "title": "Incentivo à inovação",
+    "text": "Seu projeto foi premiado. Receba R$ 2.000.000 do banco.",
+    "cash": 2000000
+  },
+  {
+    "kind": "Revés",
+    "title": "Documentação pendente",
+    "text": "Vá diretamente para a Auditoria, sem receber pelo Início.",
+    "jail": true
+  },
+  {
+    "kind": "Sorte",
+    "title": "Autorização de liberação",
+    "text": "Guarde esta carta para sair da Auditoria sem pagar a taxa. Ela volta ao baralho depois do uso.",
+    "pass": true
+  },
+  {
+    "kind": "Sorte",
+    "title": "Consultoria contratada",
+    "text": "Receba R$ 1.000.000 pelos serviços de sua equipe.",
+    "cash": 1000000
+  },
+  {
+    "kind": "Revés",
+    "title": "Obras obrigatórias",
+    "text": "A adequação de segurança custou R$ 1.200.000. Pague ao banco.",
+    "cash": -1200000
+  },
+  {
+    "kind": "Revés",
+    "title": "Revisão dos imóveis",
+    "text": "Pague R$ 100.000 por casa e R$ 400.000 por hotel. Terrenos sem construções não pagam.",
+    "repairs": true
+  },
+  {
+    "kind": "Sorte",
+    "title": "Economia de energia",
+    "text": "Receba R$ 1.400.000 por um projeto premiado.",
+    "cash": 1400000
+  },
+  {
+    "kind": "Revés",
+    "title": "Despesas administrativas",
+    "text": "Renove suas licenças: pague R$ 600.000.",
+    "cash": -600000
+  },
+  {
+    "kind": "Sorte",
+    "title": "Negócios em Porto Alegre",
+    "text": "Avance para a Rua Padre Chagas e resolva o terreno. Receba R$ 2.000.000 se passar pelo Início.",
+    "move": 21
+  },
+  {
+    "kind": "Sorte",
+    "title": "Prêmio de arquitetura",
+    "text": "Seu projeto se destacou. Receba R$ 1.000.000.",
+    "cash": 1000000
+  },
+  {
+    "kind": "Sorte",
+    "title": "Logística nacional",
+    "text": "Avance para os Correios e resolva a companhia. Receba R$ 2.000.000 se passar pelo Início.",
+    "move": 25
+  },
+  {
+    "kind": "Revés",
+    "title": "Reparo emergencial",
+    "text": "Pague R$ 1.500.000 por uma obra emergencial.",
+    "cash": -1500000
+  },
+  {
+    "kind": "Sorte",
+    "title": "Dividendos",
+    "text": "Seu investimento rendeu R$ 750.000. Receba do banco.",
+    "cash": 750000
+  },
+  {
+    "kind": "Revés",
+    "title": "Nova infraestrutura",
+    "text": "Pague R$ 1.000.000 pela adequação dos imóveis.",
+    "cash": -1000000
+  },
+  {
+    "kind": "Revés",
+    "title": "Destinação de resíduos",
+    "text": "Pague R$ 900.000 pela destinação dos resíduos de uma obra.",
+    "cash": -900000
+  }
+];
+
+function shuffled(values,rng=randomInt){
+  const a=values.slice();for(let i=a.length-1;i>0;i--){const j=rng(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;
+}
+function draw(s,rng){
+  if(!s.deck.length){s.deck=shuffled(s.discard,rng);s.discard=[];}
+  const index=s.deck.shift();check(CARDS[index],'O baralho está indisponível.');
+  if(!CARDS[index].pass)s.discard.push(index);
+  return {...CARDS[index],cardId:index};
+}
+function returnPass(s,p){
+  if(p.passes){s.discard.push(CARDS.findIndex(c=>c.pass));p.passes--;}
+}
+
+const clone=s=>JSON.parse(JSON.stringify(s));
+function randomInt(n){const a=new Uint32Array(1);if(typeof globalThis.crypto!=='undefined'&&crypto.getRandomValues){const limit=Math.floor(4294967296/n)*n;do{crypto.getRandomValues(a);}while(a[0]>=limit);return a[0]%n;}return Math.floor(Math.random()*n);}
+function id(){return Array.from({length:24},()=>randomInt(16).toString(16)).join('');}
+function code(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';return Array.from({length:6},()=>chars[randomInt(chars.length)]).join('');}
+function check(condition,msg){if(!condition)throw new Error(msg);}
+function name(v){const n=String(v||'').replace(/[\x00-\x1F\x7F]/g,'').trim().slice(0,18);check(n.length>0,'Digite seu nome.');return n;}
+function log(s,text,kind='info',now=Date.now()){s.log.push({id:id(),text,kind,at:now});s.log=s.log.slice(-70);}
+function player(s,pid){const p=s.players.find(p=>p.id===pid);check(p,'Jogador não encontrado.');return p;}
+function current(s){return s.players[s.turnIndex]||null;}
+function owned(s,pid){return TILES.filter(t=>s.properties[t.id]?.owner===pid);}
+function groupTiles(group){return TILES.filter(t=>t.group===group);}
+function fullGroup(s,pid,g){return g&&groupTiles(g).every(t=>s.properties[t.id].owner===pid);}
+function legacyWealth(s,pid){const p=player(s,pid);return p.cash+owned(s,pid).reduce((v,t)=>{const d=s.properties[t.id];return v+t.price-(d.mortgaged?Math.floor(t.price/2):0)+(t.group?d.level*GROUPS[t.group].build:0);},0)-(s.debt?.playerId===pid?s.debt.amount:0);}
+function rent(s,t,dice=7){
+ const d=s.properties[t.id];if(!d?.owner||d.mortgaged)return 0;
+ if(t.type==='property')return t.rents[d.level]*(d.level===0&&fullGroup(s,d.owner,t.group)?2:1);
+ return dice*t.rate;
+}
+// Active bids and cash offered in an open trade cannot be spent on construction.
+function legacySpendable(s,pid){
+ const p=player(s,pid);let reserved=s.auction?.bidderId===pid?s.auction.bid:0;
+ if(s.trade?.from===pid)reserved+=s.trade.giveCash;
+ if(s.trade?.to===pid)reserved+=s.trade.takeCash;
+ return Math.max(0,p.cash-reserved);
+}
+function legacyBuildReason(s,pid,tid){
+ const p=s.players.find(x=>x.id===pid),t=TILES[tid],d=s.properties[tid];
+ if(!p||p.bankrupt||p.removed||s.phase!=='playing')return 'Construção indisponível.';
+ if(t?.type!=='property')return 'Companhias não recebem casas nem hotéis.';
+ if(d?.owner!==pid)return 'Este terreno não é seu.';
+ if(d.mortgaged)return 'Resgate a hipoteca deste terreno antes de construir.';
+ if(d.level>=HOTEL_LEVEL)return 'O hotel já está construído.';
+ if(s.debt?.playerId===pid)return 'Quite sua dívida antes de construir.';
+ if(s.trade&&(s.trade.give.includes(tid)||s.trade.take.includes(tid)))return 'Cancele a troca deste terreno antes de construir.';
+ if(spendable(s,pid)<GROUPS[t.group].build)return 'Saldo livre insuficiente. Lances e propostas em aberto reservam dinheiro.';
+ return '';
+}
+function canBuild(s,pid,tid){return !buildReason(s,pid,tid);}
+
+function makePlayer(pid,n,index,bot=false){return {id:pid,name:name(n),color:COLORS[index%6],token:TOKENS[index%6],cash:STARTING_CASH,pos:0,bankrupt:false,removed:false,bot,online:true,offlineSince:null,jail:0,jailRelease:false,passes:0,lastChat:0};}
+function legacyCreateRoom(n,opts={}){const pid=opts.hostId||id();const s={version:30,code:opts.code||code(),hostId:pid,phase:'lobby',players:[makePlayer(pid,n,0)],properties:{},turnIndex:0,round:1,turnCount:0,roundLimit:[0,10,20,40].includes(Number(opts.roundLimit))?Number(opts.roundLimit):0,turnState:'roll',doubles:0,extraTurn:false,dice:[1,1],rollSerial:0,auction:null,debt:null,trade:null,lastCard:null,deck:shuffled(CARDS.map((_,i)=>i)),discard:[],log:[],chat:[],revision:1,createdAt:Date.now(),updatedAt:Date.now(),winnerIds:[]};TILES.filter(t=>t.price).forEach(t=>s.properties[t.id]={owner:null,level:0,mortgaged:false});log(s,`${s.players[0].name} criou a sala.`);return s;}
+function touch(s,now=Date.now()){s.revision++;s.updatedAt=now;}
+function move(s,p,steps){const next=p.pos+steps;if(next>=TILES.length){const cash=Math.floor(next/TILES.length)*PASS_START;p.cash+=cash;log(s,`${p.name} passou pelo Início e recebeu ${cashfmt(cash)}.`,'money');}p.pos=next%TILES.length;}
+function toJail(s,p){p.pos=10;p.jail=3;p.jailRelease=false;s.extraTurn=false;s.doubles=0;s.turnState='end';log(s,`${p.name} foi à Auditoria.`,'alert');}
+function legacyCharge(s,p,amount,creditorId=null,reason='Pagamento'){if(amount<=0)return;const available=Math.min(p.cash,amount);p.cash-=available;if(creditorId){const creditor=player(s,creditorId);if(!creditor.bankrupt)creditor.cash+=available;}log(s,`${p.name}: ${reason.toLocaleLowerCase()} de ${cashfmt(amount)}${creditorId?' para '+player(s,creditorId).name:''}.`,'money');if(available<amount){s.debt={playerId:p.id,creditorId,amount:amount-available,reason};s.turnState='debt';s.trade=null;log(s,`${p.name} precisa levantar ${cashfmt(amount-available)} ou declarar falência.`,'alert');}}
+function land(s,p,rng,depth=0){check(depth<5,'Não foi possível resolver a casa.');const t=TILES[p.pos];s.turnState='end';log(s,`${p.name} chegou a ${t.name}.`);if(t.price){const d=s.properties[t.id];if(!d.owner){s.turnState='buy';return;}if(d.owner!==p.id&&!d.mortgaged){
+ const sum=s.dice[0]+s.dice[1];const total=rent(s,t,sum);
+ const reason=t.type==='property'?'Aluguel':`Companhia: ${cashfmt(t.rate)} × (${s.dice[0]} + ${s.dice[1]}) = ${cashfmt(total)}`;
+ charge(s,p,total,d.owner,reason);
+ }else log(s,d.owner===p.id?'Você já é dono deste imóvel.':'Imóvel hipotecado: aluguel suspenso.');}
+else if(t.type==='tax')charge(s,p,t.amount,null,t.name);else if(t.type==='bonus'){p.cash+=t.amount;log(s,`${p.name} recebeu ${cashfmt(t.amount)}.`,'money');}
+else if(t.type==='gotojail')toJail(s,p);else if(t.type==='chance'){const c=draw(s,rng);s.lastCard={...c,playerId:p.id,serial:s.rollSerial};log(s,`${c.title}: ${c.text}`,'card');if(c.cash>0)p.cash+=c.cash;else if(c.cash<0)charge(s,p,-c.cash,null,c.title);else if(c.jail)toJail(s,p);else if(c.pass)p.passes++;else if(c.repairs){const cost=owned(s,p.id).reduce((v,t)=>v+(s.properties[t.id].level===HOTEL_LEVEL?400000:s.properties[t.id].level*100000),0);charge(s,p,cost,null,c.title);}else if(c.move!==undefined){if(c.move===0){p.pos=0;p.cash+=PASS_START;log(s,`${p.name} recebeu R$ 2.000.000 no Início.`,'money');}else{move(s,p,(c.move-p.pos+TILES.length)%TILES.length);land(s,p,rng,depth+1);}}}}
+function legacyFinish(s,reason){s.phase='finished';s.reason=reason;s.auction=null;s.trade=null;const alive=s.players.filter(p=>!p.bankrupt);const max=Math.max(...alive.map(p=>wealth(s,p.id)));s.winnerIds=alive.filter(p=>wealth(s,p.id)===max).map(p=>p.id);log(s,`Fim de jogo! ${s.winnerIds.map(pid=>player(s,pid).name).join(' e ')} venceu${s.winnerIds.length>1?' em empate':''}.`,'success');}
+function legacyNext(s){s.trade=null;s.auction=null;if(s.players.filter(p=>!p.bankrupt).length<=1){finish(s,'Último jogador solvente');return;}const p=current(s);if(s.extraTurn&&!p.bankrupt&&!p.jail){s.extraTurn=false;s.turnState='roll';log(s,`${p.name} joga novamente: dados iguais!`);return;}s.extraTurn=false;s.doubles=0;s.turnCount++;let i=s.turnIndex;do{i=(i+1)%s.players.length;if(i===0)s.round++;}while(s.players[i].bankrupt);s.turnIndex=i;s.turnState='roll';s.lastCard=null;if(s.roundLimit>0&&s.round>s.roundLimit){finish(s,'Limite de rodadas alcançado');return;}log(s,`Vez de ${current(s).name}.`);}
+function auctionEnd(s){const a=s.auction;if(a?.bidderId){const p=player(s,a.bidderId);if(!p.bankrupt&&p.cash>=a.bid){p.cash-=a.bid;s.properties[a.tileId].owner=p.id;log(s,`${p.name} arrematou ${TILES[a.tileId].name} por ${cashfmt(a.bid)}.`,'success');}}else log(s,'Leilão encerrado sem ofertas. O imóvel permanece com o banco.');s.auction=null;s.turnState='end';}
+function tradeAssets(s,pid,ids){check(Array.isArray(ids)&&ids.length<=28,'Lista de imóveis inválida.');check(new Set(ids).size===ids.length,'Um imóvel foi repetido.');for(const tid of ids){check(Number.isInteger(tid)&&TILES[tid]?.price,'Imóvel inválido.');const t=TILES[tid],d=s.properties[tid];check(d.owner===pid,'O imóvel não pertence ao jogador.');check(!d.mortgaged&&!d.level,'Negocie apenas imóveis sem construção e sem hipoteca.');}}
+function amount(v,max=1000000000000){check(Number.isSafeInteger(v)&&v>=0&&v<=max,'Digite um valor inteiro não negativo.');return v;}
+function validateTrade(s,tr){const from=player(s,tr.from),to=player(s,tr.to);check(from.id!==to.id&&!from.bankrupt&&!to.bankrupt,'Participantes inválidos.');amount(tr.giveCash);amount(tr.takeCash);check(from.cash>=tr.giveCash&&to.cash>=tr.takeCash,'Saldo insuficiente para a troca.');tradeAssets(s,from.id,tr.give);tradeAssets(s,to.id,tr.take);check(tr.give.length+tr.take.length+tr.giveCash+tr.takeCash>0,'A proposta está vazia.');}
+function legacyApply(state,pid,a,now=Date.now(),rng=randomInt){check(a&&typeof a.type==='string','Ação inválida.');const s=clone(state),p=player(s,pid);check(!p.removed,'Você foi retirado da sala pelo anfitrião.');check(a.type.length<40,'Ação inválida.');
+if(a.type==='chat'||a.type==='sticker'){
+ check(now-p.lastChat>=900,'Espere um instante antes de enviar novamente.');
+ const sticker=a.type==='sticker'?STICKERS.find(x=>x.id===a.stickerId):null;
+ if(a.type==='sticker')check(sticker,'Figurinha inválida.');
+ const text=sticker?sticker.label:String(a.text||'').replace(/[\x00-\x1F]/g,' ').trim().slice(0,200);
+ check(text,'Digite uma mensagem.');p.lastChat=now;
+ s.chat.push({id:id(),playerId:p.id,name:p.name,text,stickerId:sticker?.id||null,at:now});
+ s.chat=s.chat.slice(-60);touch(s,now);return s;
+}
+
+if(a.type==='addBot'){check(s.phase==='lobby'&&s.hostId===pid,'Somente o anfitrião pode adicionar IA antes de começar.');const candidates=['Alex • IA','Bia • IA','Caio • IA','Duda • IA','Eli • IA'];const nm=candidates.find(n=>!s.players.some(p=>p.name===n));return join(s,nm,id(),true);}
+if(a.type==='remove'){
+ check(s.phase==='lobby'||s.phase==='playing','A partida já foi encerrada.');
+ check(s.hostId===pid&&a.playerId!==pid,'Somente o anfitrião pode retirar outros jogadores.');
+ const target=player(s,a.playerId);check(!target.removed,'Este jogador já foi retirado.');
+ if(s.phase==='lobby'){
+  s.players=s.players.filter(x=>x.id!==target.id);
+ }else{
+  const wasActive=current(s).id===target.id;
+  if(s.trade&&(s.trade.from===target.id||s.trade.to===target.id)){s.trade=null;log(s,'A proposta foi cancelada porque um participante foi retirado.');}
+  if(s.auction){
+   if(wasActive){s.auction=null;s.turnState='end';log(s,'Leilão cancelado: o jogador do turno foi retirado.');}
+   else{const ar=s.auction;ar.passed=ar.passed.filter(x=>x!==target.id);
+    if(ar.bidderId===target.id){ar.bid=0;ar.bidderId=null;ar.endsAt=Math.max(ar.endsAt,now+10000);log(s,'Lance do jogador retirado cancelado. O leilão reabriu.');}
+   }
+  }
+  if(s.debt?.playerId===target.id)s.debt=null;
+  else if(s.debt?.creditorId===target.id){s.debt.creditorId=null;log(s,'O saldo da dívida passa a ser devido ao banco.');}
+  returnPass(s,target);
+  owned(s,target.id).forEach(t=>s.properties[t.id]={owner:null,level:0,mortgaged:false});
+  target.cash=0;target.bankrupt=true;target.removed=true;target.online=false;target.offlineSince=now;
+  if(s.players.filter(x=>!x.bankrupt).length<=1)finish(s,'Último jogador ativo');
+  else if(wasActive){s.extraTurn=false;next(s);}
+  else if(s.auction&&s.players.filter(x=>!x.bankrupt&&x.id!==s.auction.bidderId&&!s.auction.passed.includes(x.id)).length===0)auctionEnd(s);
+ }
+ log(s,`${p.name} retirou ${target.name} da sala. Seus imóveis retornam ao banco.`,'alert');
+ touch(s,now);return s;
+}
+
+if(a.type==='settings'){check(s.hostId===pid&&s.phase==='lobby','Só o anfitrião pode configurar a sala.');check([0,10,20,40].includes(a.roundLimit),'Configuração inválida.');s.roundLimit=a.roundLimit;touch(s,now);return s;}
+if(a.type==='start'){check(s.hostId===pid&&s.phase==='lobby','Só o anfitrião inicia a partida.');check(s.players.length>=2,'É preciso ter ao menos 2 jogadores.');check(s.players.every(p=>p.online||p.bot),'Retire ou reconecte os jogadores ausentes.');s.phase='playing';log(s,`Partida iniciada! ${current(s).name} começa.`,'success');touch(s,now);return s;}
+check(s.phase==='playing','A partida não está em andamento.');check(!p.bankrupt,'Você já saiu dos negócios.');const active=current(s).id===pid;
+if(a.type==='bid'||a.type==='passAuction'){check(s.auction&&s.turnState==='auction','Não há leilão ativo.');const ar=s.auction;check(now<ar.endsAt,'O leilão terminou.');check(!ar.passed.includes(pid),'Você já desistiu deste leilão.');if(a.type==='bid'){const v=amount(a.amount);check(v>=ar.bid+BID_STEP&&v>=BID_MIN,'O lance deve ser de pelo menos R$ 200.000 e superar o atual em R$ 100.000.');check(p.cash>=v,'Saldo insuficiente para este lance.');check(ar.bidderId!==pid,'Você já tem o maior lance.');ar.bid=v;ar.bidderId=pid;ar.endsAt=Math.max(ar.endsAt,now+8000);log(s,`${p.name} ofereceu ${cashfmt(v)} no leilão.`);}else{check(ar.bidderId!==pid,'O maior lance não pode ser retirado.');ar.passed.push(pid);}if(s.players.filter(x=>!x.bankrupt&&x.id!==ar.bidderId&&!ar.passed.includes(x.id)).length===0)auctionEnd(s);touch(s,now);return s;}
+if(a.type==='tradeReply'){check(s.trade,'Não há proposta pendente.');const tr=s.trade;check(pid===tr.to||pid===tr.from,'Esta proposta não é sua.');if(a.accept){check(pid===tr.to,'Somente o destinatário pode aceitar.');check(now<tr.expiresAt,'A proposta expirou.');validateTrade(s,tr);const from=player(s,tr.from),to=player(s,tr.to);from.cash+=tr.takeCash-tr.giveCash;to.cash+=tr.giveCash-tr.takeCash;tr.give.forEach(t=>s.properties[t].owner=to.id);tr.take.forEach(t=>s.properties[t].owner=from.id);log(s,`${from.name} e ${to.name} concluíram uma negociação.`,'success');}else log(s,'Proposta de negociação encerrada.');s.trade=null;touch(s,now);return s;}
+if(a.type==='build'){
+ const reason=buildReason(s,pid,a.tileId);check(!reason,reason);
+ const t=TILES[a.tileId],d=s.properties[a.tileId];
+ p.cash-=GROUPS[t.group].build;d.level++;
+ log(s,`${p.name} comprou ${d.level===HOTEL_LEVEL?'o hotel':'a '+d.level+'ª casa'} em ${t.name} por ${cashfmt(GROUPS[t.group].build)}.`,'success');
+ touch(s,now);return s;
+}
+check(active,'Aguarde a sua vez.');check(!s.auction,'Resolva o leilão primeiro.');check(!s.trade,'Conclua ou cancele a proposta de troca primeiro.');
+if(a.type==='bankrupt'){check(s.turnState==='debt','A falência só é declarada quando há uma dívida pendente.');bankrupt(s,p);}
+else if(['sell','mortgage','unmortgage'].includes(a.type)){
+ check(['roll','end','debt'].includes(s.turnState),'Resolva a casa atual antes de gerenciar imóveis.');
+ const t=TILES[a.tileId],d=s.properties[a.tileId];check(t?.price&&d?.owner===pid,'Este imóvel não é seu.');
+ if(a.type==='sell'){
+  check(t.type==='property'&&d.level>0,'Não há construção para vender.');d.level--;
+  const value=Math.floor(GROUPS[t.group].build/2);p.cash+=value;
+  log(s,`${p.name} vendeu uma etapa de construção por ${cashfmt(value)}.`,'money');settle(s,p,rng);
+ }else if(a.type==='mortgage'){
+  check(!d.mortgaged,'O imóvel já está hipotecado.');check(d.level===0,'Venda as construções deste terreno antes de hipotecá-lo.');
+  d.mortgaged=true;const value=Math.floor(t.price/2);p.cash+=value;
+  log(s,`${p.name} hipotecou ${t.name} por ${cashfmt(value)}.`,'money');settle(s,p,rng);
+ }else{
+  check(s.turnState!=='debt','Quite a dívida antes de resgatar hipotecas.');check(d.mortgaged,'Este imóvel não está hipotecado.');
+  const cost=Math.ceil(Math.floor(t.price/2)*1.2);check(p.cash>=cost,'Saldo insuficiente.');
+  p.cash-=cost;d.mortgaged=false;log(s,`${p.name} resgatou ${t.name} por ${cashfmt(cost)}.`,'money');
+ }
+}
+
+else if(a.type==='roll'){check(s.turnState==='roll','Você já lançou os dados neste turno.');s.lastCard=null;s.dice=[rng(6)+1,rng(6)+1];check(s.dice.every(x=>x>=1&&x<=6),'Dados inválidos.');s.rollSerial++;const double=s.dice[0]===s.dice[1];log(s,`${p.name} tirou ${s.dice[0]} + ${s.dice[1]}.`,'dice');if(p.jail||p.jailRelease){
+ s.extraTurn=false;s.doubles=0;s.turnState='end';
+ if(p.jailRelease){
+   charge(s,p,JAIL_FEE,null,'Taxa de liberação da Auditoria');
+   if(s.debt)s.debt.after={kind:'jailMove',steps:s.dice[0]+s.dice[1]};
+   else{p.jailRelease=false;move(s,p,s.dice[0]+s.dice[1]);land(s,p,rng);}
+ }else if(double){
+   p.jail=0;log(s,`${p.name} saiu da Auditoria com dados iguais.`);
+   move(s,p,s.dice[0]+s.dice[1]);land(s,p,rng);
+ }else{
+   p.jail--;if(p.jail===0){p.jailRelease=true;log(s,`${p.name} esgotou três tentativas. Na próxima jogada deverá pagar ${cashfmt(JAIL_FEE)} e avançar.`);}
+   else log(s,`${p.name} permanece na Auditoria (${p.jail} tentativa${p.jail>1?'s':''}).`);
+ }
+}else{s.doubles=double?s.doubles+1:0;s.extraTurn=double;if(s.doubles>=3)toJail(s,p);else{move(s,p,s.dice[0]+s.dice[1]);land(s,p,rng);}}}
+else if(a.type==='bail'){
+ check(s.turnState==='roll'&&(p.jail>0||p.jailRelease),'Você não está retido na Auditoria.');
+ check(a.usePass&&p.passes>0,'Use sua autorização ou tente tirar dados iguais. A taxa é cobrada na quarta jogada.');
+ returnPass(s,p);p.jail=0;p.jailRelease=false;log(s,`${p.name} usou a Autorização de funcionamento e saiu da Auditoria.`);
+}
+
+else if(a.type==='buy'){check(s.turnState==='buy','Não há imóvel disponível para comprar neste turno.');const t=TILES[p.pos];check(t.price&&!s.properties[t.id].owner,'Imóvel indisponível.');check(p.cash>=t.price,'Saldo insuficiente. Envie o imóvel a leilão.');p.cash-=t.price;s.properties[t.id].owner=pid;s.turnState='end';log(s,`${p.name} comprou ${t.name} por ${cashfmt(t.price)}.`,'success');}
+else if(a.type==='auction'){check(s.turnState==='buy','Nenhum imóvel para leiloar.');s.auction={tileId:p.pos,bid:0,bidderId:null,passed:[],endsAt:now+25000};s.turnState='auction';log(s,`${TILES[p.pos].name} está em leilão. Todos podem participar.`,'alert');}
+else if(a.type==='end'){check(s.turnState==='end','Resolva as ações pendentes antes de encerrar.');next(s);}
+else if(a.type==='trade'){check(['roll','end'].includes(s.turnState),'Resolva a casa antes de negociar.');const tr={from:pid,to:a.to,give:a.give,take:a.take,giveCash:a.giveCash,takeCash:a.takeCash,expiresAt:now+60000};validateTrade(s,tr);s.trade=tr;log(s,`${p.name} enviou uma proposta a ${player(s,tr.to).name}.`);}
+else throw new Error('Ação desconhecida.');
+for(const x of s.players)check(Number.isSafeInteger(x.cash)&&x.cash>=0,'Estado financeiro inválido.');touch(s,now);return s;}
+function legacyTick(state,now=Date.now()){if(state.phase!=='playing')return state;if(state.auction&&now>=state.auction.endsAt){const s=clone(state);auctionEnd(s);touch(s,now);return s;}if(state.trade&&now>=state.trade.expiresAt){const s=clone(state);s.trade=null;log(s,'A proposta expirou.');touch(s,now);return s;}return state;}
+function legacyBotAction(s){if(s.phase!=='playing')return null;if(s.trade){const tr=s.trade,p=player(s,tr.to);if(!p.bot)return null;const value=(ids,cash)=>cash+ids.reduce((n,i)=>n+TILES[i].price,0);return {pid:p.id,action:{type:'tradeReply',accept:value(tr.give,tr.giveCash)>=value(tr.take,tr.takeCash)*.95}};}
+if(s.auction){const ar=s.auction;const p=s.players.find(p=>p.bot&&!p.bankrupt&&!ar.passed.includes(p.id)&&ar.bidderId!==p.id);if(!p)return null;const nextBid=Math.max(BID_MIN,ar.bid+BID_STEP);return {pid:p.id,action:nextBid<=Math.min(p.cash-1800000,TILES[ar.tileId].price*.85)?{type:'bid',amount:nextBid}:{type:'passAuction'}};}
+const p=current(s);if(!p?.bot||p.bankrupt)return null;let action;
+if(s.turnState==='debt'){const props=owned(s,p.id);const developed=props.find(t=>s.properties[t.id].level>0);if(developed)action={type:'sell',tileId:developed.id};else{const t=props.find(t=>!s.properties[t.id].mortgaged);action=t?{type:'mortgage',tileId:t.id}:{type:'bankrupt'};}}
+else if(s.turnState==='buy')action={type:p.cash>=TILES[p.pos].price+1800000?'buy':'auction'};
+else if(s.turnState==='roll')action=(p.jail||p.jailRelease)&&p.passes?{type:'bail',usePass:true}:{type:'roll'};
+else if(s.turnState==='end'){const t=owned(s,p.id).find(t=>t.type==='property'&&!s.properties[t.id].mortgaged&&s.properties[t.id].level<HOTEL_LEVEL&&p.cash>GROUPS[t.group].build+4200000);action=t?{type:'build',tileId:t.id}:{type:'end'};}
+return action?{pid:p.id,action}:null;}
+/* 3.1 — persistence-safe finance rules. Amounts are integer, fictitious reais. */
+const BANK_LOAN = Object.freeze({min:100000,max:5000000,rate:10,term:3,maxContracts:3});
+function normalizedName(v){return String(v||'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('pt-BR');}
+function upgrade(state){
+ const s=clone(state);check(s&&Array.isArray(s.players)&&s.properties,'Salvamento inválido.');
+ s.version=31;s.loans??=[];s.loanOffer??=null;s.assetOffer??=null;s.pausedAt??=null;
+ if(s.debt&&!s.debt.id)s.debt.id=id();return s;
+}
+function createRoom(n,opts={}){const s=legacyCreateRoom(n,opts);s.version=31;s.loans=[];s.loanOffer=null;s.assetOffer=null;s.pausedAt=null;return s;}
+function finish(s,reason){legacyFinish(s,reason);s.loanOffer=null;s.assetOffer=null;s.pausedAt=null;}
+function waitingPlayers(s){return s.players.filter(p=>!p.bot&&!p.bankrupt&&!p.removed&&!p.online);}
+function refreshPause(s,now=Date.now()){
+ const offline=waitingPlayers(s);const paused=offline.length>0&&s.phase!=='finished';
+ if(paused&&s.pausedAt==null){s.pausedAt=now;log(s,'Conexão interrompida: a partida aguarda o retorno. Patrimônios preservados.','alert',now);}
+ if(!paused&&s.pausedAt!=null){const delta=Math.max(0,now-s.pausedAt);for(const [o,key] of [[s.auction,'endsAt'],[s.trade,'expiresAt'],[s.loanOffer,'expiresAt'],[s.assetOffer,'expiresAt']])if(o&&o[key])o[key]+=delta;s.pausedAt=null;log(s,'Todos reconectados. A partida foi retomada sem perder bens ou dinheiro.','success',now);}
+}
+function setOnline(state,pid,status,now=Date.now()){
+ const p=player(state,pid);if(p.online===status)return state;
+ const s=clone(state),q=player(s,pid);q.online=!!status;q.offlineSince=status?null:now;
+ refreshPause(s,now);touch(s,now);return s;
+}
+function join(state,n,pid=id(),bot=false){
+ const s=upgrade(state),nm=name(n).replace(/\s+/g,' '),existing=s.players.find(p=>normalizedName(p.name)===normalizedName(nm));
+ if(existing){
+  check(!existing.removed,'Este nome foi retirado pelo anfitrião. Não pode retornar a esta partida.');
+  check(!existing.bot,'Esse nome pertence ao computador.');
+  check(!existing.online,'Esse nome já está conectado. Aguarde a conexão anterior cair ou use a mesma sessão.');
+  existing.online=true;existing.offlineSince=null;
+  log(s,`${existing.name} voltou com o mesmo patrimônio, posição e contratos.`,'success');
+ }else{
+  check(s.phase==='lobby'||s.phase==='playing','A partida já terminou.');
+  check(s.players.filter(p=>!p.removed).length<6,'As seis vagas estão ocupadas. Jogadores desconectados mantêm a vaga.');
+  const used=new Set(s.players.filter(p=>!p.removed).map(p=>p.color));
+  const index=Math.max(0,COLORS.findIndex(c=>!used.has(c)));
+  const p=makePlayer(pid,nm,index,bot);p.joinedRound=s.round;s.players.push(p);
+  log(s,`${nm} entrou${s.phase==='playing'?' durante a partida':''} com ${cashfmt(STARTING_CASH)}.`,'success');
+ }
+ refreshPause(s);touch(s);return s;
+}
+function activeLoans(s){return (s.loans||[]).filter(l=>['active','overdue'].includes(l.status)&&l.balance>0);}
+function loansOf(s,pid){return activeLoans(s).filter(l=>l.borrowerId===pid);}
+function lien(s,tid){return activeLoans(s).find(l=>l.collateralId===tid&&s.properties[tid]?.owner===l.borrowerId);}
+function assetValue(s,tid){const t=TILES[tid],d=s.properties[tid];if(!t?.price||!d)return 0;return t.price+(t.group?d.level*GROUPS[t.group].build:0)-(d.mortgaged?Math.floor(t.price/2):0);}
+function wealth(s,pid){return legacyWealth(s,pid)+((s.debt?.playerId===pid&&s.debt.loanId)?s.debt.amount:0)-loansOf(s,pid).reduce((v,l)=>v+l.balance,0)+activeLoans(s).filter(l=>l.lenderId===pid).reduce((v,l)=>v+l.balance,0);}
+function spendable(s,pid){
+ let free=legacySpendable(s,pid);
+ if(s.loanOffer?.lenderId===pid)free-=s.loanOffer.principal;
+ if(s.assetOffer?.creditorId===pid)free-=s.assetOffer.change;
+ return Math.max(0,free);
+}
+function buildReason(s,pid,tid){
+ if(s.pausedAt!=null)return 'Aguarde a reconexão dos participantes.';
+ if(s.assetOffer?.tileId===tid)return 'Este imóvel está em uma proposta de pagamento. Cancele-a antes de construir.';
+ return legacyBuildReason(s,pid,tid);
+}
+function loanTotal(principal,rate){return Math.ceil(principal*(100+rate)/100);}
+function financeReady(s,pid){
+ const p=player(s,pid);check(s.phase==='playing'&&!p.bankrupt&&!p.removed,'Operação indisponível.');
+ check(s.pausedAt==null,'A partida está pausada para reconexão.');
+ check(!s.auction&&!s.trade,'Conclua o leilão ou a troca antes de movimentar empréstimos.');return p;
+}
+function validateCredit(s,tr,ignoreOffer=false){
+ const b=financeReady(s,tr.borrowerId);check(!loansOf(s,b.id).some(l=>l.status==='overdue'),'Resolva o empréstimo vencido antes de contratar outro.');
+ check(loansOf(s,b.id).length<BANK_LOAN.maxContracts,'Limite de três empréstimos em aberto por jogador.');
+ amount(tr.principal,50000000);check(tr.principal>=BANK_LOAN.min,'O empréstimo mínimo é R$ 100.000.');
+ check(Number.isInteger(tr.rate)&&tr.rate>=0&&tr.rate<=50,'Os juros devem estar entre 0% e 50%, para todo o contrato.');
+ check(Number.isInteger(tr.term)&&tr.term>=1&&tr.term<=10,'Escolha um prazo de 1 a 10 rodadas.');
+ if(tr.lenderId){
+  const l=financeReady(s,tr.lenderId);check(l.id!==b.id,'Não é possível emprestar para si mesmo.');
+  check(!s.debt||s.debt.playerId!==l.id,'Quem tem uma dívida pendente não pode emprestar.');
+  const available=spendable(s,l.id)+(ignoreOffer&&s.loanOffer?.lenderId===l.id?s.loanOffer.principal:0);
+  check(available>=tr.principal,'O credor não tem saldo livre suficiente.');
+ }else{
+  check(tr.principal<=BANK_LOAN.max&&tr.rate===BANK_LOAN.rate&&tr.term===BANK_LOAN.term,'Condições inválidas para o crédito do banco.');
+  check(!loansOf(s,b.id).some(l=>!l.lenderId),'É permitido apenas um empréstimo do banco por vez.');
+ }
+ if(tr.collateralId!=null){const t=TILES[tr.collateralId],d=s.properties[tr.collateralId];
+  check(t?.price&&d?.owner===b.id&&!d.mortgaged,'A garantia precisa ser um imóvel próprio, sem hipoteca.');
+  check(!lien(s,tr.collateralId),'Esse imóvel já garante outro contrato.');
+  check(s.assetOffer?.tileId!==tr.collateralId,'Esse imóvel está em uma proposta de pagamento.');
+ }
+}
+function createLoan(s,tr,now){
+ validateCredit(s,tr,true);const b=player(s,tr.borrowerId);
+ if(tr.lenderId)player(s,tr.lenderId).cash-=tr.principal;
+ b.cash+=tr.principal;
+ const total=loanTotal(tr.principal,tr.rate);
+ const l={id:id(),borrowerId:b.id,lenderId:tr.lenderId||null,principal:tr.principal,rate:tr.rate,term:tr.term,total,balance:total,createdAt:now,createdRound:s.round,dueRound:s.round+tr.term,collateralId:tr.collateralId??null,status:'active',paid:0};
+ s.loans.push(l);s.loanOffer=null;
+ log(s,`${b.name} recebeu ${cashfmt(l.principal)} de ${l.lenderId?player(s,l.lenderId).name:'Banco Metrópole'}. Total: ${cashfmt(total)}; vencimento na sua vez da rodada ${l.dueRound}.`,'money',now);
+ if(s.debt?.playerId===b.id)settle(s,b);
+ return l;
+}
+function credit(s,pid,value){if(pid){const p=player(s,pid);if(!p.bankrupt&&!p.removed)p.cash+=value;}}
+function closePaidLoan(s,l,now=Date.now()){
+ if(l.balance>0)return;l.balance=0;l.status='paid';l.closedAt=now;l.collateralId=null;
+ log(s,`Empréstimo de ${player(s,l.borrowerId).name} quitado. A garantia está liberada.`,'success',now);
+}
+function completeDebt(s,rng=randomInt){
+ const d=s.debt;if(!d||d.amount>0)return;
+ const p=player(s,d.playerId),after=d.after,l=d.loanId?(s.loans||[]).find(x=>x.id===d.loanId):null;
+ if(l)closePaidLoan(s,l);s.debt=null;s.assetOffer=null;s.turnState='end';
+ log(s,`${p.name} quitou a dívida.`,'success');
+ if(after?.kind==='jailMove'){p.jailRelease=false;move(s,p,after.steps);land(s,p,rng);}
+ else if(after?.kind==='loanDue'){s.turnState='roll';collectDue(s);}
+}
+function settle(s,p,rng=randomInt){
+ const d=s.debt;if(d?.playerId!==p.id)return;
+ const paid=Math.min(d.amount,p.cash);p.cash-=paid;d.amount-=paid;credit(s,d.creditorId,paid);
+ if(d.loanId){const l=s.loans.find(x=>x.id===d.loanId);l.balance=d.amount;l.paid+=paid;}
+ completeDebt(s,rng);
+}
+function charge(s,p,v,creditorId=null,reason='Pagamento'){
+ legacyCharge(s,p,v,creditorId,reason);if(s.debt&&!s.debt.id)s.debt.id=id();
+}
+function transferableForDebt(s,tid){
+ const d=s.debt;if(!d)return false;const t=TILES[tid],p=s.properties[tid],locked=lien(s,tid);
+ return !!(t?.price&&p?.owner===d.playerId&&(!locked||locked.id===d.loanId));
+}
+function debtAssetQuote(s,tid){
+ check(transferableForDebt(s,tid),'O imóvel não pode pagar esta dívida: confira proprietário e garantias.');
+ const value=assetValue(s,tid),deduction=Math.min(value,s.debt.amount),change=Math.max(0,value-s.debt.amount);
+ return {tileId:tid,value,deduction,change,debtId:s.debt.id,borrowerId:s.debt.playerId,creditorId:s.debt.creditorId};
+}
+function transferDebtAsset(s,tid,toBank=false,now=Date.now()){
+ const d=s.debt,q=debtAssetQuote(s,tid),b=player(s,q.borrowerId),t=TILES[tid];
+ const creditor=q.creditorId?player(s,q.creditorId):null;
+ if(creditor&&!toBank){
+  const available=spendable(s,creditor.id)+(s.assetOffer?.creditorId===creditor.id?s.assetOffer.change:0);
+  check(available>=q.change,'O credor precisa pagar o troco. Use a liquidação no banco ou escolha outro imóvel.');
+  creditor.cash-=q.change;b.cash+=q.change;s.properties[tid].owner=creditor.id;
+ }else{
+  s.properties[tid]={owner:null,level:0,mortgaged:false};b.cash+=q.change;credit(s,q.creditorId,q.deduction);
+ }
+ d.amount-=q.deduction;
+ if(d.loanId){const l=s.loans.find(x=>x.id===d.loanId);l.balance=d.amount;l.paid+=q.deduction;if(l.collateralId===tid)l.collateralId=null;}
+ s.assetOffer=null;
+ log(s,`${t.name} ${creditor&&!toBank?'transferido para '+creditor.name:'liquidado no banco'}. Dívida abatida: ${cashfmt(q.deduction)}; troco para ${b.name}: ${cashfmt(q.change)}.`,'money',now);
+ completeDebt(s);checkEmptyDefault(s);
+}
+function checkEmptyDefault(s){
+ if(s.phase!=='playing'||!s.debt?.loanId)return;
+ const p=player(s,s.debt.playerId);
+ if(p.cash===0&&owned(s,p.id).length===0){log(s,`${p.name} não tem dinheiro nem imóveis para pagar o empréstimo vencido. Falência declarada.`,'alert');bankrupt(s,p);}
+}
+function bankCollect(s){
+ for(let count=0;count<40&&s.phase==='playing'&&s.debt?.loanId&&!s.debt.creditorId;count++){
+  const d=s.debt,l=s.loans.find(x=>x.id===d.loanId);
+  const assets=owned(s,d.playerId).filter(t=>transferableForDebt(s,t.id));
+  if(!assets.length){bankrupt(s,player(s,d.playerId));break;}
+  let target=assets.find(t=>t.id===l.collateralId);
+  if(!target){const enough=assets.filter(t=>assetValue(s,t.id)>=d.amount).sort((a,b)=>assetValue(s,a.id)-assetValue(s,b.id));target=enough[0]||assets.sort((a,b)=>assetValue(s,b.id)-assetValue(s,a.id))[0];}
+  transferDebtAsset(s,target.id,true);
+ }
+}
+function collectDue(s){
+ if(s.phase!=='playing'||s.debt||s.pausedAt!=null||s.turnState!=='roll')return;
+ const p=current(s);if(!p||p.bankrupt)return;
+ const due=loansOf(s,p.id).filter(l=>l.dueRound<=s.round).sort((a,b)=>a.dueRound-b.dueRound||a.createdAt-b.createdAt);
+ for(const l of due){
+  const paid=Math.min(p.cash,l.balance);p.cash-=paid;l.balance-=paid;l.paid+=paid;credit(s,l.lenderId,paid);
+  if(!l.balance){closePaidLoan(s,l);continue;}
+  l.status='overdue';
+  s.debt={id:id(),playerId:p.id,creditorId:l.lenderId,amount:l.balance,loanId:l.id,reason:`Empréstimo vencido (rodada ${l.dueRound})`,after:{kind:'loanDue'}};s.turnState='debt';s.loanOffer=null;s.trade=null;
+  log(s,`${p.name}: venceu o empréstimo. Faltam ${cashfmt(l.balance)}. O credor pode executar imóveis; nada é confiscado antes do vencimento.`,'alert');
+  if(!l.lenderId)bankCollect(s);else checkEmptyDefault(s);return;
+ }
+}
+function next(s){legacyNext(s);if(s.phase==='playing')collectDue(s);}
+function retireFinance(s,p){
+ /* Liquidation preserves secured priority. There is no negative cash or double claim. */
+ let funds=p.cash;p.cash=0;
+ const claims=loansOf(s,p.id).slice().sort((a,b)=>a.createdAt-b.createdAt);
+ for(const l of claims){
+  const tid=l.collateralId;if(tid==null||s.properties[tid]?.owner!==p.id)continue;
+  const v=assetValue(s,tid),paid=Math.min(l.balance,v);l.balance-=paid;l.paid+=paid;credit(s,l.lenderId,paid);funds+=v-paid;
+  s.properties[tid]={owner:null,level:0,mortgaged:false};l.collateralId=null;
+ }
+ for(const t of owned(s,p.id)){funds+=assetValue(s,t.id);s.properties[t.id]={owner:null,level:0,mortgaged:false};}
+ if(s.debt?.playerId===p.id){const d=s.debt,l=d.loanId?claims.find(l=>l.id===d.loanId):null;
+  const need=l?l.balance:d.amount,paid=Math.min(need,funds);funds-=paid;credit(s,d.creditorId,paid);
+  if(l){l.balance-=paid;l.paid+=paid;}s.debt=null;
+ }
+ for(const l of claims){const paid=Math.min(funds,l.balance);funds-=paid;l.balance-=paid;l.paid+=paid;credit(s,l.lenderId,paid);
+  l.unpaid=l.balance;l.status=l.balance?'defaulted':'paid';l.balance=0;l.collateralId=null;l.closedAt=Date.now();
+ }
+ for(const l of activeLoans(s).filter(l=>l.lenderId===p.id))l.lenderId=null;
+ if(s.debt?.creditorId===p.id)s.debt.creditorId=null;
+ if(s.loanOffer&&(s.loanOffer.borrowerId===p.id||s.loanOffer.lenderId===p.id))s.loanOffer=null;
+ if(s.assetOffer&&(s.assetOffer.borrowerId===p.id||s.assetOffer.creditorId===p.id))s.assetOffer=null;
+}
+function bankrupt(s,p){
+ retireFinance(s,p);returnPass(s,p);p.cash=0;p.bankrupt=true;s.trade=null;
+ log(s,`${p.name} declarou falência. Bens liquidados; garantias e dívidas quitadas até o limite disponível.`,'alert');
+ refreshPause(s);
+ if(s.players.filter(x=>!x.bankrupt&&!x.removed).length<=1)finish(s,'Último jogador solvente');
+ else if(current(s).id===p.id){s.extraTurn=false;next(s);}
+ else if(s.debt?.loanId&&!s.debt.creditorId)bankCollect(s);
+}
+function apply(state,pid,a,now=Date.now(),rng=randomInt){
+ check(a&&typeof a.type==='string','Ação inválida.');
+ let s=upgrade(state),p=player(s,pid);check(!p.removed,'Você foi retirado pelo anfitrião.');
+ if(s.pausedAt!=null&&!['chat','sticker','remove'].includes(a.type))throw new Error('Aguardando reconexão. Nenhum patrimônio será perdido por falta de internet.');
+ if(a.type==='remove'){
+  check(s.hostId===pid&&a.playerId!==pid,'Somente o anfitrião pode retirar outro jogador.');
+  const target=player(s,a.playerId);if(s.phase==='playing'&&!target.bankrupt)retireFinance(s,target);
+  s=legacyApply(s,pid,a,now,rng);refreshPause(s,now);touch(s,now);return s;
+ }
+ if(['sell','mortgage','unmortgage'].includes(a.type)){
+  check(!lien(s,a.tileId),'Imóvel em garantia: quite o empréstimo antes de vender construções ou hipotecar.');
+  check(s.assetOffer?.tileId!==a.tileId,'Cancele a proposta de pagamento deste imóvel primeiro.');
+ }
+ if(a.type==='trade')for(const tid of [...(a.give||[]),...(a.take||[])])check(!lien(s,tid)&&s.assetOffer?.tileId!==tid,'O imóvel está comprometido em uma garantia ou pagamento.');
+ if(a.type==='tradeReply'&&a.accept&&s.trade)for(const tid of [...s.trade.give,...s.trade.take])check(!lien(s,tid),'Um imóvel da troca está em garantia.');
+ if(a.type==='bankLoan'){
+  check(!s.loanOffer&&!s.assetOffer,'Conclua as propostas pendentes.');
+  createLoan(s,{borrowerId:pid,lenderId:null,principal:a.amount,rate:BANK_LOAN.rate,term:BANK_LOAN.term,collateralId:a.collateralId??null},now);
+ }else if(a.type==='loanOffer'){
+  financeReady(s,pid);check(!s.loanOffer&&!s.assetOffer,'Já existe uma proposta financeira pendente.');
+  const tr={from:pid,borrowerId:a.borrowerId,lenderId:a.lenderId,principal:a.amount,rate:a.rate,term:a.term,collateralId:a.collateralId??null,expiresAt:now+120000};
+  check(tr.lenderId&&[tr.borrowerId,tr.lenderId].includes(pid),'Escolha as duas partes do empréstimo.');
+  const other=player(s,tr.borrowerId===pid?tr.lenderId:tr.borrowerId);check(other.online||other.bot,'A outra pessoa precisa estar conectada para aceitar.');
+  validateCredit(s,tr);s.loanOffer={...tr,id:id()};log(s,`${p.name} propôs um empréstimo a ${other.name}. Aguardando aceite.`,'money',now);
+ }else if(a.type==='loanReply'){
+  financeReady(s,pid);const tr=s.loanOffer;check(tr&&[tr.lenderId,tr.borrowerId].includes(pid),'Nenhuma proposta para você.');
+  if(a.accept){check(pid!==tr.from,'Quem propôs não pode aceitar pela outra pessoa.');check(now<tr.expiresAt,'A proposta expirou.');createLoan(s,tr,now);}else{s.loanOffer=null;log(s,'Proposta de empréstimo cancelada ou recusada.');}
+ }else if(a.type==='loanPay'){
+  financeReady(s,pid);const l=s.loans.find(l=>l.id===a.loanId);check(l&&l.borrowerId===pid&&['active','overdue'].includes(l.status),'Empréstimo inválido.');
+  const paid=amount(a.amount);check(paid>0&&paid<=l.balance&&paid<=spendable(s,pid),'Pagamento maior que a dívida ou o saldo livre.');
+  check(!s.debt||s.debt.playerId!==pid||s.debt.loanId===l.id,'Resolva primeiro a dívida que bloqueia sua vez.');
+  p.cash-=paid;l.balance-=paid;l.paid+=paid;credit(s,l.lenderId,paid);
+  if(s.debt?.loanId===l.id){s.debt.amount=l.balance;completeDebt(s,rng);}else closePaidLoan(s,l,now);
+  log(s,`${p.name} pagou ${cashfmt(paid)} de um empréstimo.`,'money',now);
+ }else if(a.type==='offerAsset'){
+  financeReady(s,pid);check(s.debt?.playerId===pid,'Você não possui uma dívida pendente nesta jogada.');
+  check(!s.loanOffer&&!s.assetOffer,'Conclua a proposta financeira pendente.');
+  const q=debtAssetQuote(s,a.tileId);
+  if(!q.creditorId)transferDebtAsset(s,a.tileId,true,now);
+  else{s.assetOffer={...q,id:id(),expiresAt:now+120000};log(s,`${p.name} ofereceu ${TILES[a.tileId].name} para abater ${cashfmt(q.deduction)} da dívida.`,'money',now);}
+ }else if(a.type==='assetReply'){
+  financeReady(s,pid);const o=s.assetOffer;check(o&&[o.creditorId,o.borrowerId].includes(pid),'A proposta não pertence a você.');
+  if(a.accept){check(pid===o.creditorId,'Somente o credor pode aceitar.');check(now<o.expiresAt&&s.debt?.id===o.debtId,'A proposta expirou ou a dívida mudou.');
+   const q=debtAssetQuote(s,o.tileId);check(q.value===o.value&&q.change===o.change,'Os valores mudaram. Peça outra proposta.');transferDebtAsset(s,o.tileId,false,now);
+  }else{s.assetOffer=null;log(s,'Proposta de pagamento em imóvel encerrada.');}
+ }else if(a.type==='foreclose'||a.type==='liquidateDebt'){
+  financeReady(s,pid);check(s.debt,'Nenhuma dívida pendente.');
+  if(a.type==='foreclose'){
+   check(s.debt.loanId&&s.debt.creditorId===pid,'Somente o credor do empréstimo vencido pode executar o imóvel.');
+   const l=s.loans.find(l=>l.id===s.debt.loanId);check(l.status==='overdue'&&s.round>=l.dueRound,'Ainda não venceu.');
+   if(l.collateralId!=null&&s.properties[l.collateralId]?.owner===l.borrowerId)check(a.tileId===l.collateralId,'Execute primeiro o imóvel dado em garantia.');
+  }else{
+   check(pid===s.debt.playerId||(s.debt.loanId&&pid===s.debt.creditorId),'Apenas devedor ou credor do empréstimo vencido.');
+  }
+  transferDebtAsset(s,a.tileId,a.type==='liquidateDebt'||!!a.toBank,now);
+ }else{
+  s=legacyApply(s,pid,a,now,rng);
+ }
+ if(s.phase==='playing'&&s.turnState==='roll'&&!s.debt)collectDue(s);
+ if(s.assetOffer&&s.assetOffer.debtId!==s.debt?.id)s.assetOffer=null;
+ for(const x of s.players)check(Number.isSafeInteger(x.cash)&&x.cash>=0,'Saldo inválido. A ação foi cancelada.');
+ for(const l of s.loans)check(Number.isSafeInteger(l.balance)&&l.balance>=0,'Contrato inválido.');
+ touch(s,now);return s;
+}
+function tick(state,now=Date.now()){
+ if(state.pausedAt!=null)return state;
+ let s=legacyTick(state,now);if(s.phase!=='playing')return s;
+ if((s.loanOffer&&now>=s.loanOffer.expiresAt)||(s.assetOffer&&now>=s.assetOffer.expiresAt)){
+  s=clone(s);if(s.loanOffer&&now>=s.loanOffer.expiresAt){s.loanOffer=null;log(s,'A proposta de empréstimo expirou.');}
+  if(s.assetOffer&&now>=s.assetOffer.expiresAt){s.assetOffer=null;log(s,'A proposta de imóvel expirou; a dívida continua pendente.');}touch(s,now);
+ }
+ return s;
+}
+function botAction(s){
+ if(s.phase!=='playing'||s.pausedAt!=null)return null;
+ if(s.loanOffer){const o=s.loanOffer,other=o.borrowerId===o.from?o.lenderId:o.borrowerId,p=player(s,other);
+  if(p.bot){const isLender=p.id===o.lenderId;return {pid:p.id,action:{type:'loanReply',accept:isLender?spendable(s,p.id)+o.principal>o.principal+4000000&&o.collateralId!=null:o.rate<=15}};}
+ }
+ if(s.assetOffer&&player(s,s.assetOffer.creditorId).bot){const o=s.assetOffer;return {pid:o.creditorId,action:{type:'assetReply',accept:player(s,o.creditorId).cash>=o.change}};}
+ if(s.debt?.loanId&&s.debt.creditorId&&player(s,s.debt.creditorId).bot){
+  const d=s.debt,l=s.loans.find(l=>l.id===d.loanId),assets=owned(s,d.playerId).filter(t=>transferableForDebt(s,t.id));
+  const t=assets.find(t=>t.id===l.collateralId)||assets.sort((a,b)=>assetValue(s,a.id)-assetValue(s,b.id))[0];
+  if(t)return {pid:d.creditorId,action:{type:'foreclose',tileId:t.id,toBank:spendable(s,d.creditorId)<debtAssetQuote(s,t.id).change}};
+ }
+ const p=current(s);if(p?.bot&&s.turnState==='debt'){
+  const assets=owned(s,p.id).filter(t=>transferableForDebt(s,t.id));
+  const t=assets.sort((a,b)=>assetValue(s,a.id)-assetValue(s,b.id))[0];
+  if(t)return {pid:p.id,action:{type:'liquidateDebt',tileId:t.id}};
+  return {pid:p.id,action:{type:'bankrupt'}};
+ }
+ return legacyBotAction(s);
+}
+
+return {upgrade,normalizedName,waitingPlayers,activeLoans,loansOf,lien,assetValue,debtAssetQuote,transferableForDebt,loanTotal,BANK_LOAN,collectDue,spendable,buildReason,STICKERS,BID_MIN,BID_STEP,canBuild,STARTING_CASH,PASS_START,JAIL_FEE,HOTEL_LEVEL,TILES,GROUPS,COLORS,TOKENS,CARDS,randomInt,id,code,clone,createRoom,join,apply,tick,setOnline,current,player,owned,wealth,rent,fullGroup,groupTiles,botAction};
+});
+
+</script><script>/* 4.0: same-origin HTTPS transport. No PeerJS, WebRTC, STUN, TURN or host browser server.
+ * The server is authoritative. A saved local snapshot is display-only.
+ */
+(function(){'use strict';
+const G=Metro, NS='metro-br40-', ENDPOINT='/api/metro';
+const storage={
+ get(k){try{return localStorage.getItem(k)??sessionStorage.getItem(k);}catch{return null;}},
+ set(k,v){try{localStorage.setItem(k,v);return true;}catch{try{sessionStorage.setItem(k,v);return true;}catch{return false;}}},
+ remove(k){try{localStorage.removeItem(k);sessionStorage.removeItem(k);}catch{}}
+};
+const read=k=>{try{return JSON.parse(storage.get(k));}catch{return null;}};
+const identityKey=(code,name)=>NS+'identity-'+code+'-'+G.normalizedName(name);
+const snapshotKey=(code,name)=>NS+'snapshot-'+code+'-'+G.normalizedName(name);
+const pendingKey=(code,name)=>NS+'pending-'+code+'-'+G.normalizedName(name);
+let serverOffset=0;
+function remember(net){
+ if(!net.state||net.mode==='local')return;
+ const session={code:net.code,id:net.pid,mode:'server',name:net.name,isHost:net.isHost,savedAt:net.savedAt};
+ storage.set(NS+'session',JSON.stringify(session));
+ const all=(read(NS+'sessions')||[]).filter(x=>!(x.code===net.code&&G.normalizedName(x.name)===G.normalizedName(net.name)));
+ storage.set(NS+'sessions',JSON.stringify([session,...all].slice(0,8)));
+ storage.set(snapshotKey(net.code,net.name),JSON.stringify({...session,state:net.state,schema:4}));
+}
+function error(message,code,status){const e=new Error(message);e.code=code;e.status=status;return e;}
+async function send(payload,token,timeout=15000){
+ if(!['http:','https:'].includes(location.protocol))throw error('Este HTML é a tela do jogo. Para salas online, abra o site com o servidor 4.0 publicado. A demonstração local continua disponível.','SERVER_NOT_PUBLISHED',404);
+ if(navigator.onLine===false)throw error('Sem internet. Seus bens confirmados estão guardados no servidor.','OFFLINE',0);
+ const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),timeout);
+ try{
+  const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+    body:JSON.stringify({apiVersion:4,...payload}),cache:'no-store',signal:controller.signal});
+  let data;
+  if(!(res.headers.get('content-type')||'').includes('application/json')){
+    throw error(res.status===429||res.status===503?'A hospedagem está indisponível ou atingiu a cota gratuita. Nenhuma jogada foi confirmada.':'O servidor 4.0 não foi encontrado neste site. Publicar apenas o HTML não instala as salas.', 'SERVER_NOT_PUBLISHED',res.status);
+  }
+  try{data=await res.json();}catch{throw error('O servidor enviou uma resposta incompleta. Tente novamente.','BAD_RESPONSE',502);}
+  if(!res.ok)throw error(data.error||'Não foi possível conectar à sala.',data.code||'SERVER_ERROR',res.status);
+  if(data.apiVersion!==4)throw error('A página e o servidor têm versões diferentes. Atualize o site.','VERSION_MISMATCH',409);
+  return data;
+ }catch(e){
+  if(e.name==='AbortError')throw error('O servidor demorou a responder. A jogada será conferida antes de qualquer nova cobrança.','TIMEOUT',0);
+  if(e instanceof TypeError)throw error('A conexão HTTP caiu. Seu patrimônio salvo continua no servidor.','NETWORK',0);
+  throw e;
+ }finally{clearTimeout(timer);}
+}
+function intent(state,action){
+ if(['roll','end','buy','auction','bail','bankrupt','trade'].includes(action.type))return [state.turnCount,state.turnIndex,state.rollSerial,state.turnState].join(':');
+ if(['build','sell','mortgage','unmortgage'].includes(action.type)){const p=state.properties[action.tileId];return p?[p.owner,p.level,p.mortgaged].join(':'):'missing';}
+ if(action.type==='tradeReply')return state.trade?JSON.stringify(state.trade):'none';
+ if(action.type==='loanReply')return state.loanOffer?.id||'none';
+ if(action.type==='assetReply')return state.assetOffer?.id||'none';
+ if(['offerAsset','foreclose','liquidateDebt'].includes(action.type))return state.debt?.id||'none';
+ return null;
+}
+class LocalNet{
+ constructor(name,roundLimit,onState,onStatus){this.mode='local';this.isHost=true;this.connected=true;this.name=name;this.onState=onState;this.onStatus=onStatus;this.state=G.createRoom(name,{roundLimit,code:'DEMO'});this.pid=this.state.hostId;this.code='DEMO';this.state=G.apply(this.state,this.pid,{type:'addBot'});this.state=G.apply(this.state,this.pid,{type:'addBot'});this.connectionText='Demonstração local · sem servidor';this.timer=setInterval(()=>this.tick(),1000);}
+ async act(a){this.state=G.apply(this.state,this.pid,a);this.onState(this.state,this.pid);}
+ tick(){try{const old=this.state;this.state=G.tick(this.state);const b=G.botAction(this.state);if(b)this.state=G.apply(this.state,b.pid,b.action);if(old!==this.state)this.onState(this.state,this.pid);}catch(e){console.error(e);}}
+ retry(){return Promise.resolve();}close(){clearInterval(this.timer);}
+}
+class ServerNet{
+ constructor(onState,onStatus){this.mode='server';this.onState=onState;this.onStatus=onStatus;this.connected=false;this.closed=false;this.failures=0;this.halted=false;this.ready=false;this.queue=Promise.resolve();this.clientId=G.id()+G.id();this.lastSeq=0;this.pending=null;this.nextPoll=4000;}
+ base(op){return {op,code:this.code,pid:this.pid,name:this.name,clientId:this.clientId,revision:this.state?.revision};}
+ report(ok,text){this.connected=ok;this.connectionText=text;if(this.ready)this.onStatus(ok,text);}
+ accept(data){
+  this.pid=data.pid;this.code=data.code;this.isHost=data.isHost;this.savedAt=data.savedAt;
+  serverOffset=data.serverTime-Date.now();this.lastSeq=Math.max(this.lastSeq,data.lastSeq||0);this.nextPoll=data.pollAfterMs||4000;
+  if(data.state&&(!this.state||data.state.revision>=this.state.revision)){
+   const changed=!this.state||this.state.revision!==data.state.revision;this.state=data.state;
+   remember(this);if(changed&&this.ready)this.onState(this.state,this.pid);
+  }
+  if(this.pending){
+   const receipt=data.receipt?.id===this.pending.requestId?data.receipt:(data.receipts||[]).find(r=>r.id===this.pending.requestId&&r.seq===this.pending.seq);
+   if(receipt){this.pending=null;storage.remove(pendingKey(this.code,this.name));if(receipt.error)this.lastActionError=receipt.error;}
+   else if(data.lastSeq>=this.pending.seq){this.pending=null;storage.remove(pendingKey(this.code,this.name));this.lastActionError='A ação antiga já foi processada; confira o histórico. Não foi repetida.';}
+  }
+  this.failures=0;this.halted=false;
+  this.report(true,'Servidor conectado · salvo às '+new Date(this.savedAt).toLocaleTimeString('pt-BR'));
+ }
+ async open(kind,name,code,roundLimit){
+  this.name=String(name).normalize('NFKC').trim().replace(/\s+/g,' ');
+  let payload;
+  if(kind==='create'){
+   let creation=read(NS+'creating');
+   if(!creation||creation.name!==this.name||Date.now()-creation.at>3600000)creation={name:this.name,token:G.id()+G.id(),requestId:G.id(),at:Date.now()};
+   storage.set(NS+'creating',JSON.stringify(creation));this.token=creation.token;
+   payload={op:'create',name:this.name,roundLimit,requestId:creation.requestId,clientId:this.clientId};
+  }else{
+   this.code=String(code||'').trim().toUpperCase();
+   if(!/^[A-HJ-NP-Z2-9]{6}$/.test(this.code))throw error('Informe o código de seis caracteres.','BAD_CODE',400);
+   this.token=storage.get(identityKey(this.code,this.name))||G.id()+G.id();
+   storage.set(identityKey(this.code,this.name),this.token);
+   this.pending=read(pendingKey(this.code,this.name));
+   payload={op:'join',code:this.code,name:this.name,clientId:this.clientId};
+  }
+  const data=await send(payload,this.token);this.accept(data);
+  storage.set(identityKey(this.code,this.name),this.token);if(kind==='create')storage.remove(NS+'creating');
+  remember(this);this.ready=true;this.install();this.schedule(150);return this;
+ }
+ install(){
+  this.onOnline=()=>this.retry();
+  this.onOffline=()=>{clearTimeout(this.timer);this.report(false,'Sem internet. A partida está salva. A reconexão será tentada quando a rede voltar.');};
+  this.onWake=()=>{if(document.visibilityState==='visible'){if(!this.halted)this.pulse(true);}};
+  this.onLeave=()=>this.notifyLeave();
+  window.addEventListener('online',this.onOnline);window.addEventListener('offline',this.onOffline);
+  document.addEventListener('visibilitychange',this.onWake);window.addEventListener('pagehide',this.onLeave);
+ }
+ schedule(ms){clearTimeout(this.timer);if(!this.closed&&!this.halted)this.timer=setTimeout(()=>this.pulse(),ms);}
+ handleFailure(e){
+  this.failures++;
+  const fatal=['SESSION_REPLACED','SESSION_EXPIRED','PLAYER_REMOVED','ROOM_NOT_FOUND','ROOM_EXPIRED','VERSION_MISMATCH','SERVER_NOT_PUBLISHED'].includes(e.code);
+  this.halted=fatal||this.failures>=5;
+  this.report(false,e.message+(this.halted?' As tentativas automáticas foram pausadas. Use Tentar novamente.':''));
+  if(!this.halted&&navigator.onLine!==false)this.schedule(Math.min(30000,2000*2**(this.failures-1)));
+ }
+ async pulse(force=false){
+  if(this.closed||this.pulling||this.sending||(!force&&this.halted))return;
+  if(navigator.onLine===false){this.onOffline();return;}
+  this.pulling=true;
+  try{
+   const data=await send(this.base('sync'),this.token);this.accept(data);
+   if(this.pending){try{await this.submitPending();}catch(e){if(e.code!=='GAME_REJECTED')throw e;this.lastActionError=e.message;}}
+   if(this.lastActionError){window.dispatchEvent(new CustomEvent('metro-notice',{detail:this.lastActionError}));this.lastActionError=null;}
+   this.schedule(document.visibilityState==='hidden'?15000:this.nextPoll);
+  }catch(e){this.handleFailure(e);}finally{this.pulling=false;}
+ }
+ async retry(){if(this.closed)return;this.failures=0;this.halted=false;clearTimeout(this.timer);return this.pulse(true);}
+ async submitPending(){
+  const action=this.pending;if(!action)return;
+  const result=await send({...this.base('action'),...action},this.token);this.accept(result);
+  if(result.receipt?.error)throw error(result.receipt.error,'GAME_REJECTED',200);
+ }
+ act(action){
+  const run=async()=>{
+   if(this.closed)throw new Error('Você saiu da sala.');
+   if(!this.connected||this.pending)throw new Error('Aguarde a reconexão e a confirmação da jogada anterior.');
+   this.sending=true;clearTimeout(this.timer);this.lastActionError=null;
+   this.pending={requestId:G.id(),seq:this.lastSeq+1,action,intent:intent(this.state,action)};
+   storage.set(pendingKey(this.code,this.name),JSON.stringify(this.pending));
+   try{await this.submitPending();}
+   catch(e){
+    if(e.code==='GAME_REJECTED'){this.lastActionError=null;throw e;}
+    if(['ACTION_OLD','SYNC_REQUIRED','BAD_REQUEST','BAD_ACTION','BAD_SEQUENCE'].includes(e.code)){
+     this.pending=null;storage.remove(pendingKey(this.code,this.name));
+    }
+    this.handleFailure(e);throw e;
+   }finally{this.sending=false;if(this.connected)this.schedule(800);}
+  };
+  const p=this.queue.then(run,run);this.queue=p.catch(()=>{});return p;
+ }
+ notifyLeave(){
+  if(!this.pid||this.closed)return;
+  // A stale browser cannot mark the replacement tab offline: server checks clientId.
+  try{fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+this.token},
+   body:JSON.stringify({apiVersion:4,...this.base('leave')}),keepalive:true,cache:'no-store'}).catch(()=>{});}catch{}
+ }
+ close(){
+  if(this.closed)return;this.notifyLeave();this.closed=true;clearTimeout(this.timer);
+  window.removeEventListener('online',this.onOnline);window.removeEventListener('offline',this.onOffline);
+  document.removeEventListener('visibilitychange',this.onWake);window.removeEventListener('pagehide',this.onLeave);
+  remember(this);
+ }
+}
+async function serverAvailable(){
+ if(!['http:','https:'].includes(location.protocol))return false;
+ const c=new AbortController(),t=setTimeout(()=>c.abort(),4000);
+ try{const r=await fetch('/api/metro/info',{signal:c.signal,cache:'no-store'});const info=await r.json();return r.ok&&info.app==='metropole'&&info.apiVersion===4;}catch{return false;}finally{clearTimeout(t);}
+}
+async function connect({kind,name,room,roundLimit,onState,onStatus}){
+ if(kind==='demo')return new LocalNet(name,roundLimit,onState,onStatus);
+ const net=new ServerNet(onState,onStatus);try{return await net.open(kind,name,room,roundLimit);}catch(e){net.closed=true;throw e;}
+}
+window.MetroNet={connect,serverAvailable,storage,getSession:()=>read(NS+'session'),getSessions:()=>read(NS+'sessions')||[],
+ getSnapshot:(code,name)=>read(snapshotKey(code,name)),serverNow:()=>Date.now()+serverOffset,ServerNet,LocalNet};
+})();
+</script><script>
+
+const METRO_SOURCE='<!doctype html>\n'+document.documentElement.outerHTML;
+(function(){'use strict';
+const G=Metro,N=MetroNet,$=q=>document.querySelector(q);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shortNames=G.TILES.map(t=>t.short||t.name);
+const money=v=>'R$ '+Math.round(v).toLocaleString('pt-BR');
+const compact=v=>Math.abs(v)>=1000000?(v/1000000).toLocaleString('pt-BR',{maximumFractionDigits:2})+' mi':Math.abs(v)>=1000?(v/1000).toLocaleString('pt-BR',{maximumFractionDigits:0})+' mil':String(v);
+let boardScale=1,chatFloating=false,chatMinimized=false,unreadChat=0;
+const seenReactions=new Set();
+let net=null,S=null,me=null,screen='home',busy=false,connectionOK=true,connectionText='',modal=null,lastRoll=0,endedShown=false,lastFeed='',lastChat='',lastTurn='',lastCardShown=-1;
+const stateCallbacks={onState:receive,onStatus:status};
+function toast(text,error=false){const el=document.createElement('div');el.className='toast'+(error?' error':'');el.textContent=text;$('#toastRoot').append(el);setTimeout(()=>el.remove(),6500);}
+function wait(show,text='Conectando à sala…'){busy=show;$('#busyRoot').innerHTML=show?`<div class="busy-overlay"><div class="busy-box"><div class="spinner"></div><strong>${esc(text)}</strong><p class="helper">As outras pessoas entrarão com o mesmo código. A conexão depende da internet e das permissões da rede.</p></div></div>`:'';}
+function coord(i){if(i<=10)return [10-i,10];if(i<=20)return [0,20-i];if(i<=30)return [i-20,0];return [10,i-30];}
+function skyline(){return '<div class="skyline" aria-hidden="true">'+Array.from({length:5},()=>'<div class="building"></div>').join('')+'</div>';}
+function diceHTML(nums=[1,1]){const maps={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};return `<div class="dice-pair" aria-label="Dados: ${nums[0]} e ${nums[1]}">${nums.map(n=>`<div class="die">${Array.from({length:9},(_,i)=>`<span class="pip ${maps[n]?.includes(i)?'on':''}"></span>`).join('')}</div>`).join('')}</div>`;}
+function boardHTML(preview=false){
+ const tints={conexao:'#f0e3ff',comunidade:'#d8f7ff',robotica:'#ffe1f1',empreendedor:'#ffebd4',inteligencia:'#ffe3e6',sustentavel:'#fff7bd',inteligente:'#d4f8e8',premium:'#e0e7ff'};
+ const minis={};
+ return `<div class="board" id="${preview?'previewBoard':'board'}" aria-label="Tabuleiro completo com 40 casas">
+ ${G.TILES.map(t=>{
+  const [x,y]=coord(t.id),group=t.group?G.GROUPS[t.group]:null;
+  const side=t.id%10===0?'corner':t.id<10?'bottom':t.id<20?'left':t.id<30?'top':'right';
+  const price=t.price?compact(t.price):t.type==='start'?'+'+compact(G.PASS_START):t.type==='tax'?'−'+compact(t.amount):t.type==='bonus'?'+'+compact(t.amount):'';
+  const caption=t.type==='chance'?'Sorte / Revés':(minis[t.id]||shortNames[t.id]);
+  const full=t.name+(t.city?' · '+t.city:'')+(t.price?' · '+money(t.price):'');
+  return `<button type="button" class="tile ${group?'color':''}" data-side="${side}" data-type="${t.type}" style="grid-column:${x+1};grid-row:${y+1};${group?'--group-color:'+group.color+';--group-tint:'+tints[t.group]:''}" data-tile="${t.id}" title="${esc(full)}" aria-label="${esc(full)}" ${preview?'tabindex="-1"':''}>
+  ${!group?`<span class="tile-icon" aria-hidden="true">${t.icon||'✦'}</span>`:''}
+  <span class="tile-name"><span class="tile-long">${esc(t.name)}</span><span class="tile-short">${esc(caption)}</span></span>
+  <span class="tile-price">${price}</span><span class="tile-owner"></span><span class="tile-level"></span></button>`;
+ }).join('')}
+ <div class="board-center">
+  <div><div class="board-brand">metrópole</div><div class="board-sub">Brasil Milionário</div></div>
+  ${skyline()}
+  <div class="center-label" id="${preview?'previewLabel':'centerLabel'}">${preview?'SUA CIDADE. SUAS ESCOLHAS.':'Sua próxima grande jogada.'}</div>
+  <div id="${preview?'previewDice':'boardDice'}">${diceHTML(preview?[3,5]:[1,1])}</div>
+  <div class="center-status" id="${preview?'previewStatus':'centerStatus'}">${preview?'Compre. Construa. Negocie.':'Lance os dados para começar.'}</div>
+  ${preview?'':'<div id="centerAction"></div><button id="lastCardButton" class="btn sm hidden" data-ui="lastCard">✦ Sorte ou Revés</button>'}
+ </div><div class="pawn-layer" id="${preview?'previewPawns':'pawns'}"></div></div>`;
+}
+function home(){boardScale=1;chatFloating=false;chatMinimized=false;unreadChat=0;seenReactions.clear();$('#chatFab')?.classList.add('hidden');document.body.classList.remove('board-focus');screen='home';S=null;me=null;document.body.classList.remove('in-game');$('#exitButton').classList.add('hidden');$('#mobileBar').classList.add('hidden');$('#connectionLabel').textContent='JOGO DE TABULEIRO';$('#connectionDot').classList.remove('off');const session=N.getSession();const query=new URLSearchParams(location.search).get('sala')||'';let username=N.storage.get('metro-name')||'';
+$('#app').innerHTML=`<section class="landing"><div class="hero-copy"><span class="eyebrow"><span class="dot"></span> UMA CIDADE. MUITAS POSSIBILIDADES.</span><h1>O próximo grande<br>negócio é <em>seu.</em></h1><p class="bodycopy">Comece com R$ 25 milhões, invista em endereços brasileiros e construa sem completar grupos. Seus amigos entram na mesma sala pelo próprio aparelho.</p><div class="entry card"><h2>Seu lugar à mesa está reservado.</h2><div class="fieldrow"><div><label for="playerName">COMO PODEMOS CHAMAR VOCÊ?</label><input id="playerName" maxlength="18" placeholder="Seu nome" autocomplete="nickname" value="${esc(username)}"></div><div><label for="roundLimit">MODO</label><select id="roundLimit"><option value="0" selected>Tradicional</option><option value="10">10 rodadas</option><option value="20">20 rodadas</option><option value="40">40 rodadas</option></select></div></div><button class="btn primary full" data-ui="create">＋ Criar sala online</button><div class="sep">JÁ TEM UM CONVITE?</div><div class="row"><input id="roomCode" class="roominput" maxlength="6" placeholder="CÓDIGO" aria-label="Código da sala" value="${esc(query.toUpperCase().slice(0,6))}" autocomplete="off" autocapitalize="characters"><button class="btn accent" data-ui="join">Entrar ↗</button></div><button class="btn ghost full" data-ui="demo">◈ Testar contra o computador</button>${session?`<button class="btn ghost full" data-ui="resume">↻ Retomar sala ${esc(session.code)}</button>`:''}<p class="helper" id="networkHint">Sala salva no servidor. Entre ou retorne com o mesmo código e nome, inclusive durante a partida. O anfitrião não hospeda a conexão.</p><div class="mode-note">Capital inicial: R$ 25.000.000 · Volta completa: R$ 2.000.000. Sem dinheiro real. A demonstração funciona sem internet.</div><button class="btn ghost full sm" data-ui="source">⧉ Ver e copiar o HTML desta versão</button></div><div class="features"><span><i>◉</i> 2 a 6 jogadores</span><span><i>⇄</i> Salas por código</span><span><i>▣</i> Celular e computador</span></div></div><div class="hero-board">${boardHTML(true)}<div class="floating-card"><span class="floating-icon">↗</span><div><span class="micro muted">8 cores · 22 propriedades · 6 companhias</span><strong>O Brasil é o seu tabuleiro.</strong></div></div></div></section>`;
+N.serverAvailable().then(yes=>{if(screen==='home'&&$('#networkHint'))$('#networkHint').textContent=yes?'Servidor 4.0 disponível. Sala salva online; cada colega entra pelo link e pelo código.':'Servidor 4.0 não detectado neste endereço. A demonstração local funciona, mas as salas precisam da publicação completa, com as funções do servidor.';});
+}
+async function begin(kind,session=null){if(busy)return;const input=$('#playerName');const name=(session?.name||input?.value||'').trim()||(kind==='demo'?'Você':'');if(!name){input?.focus();toast('Digite seu nome para entrar na partida.',true);return;}const room=session?.code||$('#roomCode')?.value.trim().toUpperCase();if(kind==='join'&&!room){$('#roomCode')?.focus();toast('Digite o código de 6 caracteres da sala.',true);return;}const roundLimit=Number($('#roundLimit')?.value||0);N.storage.set('metro-name',name);wait(true,kind==='demo'?'Preparando o tabuleiro…':kind==='create'?'Criando sua sala…':'Entrando na sala…');try{const newNet=await N.connect({kind,name,room,roundLimit,mode:session?.mode||'auto',...stateCallbacks});net=newNet;connectionOK=net.connected!==false;endedShown=false;lastRoll=0;lastFeed='';lastChat='';lastTurn='';lastCardShown=-1;receive(net.state,net.pid,true);status(connectionOK,net.connectionText||'Sala conectada · salvamento automático');if(kind==='demo')await act({type:'start'});}catch(e){toast(e.message,true);if(!net)home();}finally{wait(false);}}
+function legacyStatus(ok,text){connectionOK=ok;connectionText=text;$('#connectionDot').classList.toggle('off',!ok);$('#connectionLabel').textContent=ok?(net?.mode==='local'?'DEMONSTRAÇÃO':net?.mode==='server'?'SERVIDOR ONLINE':'SALA CONECTADA'):'RECONECTANDO';const b=$('#connectionBanner');if(b){b.textContent=text;b.classList.toggle('hidden',ok);}if(!ok&&S)updateActions();}
+function receive(s,pid,force=false){if(!s||!pid)return;if(!force&&S&&S.code===s.code&&s.revision<S.revision)return;if(!s.players.some(p=>p.id===pid&&!p.removed)){toast('Você foi retirado desta sala.',true);net?.close();net=null;home();return;}const previousPhase=S?.phase;S=s;me=pid;$('#exitButton').classList.remove('hidden');if(s.phase==='lobby'){screen='lobby';renderLobby();return;}if(screen!=='game'||previousPhase==='lobby'){screen='game';renderGameShell();}updateGame();if(s.phase==='finished'&&!endedShown){endedShown=true;showResults();}}
+function personHTML(p,active=false,lobby=false){
+ const removable=S.hostId===me&&p.id!==me&&!p.removed;
+ return `<div class="person ${active?'turn':''} ${p.bankrupt?'eliminated':''}">
+ <div class="avatar" style="--pc:${p.color}">${p.token}</div>
+ <div class="person-info"><div class="person-name">${esc(p.name)}${p.id===me?' · você':''}</div>
+ <div class="person-sub">${p.removed?'Retirado pelo anfitrião':p.bankrupt?'Fora dos negócios':p.bot?'Computador':p.online?(p.id===S.hostId?'Anfitrião':'Conectado'):'Desconectado'}${!lobby&&!p.bankrupt?' · '+G.owned(S,p.id).length+' imóveis':''}${!lobby&&(p.jail||p.jailRelease)?' · Em auditoria':''}</div></div>
+ ${lobby?'':`<div class="person-money" title="${money(p.cash)}">${money(p.cash)}</div>`}
+ ${removable?`<button class="btn sm danger remove-player" data-remove="${p.id}" aria-label="Retirar ${esc(p.name)} da partida" title="Retirar jogador">Retirar</button>`:''}</div>`;
+}
+
+function renderLobby(){const host=S.hostId===me;document.body.classList.remove('in-game');$('#mobileBar').classList.add('hidden');$('#app').innerHTML=`<div id="connectionBanner" class="connection-banner alert ${connectionOK?'hidden':''}">${esc(connectionText)}</div><section class="lobby"><div class="lobby-main card"><span class="eyebrow">A CIDADE ESTÁ QUASE ABERTA</span><h1>Uma boa companhia.<br>Uma grande partida.</h1><p class="bodycopy">${host?'Convide seus amigos e comece quando todos estiverem aqui.':'Você já está na sala. Aguarde o anfitrião iniciar a partida.'}</p><div class="room-code-box"><span class="eyebrow">CÓDIGO DA SALA</span><strong class="code" id="lobbyCode">${esc(S.code)}</strong><div class="row" style="justify-content:center"><button class="btn sm" data-ui="copyCode">Copiar código</button><button class="btn sm primary" data-ui="invite">Compartilhar convite ↗</button></div></div><div class="section-header"><h2>Quem está à mesa</h2><span class="pill">${S.players.filter(p=>!p.removed).length} / 6</span></div><div class="playerlist">${S.players.map(p=>personHTML(p,false,true)).join('')}${S.players.filter(p=>!p.removed).length<6?'<div class="empty-seat">＋ Um lugar livre para o próximo investidor.</div>':''}</div>${host?`<div class="row" style="margin-top:18px"><button class="btn ghost" data-act="addBot" ${S.players.filter(p=>!p.removed).length>=6?'disabled':''}>＋ Adicionar IA</button><button class="btn primary" data-act="start" style="flex:1" ${S.players.length<2?'disabled':''}>Iniciar partida →</button></div>`:'<div class="alert" style="margin-top:20px">Todos prontos? O anfitrião inicia a partida para a sala inteira.</div>'}<p class="helper">${net?.mode==='peer'?'Salvamento automático. Se a internet cair, retorne com o mesmo código e nome. O anfitrião retoma no navegador original; o jogo aguarda a reconexão sem apagar os bens.':'Sala salva no servidor. Use o mesmo código e nome para recuperar seu patrimônio; guarde o código dentro do grupo.'}</p></div><aside class="lobby-side card"><div><div class="section-header"><h2>As regras da mesa</h2><span class="pill">EDIÇÃO DIGITAL</span></div><div class="rules-list"><div class="rule"><div><b>Todo império começa pequeno.</b>Você começa com R$ 25 milhões. Cada volta completa rende R$ 2 milhões.</div></div><div class="rule"><div><b>Um endereço. Muitas possibilidades.</b>Compre e cobre aluguéis. Tendo saldo, compre casas no seu terreno: não é preciso completar a cor.</div></div><div class="rule"><div><b>Negocie com inteligência.</b>Troque imóveis, participe de leilões e use hipotecas para reorganizar seu caixa.</div></div><div class="rule"><div><b>O maior patrimônio vence.</b>Tradicional: vence o último jogador solvente. Modo rápido: vence o maior patrimônio ao final das rodadas.</div></div></div></div><div><label for="lobbyRounds">DURAÇÃO DA PARTIDA</label><select id="lobbyRounds" ${host?'':'disabled'}>${[0,10,20,40].map(n=>`<option value="${n}" ${n===S.roundLimit?'selected':''}>${n===0?'Tradicional · até restar um jogador':n+' rodadas · modo rápido'}</option>`).join('')}</select><p class="helper">Dados iguais dão uma jogada extra. Uma rodada termina depois que todos tiveram sua vez.</p></div><button class="btn ghost full" data-ui="rules">Ler todas as regras ↗</button><p class="micro muted">Não há compras com dinheiro real, apostas ou prêmios financeiros.</p></aside></section>`;}
+function renderGameShell(){
+ document.body.classList.add('in-game');
+ $('#app').innerHTML=`<div id="connectionBanner" class="connection-banner alert ${connectionOK?'hidden':''}">${esc(connectionText)}</div>
+ <div class="page-title"><div><h1>A cidade é sua.</h1><p id="gameSubtitle"></p></div><div class="summary-pill"><span class="pill" id="roundBadge"></span><button class="btn sm ghost" data-ui="copyCode" id="roomBadge"></button></div></div>
+ <div class="gamegrid"><section class="board-wrap card"><div class="board-toolbar"><span class="pill"><span class="dot"></span> TABULEIRO</span><span>40 casas · R$ 25 milhões iniciais</span><div class="board-tools"><button class="btn sm" data-ui="boardScale">Ampliar +</button><button class="btn sm ghost" data-ui="catalog" title="Nomes e preços de todas as casas">Ver casas</button><button class="btn sm ghost" data-ui="zoom" aria-pressed="false" title="Focar o tabuleiro inteiro, sem cortes">Tela ampla ⛶</button></div></div>
+ <div id="boardViewport" class="board-viewport">${boardHTML()}</div><p id="boardHint" class="board-hint">Toque no terreno para ver nome completo, cidade e valores.</p><div class="board-legend"><span class="group-colors" aria-label="Oito grupos de cores">${Object.values(G.GROUPS).map(g=>`<i style="--swatch:${g.color}" title="${esc(g.colorName)}"></i>`).join('')}<span>R$</span></span><span class="legend-symbols">⌂ Casa &nbsp; ▣ Hotel &nbsp; H Hipoteca</span></div></section>
+ <aside class="sidebar"><section id="actionBox" class="card action-card" aria-live="polite"></section><section class="card panel"><div class="section-header"><h2>À mesa</h2><span class="micro muted" id="playerCount"></span></div><div class="playerlist" id="playersPanel"></div></section><section class="card panel"><div class="section-header"><h2>Sua carteira</h2><button class="btn sm accent" data-ui="portfolio">🏠 Construir / imóveis</button></div><div id="walletPanel"></div></section></aside></div>
+ <div class="bottomgrid"><section class="card panel"><div class="section-header"><h2>Diário da cidade</h2><span class="micro muted">A partida, lance a lance.</span></div><div id="gameFeed" class="feed" role="log"></div></section><section id="chatPanel" class="card panel chat-panel">
+ <div class="section-header chat-head"><div><h2>💬 Conversa da sala</h2><span class="micro muted">Figurinhas e bons negócios.</span></div>
+ <div class="row"><button class="btn sm ghost" data-ui="chatFloat" title="Alternar conversa flutuante">Destacar ↗</button><button class="btn sm ghost" data-ui="chatMinimize" title="Minimizar conversa">−</button></div></div>
+ <div id="chatFeed" class="chat-feed" role="log" aria-live="polite"></div>
+ <div id="stickerPicker" class="sticker-picker hidden" aria-label="Figurinhas">${G.STICKERS.map(x=>`<button class="sticker-choice" data-sticker="${x.id}" title="${esc(x.label)}" aria-label="Enviar figurinha: ${esc(x.label)}"><span>${x.emoji}</span><small>${esc(x.label)}</small></button>`).join('')}</div>
+ <form class="chat-form" id="chatForm"><button class="btn" type="button" data-ui="stickers" title="Escolher figurinha">😊</button><input id="chatInput" placeholder="Mensagem para a mesa…" maxlength="200" aria-label="Mensagem para a sala" autocomplete="off"><button class="btn primary" type="submit" aria-label="Enviar mensagem">↗</button></form>
+ </section></div>`;
+ syncChatMode();scheduleBoardFit();
+}
+
+// Size by BOTH screen width and available height, rather than by width alone.
+// This does not hide overflowing cells or place the board in a scroll window.
+let fitFrame=0;
+function scheduleBoardFit(){
+ cancelAnimationFrame(fitFrame);
+ fitFrame=requestAnimationFrame(fitBoard);
+}
+function fitBoard(){
+ const board=$('#board'),viewport=$('#boardViewport'),wrap=$('.gamegrid .board-wrap');
+ if(!board||!viewport||!wrap)return;
+ const focused=document.body.classList.contains('board-focus');
+ const availableWidth=viewport.clientWidth;
+ let size=availableWidth*boardScale;
+ if(focused){
+  const h=(window.visualViewport?.height||innerHeight)-120;
+  size=Math.min(availableWidth,Math.max(200,h));
+ }
+ const resizing=Math.abs(board.getBoundingClientRect().width-Math.floor(size))>1;
+ if(resizing)board.querySelectorAll('.pawn').forEach(e=>e.style.transition='none');
+ board.style.setProperty('--board-fit',Math.floor(size)+'px');
+ viewport.classList.toggle('magnified',boardScale>1&&!focused);
+ const b=$('[data-ui="boardScale"]');if(b)b.textContent=boardScale===1?'Ampliar +':boardScale===1.5?'Zoom 150% +':'Reduzir −';
+ if($('#boardHint'))$('#boardHint').textContent=boardScale>1&&!focused?'Arraste dentro do tabuleiro ampliado para ver todas as casas.':'Toque no terreno para ver nome completo, cidade e valores.';
+ positionPawns();
+ if(resizing){void board.offsetWidth;requestAnimationFrame(()=>board.querySelectorAll('.pawn').forEach(e=>e.style.transition=''));}
+}
+
+function toggleBoardFocus(force){
+ if(!$('#board'))return;
+ const on=typeof force==='boolean'?force:!document.body.classList.contains('board-focus');
+ document.body.classList.toggle('board-focus',on);
+ document.querySelectorAll('[data-ui="zoom"]').forEach(b=>{
+  b.textContent=on?'Voltar ×':'Tela ampla ⛶';
+  b.setAttribute('aria-pressed',String(on));
+ });
+ syncChatMode();scheduleBoardFit();
+}
+function positionPawns(){
+ if(!S||!$('#pawns'))return;
+ const layer=$('#pawns'),lr=layer.getBoundingClientRect();
+ for(const p of S.players){
+  const el=layer.querySelector(`[data-pawn="${p.id}"]`);
+  const tile=$(`#board [data-tile="${p.pos}"]`);
+  if(!el||!tile||p.bankrupt)continue;
+  const r=tile.getBoundingClientRect();
+  const peers=S.players.filter(x=>!x.bankrupt&&x.pos===p.pos),n=peers.findIndex(x=>x.id===p.id);
+  const cols=Math.min(3,peers.length),rows=Math.ceil(peers.length/3);
+  const diameter=Math.max(6,Math.min(17,(r.width-6)/3.5,(r.height-5)/2.8));
+  const row=Math.floor(n/3),rowCount=Math.min(cols,peers.length-row*3),col=n%3;
+  const x=r.left-lr.left+r.width/2+(col-(rowCount-1)/2)*(diameter+1);
+  const y=r.bottom-lr.top-3-diameter/2-(rows-1-row)*(diameter+1);
+  el.style.setProperty('--x',x+'px');el.style.setProperty('--y',y+'px');
+  el.style.setProperty('--pawn-size',diameter+'px');el.style.setProperty('--pawn-font',Math.max(4,diameter*.56)+'px');
+ }
+}
+function updateBoard(){const cp=G.current(S);for(const t of G.TILES){const el=$(`#board [data-tile="${t.id}"]`);const d=S.properties[t.id];el.classList.toggle('focus',t.id===cp?.pos);el.style.setProperty('--player-color',cp?.color||'#23684e');const op=d?.owner?G.player(S,d.owner):null;el.querySelector('.tile-owner').textContent=op?op.token:'';el.style.setProperty('--owner-color',op?.color||'transparent');el.querySelector('.tile-level').textContent=d?.mortgaged?'H':d?.level===G.HOTEL_LEVEL?'▣':d?.level?'⌂'+d.level:'';el.title=t.name+(t.price?' · '+money(t.price):'')+(op?' · '+op.name:'');}
+const layer=$('#pawns');for(const p of S.players){let el=layer.querySelector(`[data-pawn="${p.id}"]`);if(p.bankrupt){el?.remove();continue;}if(!el){el=document.createElement('div');el.className='pawn';el.dataset.pawn=p.id;el.textContent=p.token;el.style.setProperty('--pc',p.color);layer.appendChild(el);}el.classList.toggle('active',cp?.id===p.id);el.title=p.name;}positionPawns();
+if(S.rollSerial!==lastRoll){$('#boardDice').innerHTML=diceHTML(S.dice);$('#boardDice .dice-pair').classList.add('rolling');setTimeout(()=>$('#boardDice .dice-pair')?.classList.remove('rolling'),800);lastRoll=S.rollSerial;}
+$('#centerLabel').textContent=S.phase==='finished'?'PARTIDA ENCERRADA':cp?.id===me?'É A SUA VEZ':'VEZ DE '+cp?.name.toUpperCase();$('#lastCardButton')?.classList.toggle('hidden',!S.lastCard);$('#centerStatus').textContent=S.lastCard&&S.lastCard.serial===S.rollSerial?S.lastCard.title:cp?G.TILES[cp.pos].name:'Boas jogadas!';}
+function legacyUpdateGame(){if(!$('#board'))return;const p=G.player(S,me),cp=G.current(S);$('#gameSubtitle').textContent=net?.mode==='local'?'Demonstração local · você e 2 adversários de IA':net?.mode==='peer'?'Sala direta · cada investidor no seu aparelho':'Servidor 4.0 · salas persistentes por HTTPS';$('#roundBadge').textContent=S.roundLimit?`RODADA ${Math.min(S.round,S.roundLimit)} / ${S.roundLimit}`:`TRADICIONAL · RODADA ${S.round}`;$('#roomBadge').textContent=`SALA ${S.code} ⧉`;$('#playerCount').textContent=`${S.players.filter(p=>!p.bankrupt).length} no jogo`;$('#playersPanel').innerHTML=S.players.map(p=>personHTML(p,cp?.id===p.id)).join('');$('#walletPanel').innerHTML=`<div class="stats"><div class="stat"><span>Saldo disponível</span><strong>${money(p.cash)}</strong></div><div class="stat"><span>Patrimônio</span><strong>${money(G.wealth(S,me))}</strong></div></div><div class="micro muted" style="margin-bottom:10px">${p.passes?'✦ 1 autorização de saída da Auditoria':'Banco Central de Metrópole'}</div><div class="mini-properties">${G.owned(S,me).map(t=>`<button class="mini-prop" style="--group-color:${t.group?G.GROUPS[t.group].color:'#c9cdbb'}" data-tile="${t.id}" title="${esc(t.name)}">${S.properties[t.id].mortgaged?'H':S.properties[t.id].level===G.HOTEL_LEVEL?'▣':S.properties[t.id].level?'⌂':'·'}</button>`).join('')||'<span class="micro muted">Seu primeiro endereço brasileiro está logo ali.</span>'}</div><button class="btn ghost full" style="margin-top:14px" data-ui="trade" ${p.bankrupt||cp?.id!==me||!['roll','end'].includes(S.turnState)||S.trade||S.phase!=='playing'?'disabled':''}>⇄ Negociar com um jogador</button>`;updateBoard();updateActions();
+const feedKey=S.log.at(-1)?.id;if(feedKey!==lastFeed){lastFeed=feedKey;$('#gameFeed').innerHTML=S.log.slice().reverse().map(l=>`<div class="feed-line ${esc(l.kind)}"><time>${new Date(l.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</time><span>${esc(l.text)}</span></div>`).join('');}
+updateChat();
+if(S.lastCard&&S.lastCard.serial!==lastCardShown&&!modal){lastCardShown=S.lastCard.serial;showLastCard();}if(cp?.id===me&&lastTurn!==me&&S.phase==='playing')toast('É sua vez de investir!');lastTurn=cp?.id;if(modal?.type==='tile')paintTile(modal.tileId);if(modal?.type==='portfolio')paintPortfolio();if(modal?.type==='tradeReview'){if(S.trade)paintTradeReview();else closeModal();}}
+function legacyActionInfo(){const p=G.player(S,me),cp=G.current(S);let title,desc,buttons='',small='SUA PRÓXIMA JOGADA',primary=null;
+if(!connectionOK)return {small:'CONEXÃO INTERROMPIDA',title:'Reconectando…',desc:connectionText,buttons:'',wait:true};
+if(S.phase==='finished')return {small:'FIM DE PARTIDA',title:'A cidade tem um vencedor.',desc:S.reason,buttons:'<button class="btn primary" data-ui="results">Ver classificação ↗</button>',primary:{label:'Classificação',ui:'results'}};
+if(S.trade){const tr=S.trade;title=tr.to===me?'Uma proposta para você.':'Negociação em andamento.';desc=`${esc(G.player(S,tr.from).name)} está negociando com ${esc(G.player(S,tr.to).name)}.`;buttons=`<button class="btn primary" data-ui="tradeReview">Ver proposta ⇄</button>`;if(tr.from===me)buttons+='<button class="btn ghost" data-act="tradeReject">Cancelar proposta</button>';primary={label:'Ver proposta',ui:'tradeReview'};small='MESA DE NEGOCIAÇÃO';}
+else if(S.auction){const a=S.auction;const passed=a.passed.includes(me),lead=a.bidderId===me;title=G.TILES[a.tileId].name;desc=`Maior lance: ${money(a.bid)}${a.bidderId?' · '+esc(G.player(S,a.bidderId).name):''}. <span class="timer" data-until="${a.endsAt}"></span>`;const min=Math.max(G.BID_MIN,a.bid+G.BID_STEP);if(!p.bankrupt&&!passed&&!lead){buttons=`<button class="btn primary" data-act="bid" data-amount="${min}" ${p.cash<min?'disabled':''}>Oferecer ${money(min)}</button><button class="btn ghost" data-act="passAuction">Passar leilão</button>`;primary={label:'Lance '+money(min),action:'bid',amount:min,disabled:p.cash<min};}else buttons=`<div class="micro muted">${lead?'Você tem o maior lance. Aguarde o encerramento.':passed?'Você passou. Aguarde o resultado.':'Acompanhe o leilão.'}</div>`;small='LEILÃO ABERTO A TODOS';}
+else if(cp.id!==me||p.bankrupt){title=p.bankrupt?'Você segue na plateia.':`Vez de ${esc(cp.name)}.`;desc=p.bankrupt?'Acompanhe a partida e converse com a mesa.':`${esc(cp.name)} está em ${esc(G.TILES[cp.pos].name)}. Você pode construir nos seus terrenos pela carteira, mesmo fora da sua vez.`;small='A CIDADE CONTINUA';buttons='<button class="btn ghost" data-ui="portfolio">🏠 Construir nos seus terrenos</button>';return {small,title,desc,buttons,wait:true};}
+else if(S.turnState==='roll'){const detained=p.jail>0||p.jailRelease;
+ title=detained?'Hora de resolver a Auditoria.':'Vamos aos negócios?';
+ desc=detained?(p.jailRelease?'Você já realizou três tentativas. Nesta jogada será cobrada a taxa de R$ 500.000 e você avançará pelos dados. Uma autorização ainda pode liberar a saída sem pagar.':`Restam ${p.jail} tentativas para tirar dados iguais. Na quarta jogada, pague R$ 500.000 e avance. Quem possui autorização pode usá-la antes de lançar.`):'Lance os dados e descubra o próximo endereço da sua estratégia.';
+ buttons=`<button class="btn primary" data-act="roll">◈ ${p.jailRelease?'Pagar R$ 500.000 e lançar':'Lançar dados'}</button>`;
+ if(detained&&p.passes)buttons+='<button class="btn ghost" data-act="bail">Usar autorização</button>';
+ primary={label:p.jailRelease?'Pagar e lançar':'Lançar dados',action:'roll'};}
+else if(S.turnState==='buy'){const t=G.TILES[p.pos];title='Um endereço para chamar de seu.';desc=`${esc(t.name)} está à venda por <b>${money(t.price)}</b>. Compre ou leve a leilão.`;buttons=`<button class="btn primary" data-act="buy" ${p.cash<t.price?'disabled':''}>Comprar · ${money(t.price)}</button><button class="btn ghost" data-act="auction">Abrir leilão ⇄</button>`;primary=p.cash>=t.price?{label:'Comprar '+money(t.price),action:'buy'}:{label:'Abrir leilão',action:'auction'};}
+else if(S.turnState==='debt'){title='É hora de reorganizar o caixa.';desc=`Faltam <b>${money(S.debt.amount)}</b> para quitar ${esc(S.debt.reason.toLowerCase())}. Venda construções ou hipoteque imóveis.`;buttons='<button class="btn primary" data-ui="portfolio">Gerenciar imóveis ↗</button><button class="btn danger" data-ui="bankrupt">Declarar falência</button>';primary={label:'Gerenciar imóveis',ui:'portfolio'};small='DÍVIDA PENDENTE';}
+else{
+ const t=G.TILES[p.pos],d=S.properties[t.id];
+ const ownLand=t.type==='property'&&d?.owner===me;
+ const endLabel=S.extraTurn?'Continuar jogando →':'Encerrar turno →';
+ if(ownLand){
+  small='VOCÊ ESTÁ NO SEU TERRENO';title=esc(t.name);
+  const level=d.level, cost=G.GROUPS[t.group].build;
+  const label=level===4?'Comprar hotel':'Comprar casa';
+  const stage=level===G.HOTEL_LEVEL?'1 Hotel de Luxo':level?level+' Casa'+(level>1?'s de Alto Padrão':' de Alto Padrão'):'Terreno sem casas';
+  desc=`<b>${stage}</b>. `;
+  if(d.mortgaged){
+   desc+='Resgate a hipoteca deste terreno para poder construir. Os outros imóveis da cor não interferem.';
+   buttons='<button class="btn accent" data-tile="'+t.id+'">Gerenciar hipoteca</button>';
+  }else if(level<G.HOTEL_LEVEL){
+   desc+=`Cada etapa custa <b>${money(cost)}</b>. Não precisa completar a cor: tendo saldo, é só comprar. `;
+   desc+=`Aluguel após esta compra: <b>${money(t.rents[level+1])}</b>.`;
+   const ok=G.canBuild(S,me,t.id);
+   if(!ok)desc+=` Faltam ${money(Math.max(0,cost-p.cash))} para esta construção.`;
+   buttons=`<button class="btn primary" data-act="build" data-tid="${t.id}" ${ok?'':'disabled'}>${label} · ${money(cost)}</button>`;
+   if(ok)primary={label,action:'build',tileId:t.id};
+  }else{
+   desc+='Este terreno atingiu o limite de construção. Seu hotel já está pronto para cobrar aluguel.';
+  }
+  buttons+=`<button class="btn ${primary?'accent':'primary'}" data-act="end">${endLabel}</button><button class="btn ghost" data-tile="${t.id}">Ver escritura e aluguéis</button>`;
+ }else{
+  title=S.extraTurn?'Dados iguais. Mais uma chance!':'Sua jogada está resolvida.';
+  desc=S.extraTurn?'Você ganhou outro lançamento. Antes, pode construir nos seus terrenos pela carteira ou negociar.':'Gerencie seus imóveis, negocie com a mesa ou passe a vez.';
+  buttons=`<button class="btn primary" data-act="end">${endLabel}</button><button class="btn ghost" data-ui="portfolio">Gerenciar imóveis</button>`;
+ }
+ primary=primary||{label:S.extraTurn?'Jogar novamente':'Encerrar turno',action:'end'};
+}
+return {small,title,desc,buttons,primary};}
+function updateActions(){if(!S||!$('#actionBox'))return;const a=actionInfo();$('#actionBox').className='card action-card'+(a.wait?' wait':'');$('#actionBox').innerHTML=`<span class="eyebrow">${a.small}</span><h2>${a.title}</h2><p>${a.desc}</p><div class="actions">${a.buttons}</div>`;const bar=$('#mobileBar');bar.classList.remove('hidden');bar.innerHTML=`<div><strong>${S.phase==='finished'?'Partida encerrada':G.current(S).id===me?'Sua vez':esc(G.current(S).name)}</strong><small>${money(G.player(S,me).cash)} disponíveis</small></div>${a.primary?`<button class="btn primary" ${a.primary.action?'data-act="'+a.primary.action+'"':'data-ui="'+a.primary.ui+'"'} ${a.primary.amount?'data-amount="'+a.primary.amount+'"':''} ${a.primary.tileId!==undefined?'data-tid="'+a.primary.tileId+'"':''} ${a.primary.disabled?'disabled':''}>${a.primary.label}</button>`:'<span class="pill">AGUARDE</span>'}`;
+const center=$('#centerAction');if(center){center.innerHTML=a.primary?`<button class="btn" ${a.primary.action?'data-act="'+a.primary.action+'"':'data-ui="'+a.primary.ui+'"'} ${a.primary.amount?'data-amount="'+a.primary.amount+'"':''} ${a.primary.tileId!==undefined?'data-tid="'+a.primary.tileId+'"':''} ${a.primary.disabled?'disabled':''}>${esc(a.primary.label)}</button>`:'<span class="pill">Aguardando a mesa</span>';}
+scheduleBoardFit();
+}
+async function act(a){if(!net)return;try{await net.act(a);}catch(e){toast(e.message,true);throw e;}}
+let actionPending=false;
+async function doAction(a){if(actionPending)return;actionPending=true;document.querySelectorAll('[data-act]').forEach(b=>b.disabled=true);try{await act(a);}catch{}finally{actionPending=false;if(S?.phase==='lobby')renderLobby();else if(S)updateGame();}}
+function modalShell(title,body,eyebrow='',color=null){const old=document.activeElement;modal??={type:'generic'};modal.focus=modal.focus||old;$('#modalRoot').innerHTML=`<div class="modal-backdrop" data-backdrop="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">${color?`<div class="deed-banner" style="--group-color:${color}"></div>`:''}<div class="modal-head"><div>${eyebrow?`<span class="eyebrow">${esc(eyebrow)}</span>`:''}<h2 id="modalTitle">${esc(title)}</h2></div><button class="close" data-ui="close" aria-label="Fechar janela">×</button></div><div class="modal-body">${body}</div></section></div>`;document.body.style.overflow='hidden';if(!modal.focused){$('#modalRoot .close')?.focus();modal.focused=true;}}
+function closeModal(){const focus=modal?.focus;modal=null;$('#modalRoot').innerHTML='';document.body.style.overflow='';if(focus?.isConnected)focus.focus();}
+function openTile(tid){modal={type:'tile',tileId:tid};paintTile(tid);}
+function paintTile(tid){
+ const t=G.TILES[tid];if(!t)return;const d=S?.properties[tid],op=d?.owner?G.player(S,d.owner):null;
+ const group=t.group?G.GROUPS[t.group]:null;let body='';
+ if(t.price){
+  body=`<p class="bodycopy">${esc(t.city||'Companhia brasileira · representação temática')}</p><div class="stats" style="margin-top:14px"><div class="stat"><span>Compra do terreno / companhia</span><strong>${money(t.price)}</strong></div><div class="stat"><span>Proprietário</span><strong>${esc(op?.name||'Banco')}</strong></div></div>`;
+  if(S&&G.lien(S,tid))body+='<div class="alert">Imóvel em garantia de empréstimo. Novas construções são permitidas; venda e hipoteca ficam bloqueadas até a quitação.</div>';
+  if(d?.mortgaged)body+='<div class="alert">Hipotecado: este imóvel não cobra aluguel.</div>';
+  if(group){
+   body+=`<table class="rent-table"><thead><tr><th>Construção no terreno</th><th>Aluguel por visita</th></tr></thead><tbody>${t.rents.map((v,i)=>`<tr class="${d?.level===i?'selected':''}"><td>${i===0?'Terreno vazio':i===G.HOTEL_LEVEL?'Hotel · 5ª etapa':i+' casa'+(i>1?'s':'')}</td><td>${money(v)}</td></tr>`).join('')}</tbody></table><p class="bodycopy">Cada etapa custa <b>${money(group.build)}</b>. Compre 1, 2, 3 e 4 casas; a quinta etapa transforma as quatro casas em <b>1 hotel</b>. Não precisa completar o grupo nem construir por igual.</p><p class="helper">O proprietário pode construir pela carteira a qualquer momento, inclusive fora do turno. A construção só muda os próximos aluguéis; não altera um pagamento já calculado. O grupo completo dobra apenas o aluguel de terreno vazio.</p>`;
+  }else{
+   const sum=S?S.dice[0]+S.dice[1]:6;
+   body+=`<div class="company-formula"><span>TARIFA POR PONTO NOS DADOS</span><strong>${money(t.rate)}</strong><p>${money(t.rate)} × ${sum} pontos = <b>${money(t.rate*sum)}</b></p></div><p class="bodycopy">Quem cair nesta companhia paga ao proprietário a tarifa multiplicada pela <b>soma dos dois dados</b>. Exemplo: dados 1 e 5 somam 6. Não é uma porcentagem. A companhia não recebe casas nem hotéis, e não há multiplicador adicional por possuir outras companhias.</p>`;
+  }
+  body+=`<p class="helper">Hipoteca: ${money(Math.floor(t.price/2))} · Resgate: ${money(Math.ceil(Math.floor(t.price/2)*1.2))}.</p>`;
+  if(S&&op?.id===me&&S.phase==='playing'&&!G.player(S,me).bankrupt){
+   const reason=group?G.buildReason(S,me,tid):'';
+   if(group){body+=`<div class="build-now"><button class="btn primary full" data-act="build" data-tid="${tid}" ${reason?'disabled':''}>${d.level>=G.HOTEL_LEVEL?'Hotel concluído':d.level===4?'Comprar hotel':'Comprar '+(d.level+1)+'ª casa'} · ${money(group.build)}</button><p class="helper">${reason?esc(reason):'Construção liberada agora. Saldo livre: '+money(G.spendable(S,me))+'.'}</p></div>`;}
+   const manage=G.current(S).id===me&&['roll','end','debt'].includes(S.turnState)&&!S.trade&&!S.auction&&!G.lien(S,tid)&&S.pausedAt==null;
+   body+='<div class="deed-actions">';
+   if(group)body+=`<button class="btn ghost" data-act="sell" data-tid="${tid}" ${!manage||!d.level?'disabled':''}>Vender etapa · ${money(Math.floor(group.build/2))}</button>`;
+   body+=`<button class="btn ghost" data-act="${d.mortgaged?'unmortgage':'mortgage'}" data-tid="${tid}" ${!manage||(d.mortgaged?(S.debt||G.player(S,me).cash<Math.ceil(t.price*.6)):d.level>0)?'disabled':''}>${d.mortgaged?'Resgatar hipoteca':'Hipotecar imóvel'}</button></div><p class="helper">Vendas e hipotecas são feitas na sua vez; comprar casas pode ser feito fora dela.</p>`;
+  }
+  if(S&&S.phase==='playing'&&G.current(S).id===me&&S.turnState==='buy'&&G.current(S).pos===tid)body+=`<button class="btn primary full" data-act="buy" ${G.player(S,me).cash<t.price?'disabled':''}>Comprar ${group?'terreno':'companhia'} · ${money(t.price)}</button>`;
+  body+='<p class="micro muted" style="margin-top:15px">Preço fictício do jogo: representa um lote temático, não a rua inteira. Não é uma avaliação imobiliária nem cotação de empresa.</p>';
+ }else{
+  const texts={start:'Receba '+money(G.PASS_START)+' ao passar pelo Início ou chegar nele completando uma volta.',chance:'Sorte ou Revés: uma carta pode gerar recebimentos, despesas, deslocamentos ou uma autorização de saída.',tax:'Pague '+money(t.amount)+' ao banco. Se faltar saldo, liquide construções ou hipoteque imóveis na sua vez.',jail:'Ao chegar pelos dados você está apenas visitando. Quando enviado, tente uma dupla por três jogadas ou use uma autorização. Sem sair, na quarta jogada pague '+money(G.JAIL_FEE)+' e avance.',gotojail:'Vá diretamente para a Auditoria, sem bônus de passagem. A jogada termina mesmo se os dados forem iguais.',free:'Espaço livre. Não há cobrança nem prêmio.',bonus:'Receba '+money(t.amount)+' do banco.'};
+  body=`<p class="bodycopy">${esc(texts[t.type]||'')}</p>`;
+ }
+ modalShell(t.name,body,group?group.name:'NO TABULEIRO',group?.color);
+}
+
+function paintPortfolio(){
+ const p=G.player(S,me),assets=G.owned(S,me);
+ let body=`<p class="bodycopy"><b>Construa a qualquer momento</b> nos seus próprios terrenos, sem completar cores. Na quinta etapa, as quatro casas viram um hotel. Companhias não recebem construções.</p><div class="stats" style="margin-top:16px"><div class="stat"><span>Seu saldo</span><strong>${money(p.cash)}</strong></div><div class="stat"><span>Livre para construir</span><strong>${money(G.spendable(S,me))}</strong></div></div>`;
+ if(S.debt?.playerId===me)body+=`<div class="alert">Dívida pendente de ${money(S.debt.amount)}. Quite-a antes de construir.</div>`;
+ body+=assets.map(t=>{
+  const d=S.properties[t.id],g=t.group?G.GROUPS[t.group]:null;
+  return `<div class="portfolio-asset"><div class="inspect-asset"><span class="asset-chip" style="--group-color:${g?.color||'#20abd3'}"></span><div><strong>${esc(t.name)}</strong><small>${esc(t.city||'Companhia')} · ${d.mortgaged?'Hipotecado':d.level===G.HOTEL_LEVEL?'Hotel':d.level?d.level+' casa(s)':'Sem construção'}</small></div><button class="btn sm" data-tile="${t.id}">Escritura</button></div>${g?`<button class="btn primary full" data-act="build" data-tid="${t.id}" ${G.canBuild(S,me,t.id)?'':'disabled'}>${d.level>=5?'Hotel concluído':d.level===4?'Comprar hotel':'Comprar '+(d.level+1)+'ª casa'} · ${money(g.build)}</button><p class="helper">${esc(G.buildReason(S,me,t.id)||'Disponível mesmo fora da sua vez.')}</p>`:''}</div>`;
+ }).join('')||'<p class="helper">Você ainda não tem imóveis. Compre um terreno quando cair nele ou participe de leilões.</p>';
+ modalShell('Sua carteira',body,'CONSTRUÇÃO LIVRE');
+}
+
+function tradable(pid){return G.owned(S,pid).filter(t=>!S.properties[t.id].mortgaged&&!S.properties[t.id].level);}
+function checks(pid,side){return tradable(pid).map(t=>`<label><input type="checkbox" name="${side}" value="${t.id}"> ${esc(t.name)}</label>`).join('')||'<p class="micro muted">Nenhum imóvel disponível.</p>';}
+function showTrade(){if(!S)return;const others=S.players.filter(p=>p.id!==me&&!p.bankrupt);if(!others.length)return;modal={type:'tradeForm'};modalShell('Vamos fazer negócio?','<form id="tradeForm"><label for="tradeTo">NEGOCIAR COM</label><select id="tradeTo">'+others.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')+'</select><div id="tradeFields"></div><button class="btn primary full" type="submit">Enviar proposta ⇄</button><p class="helper">A proposta precisa ser aceita pelo outro jogador. O turno fica pausado por até 60 segundos. Apenas imóveis sem hipoteca e sem construções próprias podem ser negociados; os outros terrenos da cor não interferem.</p></form>','TROCA DE IMÓVEIS & SALDOS');paintTradeFields();}
+function paintTradeFields(){const to=$('#tradeTo').value;$('#tradeFields').innerHTML=`<div class="trade-cols"><div class="trade-side"><h3>VOCÊ OFERECE</h3><label for="giveCash">Dinheiro (R$)</label><input id="giveCash" type="number" min="0" max="${G.player(S,me).cash}" step="1" value="0" inputmode="numeric"><div class="check-list">${checks(me,'give')}</div></div><div class="trade-side"><h3>VOCÊ RECEBE</h3><label for="takeCash">Dinheiro (R$)</label><input id="takeCash" type="number" min="0" max="${G.player(S,to).cash}" step="1" value="0" inputmode="numeric"><div class="check-list">${checks(to,'take')}</div></div></div>`;}
+function paintTradeReview(){const tr=S.trade;if(!tr){closeModal();return;}const body=`<p class="bodycopy"><b>${esc(G.player(S,tr.from).name)}</b> enviou esta proposta para <b>${esc(G.player(S,tr.to).name)}</b>.</p><div class="trade-cols"><div class="trade-side"><h3>${esc(G.player(S,tr.from).name)} oferece</h3><p class="micro">${money(tr.giveCash)}<br>${tr.give.map(i=>esc(G.TILES[i].name)).join('<br>')||'Nenhum imóvel'}</p></div><div class="trade-side"><h3>Em troca de</h3><p class="micro">${money(tr.takeCash)}<br>${tr.take.map(i=>esc(G.TILES[i].name)).join('<br>')||'Nenhum imóvel'}</p></div></div><p class="helper">Expira em <span class="timer" data-until="${tr.expiresAt}"></span>.</p>${me===tr.to?'<div class="deed-actions"><button class="btn primary" data-act="tradeAccept">Aceitar proposta</button><button class="btn ghost" data-act="tradeReject">Recusar</button></div>':me===tr.from?'<button class="btn ghost full" data-act="tradeReject">Cancelar proposta</button>':'<p class="helper">Apenas os participantes da negociação podem aceitar ou recusar.</p>'}`;modalShell('Uma proposta está na mesa.',body,'NEGOCIAÇÃO EM ANDAMENTO');}
+function showResults(){modal={type:'results'};const ranked=S.players.slice().sort((a,b)=>Number(a.bankrupt)-Number(b.bankrupt)||G.wealth(S,b.id)-G.wealth(S,a.id));modalShell('A cidade tem uma nova história.',`<div class="winner"><div class="cup">♛</div><span class="eyebrow">${S.winnerIds.length>1?'VITÓRIA COMPARTILHADA':'GRANDE VENCEDOR'}</span><h3>${S.winnerIds.map(i=>esc(G.player(S,i).name)).join(' e ')}</h3><p class="micro muted">${esc(S.reason)}</p></div><div style="margin-top:15px">${ranked.map((p,i)=>`<div class="ranking"><span>${i+1}. ${esc(p.name)}</span><b>${p.bankrupt?'Fora dos negócios':money(G.wealth(S,p.id))}</b></div>`).join('')}</div><p class="helper">Patrimônio = dinheiro + valor de compra dos imóveis + custo das construções − principal das hipotecas − dívidas pendentes. Empates no maior patrimônio compartilham a vitória.</p><button class="btn primary full" data-ui="exit" style="margin-top:16px">Voltar ao início</button>`,'CLASSIFICAÇÃO FINAL');}
+async function clipboard(text){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);toast('Conteúdo copiado!');return;}}catch{}const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();try{const copied=document.execCommand('copy');if(copied)toast('Conteúdo copiado!');else throw Error();}catch{modal={type:'copy'};modalShell('Copie o conteúdo.',`<textarea readonly style="width:100%;min-height:110px;padding:12px;border:1px solid #ddd;border-radius:10px">${esc(text)}</textarea>`);}t.remove();}
+function invite(){if(!S)return;const hosted=['http:','https:'].includes(location.protocol);let url='';if(hosted){const u=new URL(location.href);u.search='?sala='+encodeURIComponent(S.code);u.hash='';url=u.href;}const text=`Vamos jogar Metrópole! Sala: ${S.code}. ${url?'Abra '+url:'Abra o mesmo arquivo Metropole_Jogo.html no navegador, toque em Entrar e use este código.'}`;clipboard(text);}
+function confirmExit(){net?.close();net=null;closeModal();home();}
+function showSource(){
+ modal={type:'source'};
+ modalShell('Copie o HTML completo.',`<p class="bodycopy">Este é o HTML da interface. A versão 4.0 também depende dos arquivos de servidor no projeto. Copiar somente o HTML não instala o multiplayer; publique o projeto completo.</p><textarea id="sourceArea" readonly aria-label="Código HTML completo" style="width:100%;height:250px;margin-top:16px;font:11px monospace;padding:12px"></textarea><div class="deed-actions"><button class="btn primary" data-ui="copySource">Copiar todo o código</button><button class="btn ghost" data-ui="selectSource">Selecionar tudo</button></div>`,'CÓDIGO-FONTE · BRASIL MILIONÁRIO · 4.0');
+ $('#sourceArea').value=METRO_SOURCE;
+}
+function showLastCard(){
+ if(!S?.lastCard)return;
+ const c=S.lastCard;modal={type:'lastCard'};
+ modalShell(c.title,`<div class="event-card ${c.kind==='Revés'?'reverse':''}"><span class="eyebrow">${esc(c.kind||'Conexões')}</span><p>${esc(c.text)}</p><div class="micro muted">${esc(G.player(S,c.playerId).name)} · efeito aplicado automaticamente</div></div>`,'CONEXÕES DA CIDADE — SORTE OU REVÉS');
+}
+
+
+function showCatalog(){
+ modal={type:'catalog'};
+ const row=t=>`<div class="inspect-asset"><span class="asset-chip" style="--group-color:${t.group?G.GROUPS[t.group].color:'#20abd3'}"></span><div><strong>${esc(t.name)}</strong><small>${t.price?money(t.price):'Casa especial'}${t.group?' · Casa: '+money(G.GROUPS[t.group].build):''}</small></div><button class="btn sm" data-tile="${t.id}">Ver ↗</button></div>`;
+ let body='<p class="bodycopy">O tabuleiro usa nomes curtos para caber inteiro. Aqui estão os nomes completos e os valores. Toque em Ver para abrir a escritura.</p>';
+ for(const [key,g] of Object.entries(G.GROUPS))body+=`<section class="catalog-group"><h3><i style="--swatch:${g.color}"></i>${esc(g.colorName)} · ${esc(g.name)}</h3>${G.TILES.filter(t=>t.group===key).map(row).join('')}</section>`;
+ body+='<section class="catalog-group"><h3>Companhias e serviços</h3>'+G.TILES.filter(t=>t.price&&!t.group).map(row).join('')+'</section>';
+ body+='<section class="catalog-group"><h3>Casas especiais</h3>'+G.TILES.filter(t=>!t.price).map(row).join('')+'</section>';
+ modalShell('Conheça cada endereço.',body,'TABULEIRO · 40 CASAS');
+}
+window.addEventListener('resize',scheduleBoardFit);
+window.visualViewport?.addEventListener('resize',scheduleBoardFit);
+
+function syncChatMode(){
+ const panel=$('#chatPanel'),fab=$('#chatFab');if(!panel||!fab)return;
+ panel.classList.toggle('floating-chat',chatFloating);panel.classList.toggle('hidden',chatMinimized);
+ fab.classList.toggle('hidden',!chatMinimized);
+ const floatBtn=panel.querySelector('[data-ui="chatFloat"]');if(floatBtn)floatBtn.textContent=chatFloating?'Fixar ↙':'Destacar ↗';
+ $('#chatUnread').textContent=unreadChat?String(unreadChat):'';
+}
+function updateChat(){
+ const key=S.chat.at(-1)?.id||'empty';if(key===lastChat)return;
+ const initial=!lastChat;lastChat=key;const feed=$('#chatFeed');if(!feed)return;
+ const near=feed.scrollHeight-feed.scrollTop-feed.clientHeight<90;
+ feed.innerHTML=S.chat.length?S.chat.map(m=>{
+  const st=G.STICKERS.find(x=>x.id===m.stickerId);
+  return `<div class="chat-msg ${m.playerId===me?'mine':''}"><b>${esc(m.name)}${m.playerId===me?' · você':''}</b>${st?`<div class="sticker-message"><span>${st.emoji}</span><strong>${esc(st.label)}</strong></div>`:`<div>${esc(m.text)}</div>`}</div>`;
+ }).join(''):'<div class="micro muted">Converse com a mesa e envie uma figurinha em 😊. Todo dinheiro é fictício.</div>';
+ if(near||S.chat.at(-1)?.playerId===me)feed.scrollTop=feed.scrollHeight;
+ for(const m of S.chat){
+  if(seenReactions.has(m.id))continue;seenReactions.add(m.id);
+  if(!initial&&chatMinimized&&m.playerId!==me)unreadChat++;
+  if(!initial&&m.stickerId&&Date.now()-m.at<6000)floatReaction(m);
+ }
+ if(seenReactions.size>500){seenReactions.clear();S.chat.forEach(m=>seenReactions.add(m.id));}
+ syncChatMode();
+}
+function floatReaction(m){
+ const st=G.STICKERS.find(x=>x.id===m.stickerId),layer=$('#reactionLayer');if(!st||!layer)return;
+ const el=document.createElement('div');el.className='floating-reaction';
+ el.innerHTML=`<span>${st.emoji}</span><b>${esc(st.label)}</b><small>${esc(m.name)}</small>`;
+ layer.append(el);while(layer.children.length>3)layer.firstElementChild.remove();setTimeout(()=>el.remove(),3500);
+}
+function confirmRemove(pid){
+ if(!S||S.hostId!==me||pid===me)return;const p=G.player(S,pid);modal={type:'removeConfirm'};
+ modalShell('Retirar '+p.name+'?',`<p class="bodycopy">Esse participante será retirado da sala. ${S.phase==='playing'?'Seus terrenos voltam ao banco, sem construções; lances e propostas pendentes serão ajustados. A retirada é definitiva nesta partida.':'Ele poderá ser substituído antes de começar.'}</p><div class="deed-actions"><button class="btn danger" data-act="remove" data-pid="${pid}">Confirmar retirada</button><button class="btn primary" data-ui="close">Manter jogador</button></div>`,'CONTROLE DO ANFITRIÃO');
+}
+
+async function legacyUi(name){switch(name){case 'boardScale':boardScale=boardScale===1?1.5:boardScale===1.5?2:1;scheduleBoardFit();break;
+case 'chatFloat':chatFloating=!chatFloating;chatMinimized=false;unreadChat=0;syncChatMode();break;
+case 'chatMinimize':chatMinimized=true;syncChatMode();break;
+case 'chatToggle':chatMinimized=false;chatFloating=true;unreadChat=0;syncChatMode();$('#chatInput')?.focus();break;
+case 'stickers':$('#stickerPicker')?.classList.toggle('hidden');break;
+case 'create':await begin('create');break;case 'join':await begin('join');break;case 'demo':await begin('demo');break;case 'resume':{const session=N.getSession();if(session)await begin('join',session);break;}case 'source':showSource();break;case 'copySource':await clipboard(METRO_SOURCE);break;case 'selectSource':$('#sourceArea')?.focus();$('#sourceArea')?.select();break;case 'lastCard':showLastCard();break;case 'zoom':toggleBoardFocus();break;case 'catalog':showCatalog();break;case 'rules':rules();break;case 'close':closeModal();break;case 'copyCode':await clipboard(S.code);break;case 'invite':invite();break;case 'portfolio':modal={type:'portfolio'};paintPortfolio();break;case 'trade':showTrade();break;case 'tradeReview':modal={type:'tradeReview'};paintTradeReview();break;case 'results':showResults();break;case 'bankrupt':modal={type:'bankrupt'};modalShell('Encerrar seus negócios?',`<p class="bodycopy">Antes de declarar falência, confira se ainda pode vender construções ou hipotecar imóveis. A falência é definitiva nesta partida.</p><div class="deed-actions"><button class="btn danger" data-act="bankrupt">Confirmar falência</button><button class="btn primary" data-ui="portfolio">Rever carteira</button></div>`);break;case 'exit':exit();break;case 'confirmExit':confirmExit();break;case 'fullscreen':try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{toast('A tela cheia não está disponível. No celular, gire o aparelho para ampliar a visualização.');}break;}}
+document.addEventListener('click',async e=>{const target=e.target.closest('button,[data-backdrop]');if(!target||target.disabled)return;if(target.dataset.backdrop&&e.target===target){closeModal();return;}if(target.dataset.remove){confirmRemove(target.dataset.remove);return;}
+if(target.dataset.sticker){try{await act({type:'sticker',stickerId:target.dataset.sticker});$('#stickerPicker')?.classList.add('hidden');}catch{}return;}
+if(target.dataset.tile!==undefined){openTile(Number(target.dataset.tile));return;}if(target.dataset.ui){await ui(target.dataset.ui);return;}if(target.dataset.act){let a={type:target.dataset.act};if(target.dataset.tid!==undefined)a.tileId=Number(target.dataset.tid);if(target.dataset.pid)a.playerId=target.dataset.pid;if(a.type==='bid')a.amount=Number(target.dataset.amount);if(a.type==='bail')a.usePass=G.player(S,me).passes>0;if(a.type==='tradeAccept'||a.type==='tradeReject')a={type:'tradeReply',accept:a.type==='tradeAccept'};if(['bankrupt','buy','remove'].includes(a.type))closeModal();await doAction(a);}});
+document.addEventListener('change',e=>{if(e.target.id==='lobbyRounds')doAction({type:'settings',roundLimit:Number(e.target.value)});if(e.target.id==='tradeTo')paintTradeFields();});
+document.addEventListener('submit',async e=>{if(e.target.id==='chatForm'){e.preventDefault();const input=$('#chatInput');const text=input.value.trim();if(!text)return;input.value='';try{await act({type:'chat',text});}catch{input.value=text;}return;}if(e.target.id==='tradeForm'){e.preventDefault();const a={type:'trade',to:$('#tradeTo').value,giveCash:Number($('#giveCash').value),takeCash:Number($('#takeCash').value),give:[...document.querySelectorAll('input[name="give"]:checked')].map(el=>Number(el.value)),take:[...document.querySelectorAll('input[name="take"]:checked')].map(el=>Number(el.value))};try{await act(a);modal={type:'tradeReview'};paintTradeReview();}catch{};}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal)closeModal();else if(e.key==='Escape'&&document.body.classList.contains('board-focus'))toggleBoardFocus(false);if(e.key==='Enter'&&screen==='home'&&e.target.id==='roomCode')ui('join');if(e.key==='Tab'&&modal){const nodes=[...document.querySelectorAll('#modalRoot button:not([disabled]),#modalRoot input,#modalRoot select,#modalRoot textarea,#modalRoot a')];const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}});
+$('#brandLink').addEventListener('click',e=>{e.preventDefault();if(S)exit();else window.scrollTo({top:0,behavior:'smooth'});});
+setInterval(()=>{document.querySelectorAll('[data-until]').forEach(el=>{el.textContent=Math.max(0,Math.ceil((Number(el.dataset.until)-(S?.pausedAt??N.serverNow()))/1000))+' s';});},250);
+/* Financial interface, reconnection status and version-specific rules. */
+function actionInfo(){
+ if(!connectionOK)return {small:'PATRIMÔNIO PRESERVADO',title:net?.halted?'Conexão pausada':'Reconectando…',desc:esc(connectionText||'Aguarde a internet voltar. Use o mesmo código e nome para retornar.'),buttons:'<button class="btn primary" data-ui="retry">Tentar reconectar agora</button>',primary:{label:'Reconectar',ui:'retry'},wait:true};
+ if(S.pausedAt!=null){const waiting=G.waitingPlayers(S).map(p=>esc(p.name)).join(', ');return {small:'NINGUÉM PERDEU SEUS BENS',title:'Aguardando reconexão',desc:`${waiting} está sem conexão. Dados, prazos e transações ficam pausados. O participante volta com o mesmo código e nome.`,buttons:'<button class="btn ghost" data-ui="finance">Consultar contratos</button>',wait:true};}
+ if(S.phase==='playing'&&S.debt?.loanId&&S.debt.creditorId===me)return {small:'EMPRÉSTIMO VENCIDO',title:'Você tem um valor a receber.',desc:`${esc(G.player(S,S.debt.playerId).name)} deve <b>${money(S.debt.amount)}</b>. Agora você pode receber um imóvel ou liquidá-lo no banco.`,buttons:'<button class="btn primary" data-ui="debtAssets">Cobrar com imóvel</button><button class="btn ghost" data-ui="finance">Ver contrato</button>',primary:{label:'Cobrar dívida',ui:'debtAssets'}};
+ const a=legacyActionInfo();
+ if(S.phase==='playing'&&S.debt?.playerId===me){a.desc=`Faltam <b>${money(S.debt.amount)}</b>. Pague com um imóvel, venda bens ou, se o crédito estiver disponível, peça um empréstimo.`;a.buttons='<button class="btn primary" data-ui="debtAssets">Pagar com imóvel</button><button class="btn accent" data-ui="finance">Banco e empréstimos</button><button class="btn ghost" data-ui="portfolio">Gerenciar patrimônio</button><button class="btn danger" data-ui="bankrupt">Declarar falência</button>';a.primary={label:'Resolver dívida',ui:'debtAssets'};}
+ return a;
+}
+function status(ok,text){legacyStatus(ok,text);if(S?.phase!=='lobby')updateActions();let stamp=$('#savedStamp');if(stamp)stamp.textContent=net?.mode==='server'&&net.savedAt?'Salvo no servidor: '+new Date(net.savedAt).toLocaleTimeString('pt-BR'):'';}
+function updateGame(){
+ legacyUpdateGame();
+ if($('#gameSubtitle')&&!$('#savedStamp')){const stamp=document.createElement('span');stamp.id='savedStamp';stamp.className='saved-stamp';$('#gameSubtitle').append(stamp);}if($('#savedStamp'))$('#savedStamp').textContent=net?.mode==='server'&&net.savedAt?'Salvo no servidor: '+new Date(net.savedAt).toLocaleTimeString('pt-BR'):'';if(!S||!$('#walletPanel'))return;
+ let el=$('#financePanel');if(!el){el=document.createElement('section');el.id='financePanel';el.className='card panel';$('.sidebar').append(el);}
+ const owes=G.loansOf(S,me).reduce((n,l)=>n+l.balance,0),receives=G.activeLoans(S).filter(l=>l.lenderId===me).reduce((n,l)=>n+l.balance,0);
+ const offer=S.loanOffer&&[S.loanOffer.borrowerId,S.loanOffer.lenderId].includes(me),asset=S.assetOffer&&[S.assetOffer.borrowerId,S.assetOffer.creditorId].includes(me);
+ el.innerHTML=`<div class="section-header"><h2>Banco & contratos</h2><span class="pill">4.0</span></div><div class="stats"><div class="stat"><span>A pagar</span><strong>${money(owes)}</strong></div><div class="stat"><span>A receber</span><strong>${money(receives)}</strong></div></div><button class="btn primary full" data-ui="finance">Empréstimos e pagamentos</button>${offer?'<button class="btn accent full finance-gap" data-ui="loanReview">Responder proposta de empréstimo</button>':''}${asset?'<button class="btn accent full finance-gap" data-ui="assetReview">Proposta de pagamento em imóvel</button>':''}<p class="helper">${net?.mode==='local'?'Demonstração sem salvamento. Crie uma sala online para usar a reconexão.':'Salvamento automático. Retorne com o código <b>'+esc(S.code)+'</b> e o nome <b>'+esc(G.player(S,me).name)+'</b>.'}</p>`;
+ if(modal?.type==='finance')paintFinance();
+ if(modal?.type==='loanReview'){if(S.loanOffer)paintLoanReview();else{modal={type:'finance'};paintFinance();}}
+ if(modal?.type==='assetReview'){if(S.assetOffer)paintAssetReview();else{modal={type:'finance'};paintFinance();}}
+ if(modal?.type==='debtAssets'){if(S.debt)paintDebtAssets();else{modal={type:'finance'};paintFinance();}}
+}
+function financeStateEnabled(){return S?.phase==='playing'&&!G.player(S,me).bankrupt&&S.pausedAt==null&&connectionOK;}
+function contractHTML(l){
+ const mine=l.borrowerId===me,payer=G.player(S,l.borrowerId),lender=l.lenderId?G.player(S,l.lenderId).name:'Banco Metrópole';
+ const due=S.round>=l.dueRound?'Vence nesta rodada, na vez do devedor':'Vence na rodada '+l.dueRound;
+ const names=mine?'Credor: '+lender:'Devedor: '+payer.name;
+ const remaining=Math.min(l.balance,G.spendable(S,me));
+ return `<article class="loan-card ${l.status==='overdue'?'overdue':''}"><div class="loan-card-head"><b>${esc(names)}</b><span class="pill">${l.status==='overdue'?'VENCIDO':mine?'A PAGAR':'A RECEBER'}</span></div><strong class="loan-balance">${money(l.balance)}</strong><p class="helper">Recebido: ${money(l.principal)} · Juros totais: ${l.rate}% · Total contratado: ${money(l.total)}.<br>${esc(due)}. Cobrança no início da vez de ${esc(payer.name)}.<br>Garantia: ${l.collateralId!=null?esc(G.TILES[l.collateralId].name):'sem imóvel específico; o patrimônio responde pela dívida'}.</p>${mine?`<button class="btn ${remaining>0?'primary':'ghost'} full" data-fin="repay" data-loan="${l.id}" data-amount="${remaining}" ${remaining<=0||!financeStateEnabled()?'disabled':''}>${remaining===l.balance?'Quitar':'Amortizar'} ${money(remaining)}</button>`:''}${S.debt?.loanId===l.id?'<button class="btn accent full finance-gap" data-ui="debtAssets">Resolver com imóvel</button>':''}</article>`;
+}
+function paintFinance(){
+ const mine=G.loansOf(S,me),receivables=G.activeLoans(S).filter(l=>l.lenderId===me),enabled=financeStateEnabled();
+ const offers=(S.loanOffer&&[S.loanOffer.borrowerId,S.loanOffer.lenderId].includes(me))?'<button class="btn accent full finance-gap" data-ui="loanReview">Ver proposta de empréstimo pendente</button>':'';
+ const asset=S.assetOffer&&[S.assetOffer.borrowerId,S.assetOffer.creditorId].includes(me)?'<button class="btn accent full finance-gap" data-ui="assetReview">Ver proposta de imóvel</button>':'';
+ const debt=S.debt&&(S.debt.playerId===me||S.debt.creditorId===me)?`<div class="finance-warning"><b>Dívida pendente: ${money(S.debt.amount)}</b><p class="helper">${esc(G.player(S,S.debt.playerId).name)} deve ${S.debt.creditorId?esc(G.player(S,S.debt.creditorId).name):'ao banco'}. ${esc(S.debt.reason)}.</p><button class="btn primary full" data-ui="debtAssets">Imóveis para pagamento ou cobrança</button></div>`:'';
+ let body=`<p class="bodycopy">Contratos com <b>juros fixos para todo o prazo</b>, sem juros compostos. O vencimento é por rodadas, não por minutos de internet.</p>${debt}${offers}${asset}<div class="finance-menu"><button class="btn primary" data-ui="bankLoanForm" ${enabled?'':'disabled'}>🏦 Pedir ao banco</button><button class="btn accent" data-ui="askLoanForm" ${enabled?'':'disabled'}>Pedir a um jogador</button><button class="btn ghost" data-ui="lendLoanForm" ${enabled?'':'disabled'}>Emprestar a um jogador</button></div><p class="helper">Banco: R$ 100 mil a R$ 5 milhões · 10% de juros totais · 3 rodadas. Até 3 contratos em aberto por pessoa, sendo 1 do banco. Empréstimos vencidos bloqueiam novo crédito.</p><h3 class="finance-heading">Meus empréstimos</h3>${mine.map(contractHTML).join('')||'<p class="helper">Nenhum empréstimo a pagar.</p>'}<h3 class="finance-heading">Meus recebimentos</h3>${receivables.map(contractHTML).join('')||'<p class="helper">Nenhum empréstimo a receber.</p>'}`;
+ const history=(S.loans||[]).filter(l=>[l.borrowerId,l.lenderId].includes(me)&&!['active','overdue'].includes(l.status)).slice(-8).reverse();
+ if(history.length)body+=`<details class="finance-history"><summary>Contratos encerrados (${history.length})</summary>${history.map(l=>`<p class="helper">${esc(G.player(S,l.borrowerId).name)} · ${l.status==='paid'?'Quitado':'Encerrado por falência'} · ${money(l.total)}${l.unpaid?' · não recuperado: '+money(l.unpaid):''}</p>`).join('')}</details>`;
+ body+='<p class="helper">Empréstimos a pagar são descontados do patrimônio; créditos a receber são somados. Todos os valores são fictícios, exclusivos desta partida.</p>';
+ modalShell('Banco & contratos',body,'BRASIL MILIONÁRIO · 4.0');
+}
+function collateralOptions(pid){return '<option value="">Sem garantia específica</option>'+G.owned(S,pid).filter(t=>!S.properties[t.id].mortgaged&&!G.lien(S,t.id)&&S.assetOffer?.tileId!==t.id).map(t=>`<option value="${t.id}">${esc(t.name)} · ${money(G.assetValue(S,t.id))}</option>`).join('');}
+function showLoanForm(kind){
+ modal={type:'loanForm',kind};const bank=kind==='bank',others=S.players.filter(p=>p.id!==me&&!p.bankrupt&&!p.removed&&(p.online||p.bot));
+ if(!bank&&!others.length){toast('Nenhum outro jogador conectado para negociar.',true);modal={type:'finance'};paintFinance();return;}
+ const title=bank?'Empréstimo do banco':kind==='ask'?'Pedir dinheiro a um jogador':'Emprestar dinheiro a um jogador';
+ modalShell(title,`<form id="loanForm" data-kind="${kind}">${!bank?`<label for="loanPartner">${kind==='ask'?'QUEM VAI EMPRESTAR?':'QUEM RECEBERÁ O EMPRÉSTIMO?'}</label><select id="loanPartner">${others.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select>`:''}<label class="finance-gap" for="loanAmount">VALOR EM REAIS FICTÍCIOS</label><input id="loanAmount" type="number" min="100000" max="${bank?5000000:50000000}" step="1" value="1000000" inputmode="numeric" required><div class="finance-columns finance-gap"><div><label for="loanRate">JUROS TOTAIS (%)</label><input id="loanRate" type="number" min="0" max="50" step="1" value="10" ${bank?'readonly':''} required></div><div><label for="loanTerm">PRAZO (RODADAS)</label><input id="loanTerm" type="number" min="1" max="10" step="1" value="3" ${bank?'readonly':''} required></div></div><label class="finance-gap" for="loanCollateral">IMÓVEL DADO EM GARANTIA</label><select id="loanCollateral"></select><div class="loan-preview" id="loanQuote"></div><label class="finance-consent"><input id="loanConsent" type="checkbox" required><span>Li os valores e autorizo a cobrança no vencimento. Sem saldo, imóveis poderão ser executados; sem patrimônio suficiente, haverá falência.</span></label><button class="btn primary full" type="submit">${bank?'Confirmar e receber do banco':'Enviar proposta para aceite'}</button><p class="helper">O prazo começa quando o crédito for efetivamente concedido. Pagar antecipado não retira os juros fixos já contratados. Uma garantia não pode ser vendida ou hipotecada até a quitação, mas pode receber novas construções.</p></form>`,'NÃO ENVOLVE DINHEIRO REAL');
+ refreshLoanCollateral();updateLoanQuote();
+}
+function loanParties(){const k=$('#loanForm')?.dataset.kind,partner=$('#loanPartner')?.value;return {borrowerId:k==='lend'?partner:me,lenderId:k==='bank'?null:k==='ask'?partner:me};}
+function refreshLoanCollateral(){if(!$('#loanCollateral'))return;$('#loanCollateral').innerHTML=collateralOptions(loanParties().borrowerId);}
+function updateLoanQuote(){
+ if(!$('#loanQuote'))return;const v=Number($('#loanAmount').value),r=Number($('#loanRate').value),term=Number($('#loanTerm').value);
+ const valid=Number.isSafeInteger(v)&&v>=100000&&Number.isInteger(r)&&r>=0&&r<=50&&Number.isInteger(term)&&term>=1&&term<=10;
+ $('#loanQuote').innerHTML=valid?`<span>TOTAL A DEVOLVER</span><strong>${money(G.loanTotal(v,r))}</strong><p>${money(v)} + ${money(G.loanTotal(v,r)-v)} de juros. Vence no início da vez do devedor na <b>rodada ${S.round+term}</b>, se aceito agora.</p>`:'Preencha valores inteiros dentro dos limites.';
+}
+function paintLoanReview(){
+ const o=S.loanOffer;if(!o){modal={type:'finance'};paintFinance();return;}
+ const proposer=G.player(S,o.from),borrower=G.player(S,o.borrowerId),lender=G.player(S,o.lenderId);
+ modalShell('Proposta de empréstimo',`<p class="bodycopy"><b>${esc(proposer.name)}</b> enviou esta proposta. O dinheiro só muda de mãos quando a outra parte aceitar.</p><div class="loan-preview"><span>${esc(lender.name)} EMPRESTA PARA ${esc(borrower.name)}</span><strong>${money(o.principal)}</strong><p>Total a devolver: <b>${money(G.loanTotal(o.principal,o.rate))}</b>.<br>Juros totais: ${o.rate}% · Prazo: ${o.term} rodadas a partir do aceite.<br>Garantia: ${o.collateralId!=null?esc(G.TILES[o.collateralId].name):'sem imóvel específico'}.</p></div><p class="bodycopy">No vencimento, o sistema cobra o saldo disponível. Sem pagamento integral, o credor poderá receber imóveis ou liquidá-los no banco. Sem recursos suficientes, o devedor será declarado falido.</p><div class="deed-actions">${me!==o.from&&[o.borrowerId,o.lenderId].includes(me)?'<button class="btn primary" data-fin="loanAccept">Aceitar contrato</button>':''}${[o.borrowerId,o.lenderId].includes(me)?'<button class="btn ghost" data-fin="loanReject">Recusar / cancelar</button>':''}</div><p class="helper">A proposta expira em <span class="timer" data-until="${o.expiresAt}"></span>. O relógio pausa durante a reconexão.</p>`,'EXIGE O ACEITE DAS DUAS PARTES');
+}
+function paintAssetReview(){
+ const o=S.assetOffer;if(!o){modal={type:'finance'};paintFinance();return;}
+ modalShell('Imóvel como pagamento',`<p class="bodycopy"><b>${esc(G.player(S,o.borrowerId).name)}</b> oferece <b>${esc(G.TILES[o.tileId].name)}</b> a ${esc(G.player(S,o.creditorId).name)}.</p><div class="loan-preview"><span>VALOR DO IMÓVEL NO JOGO</span><strong>${money(o.value)}</strong><p>Abate da dívida: <b>${money(o.deduction)}</b>.<br>Troco que o credor deverá pagar: <b>${money(o.change)}</b>.<br>Saldo devedor após aceitar: <b>${money(Math.max(0,S.debt.amount-o.deduction))}</b>.</p></div><p class="helper">Construções acompanham o imóvel. Se houver hipoteca, ela acompanha o imóvel e já foi descontada da avaliação. O valor excedente nunca é tomado sem compensação.</p><div class="deed-actions">${me===o.creditorId?'<button class="btn primary" data-fin="assetAccept">Aceitar e receber imóvel</button>':''}<button class="btn ghost" data-fin="assetReject">Recusar / cancelar</button></div>`,'PAGAMENTO COM PATRIMÔNIO');
+}
+function paintDebtAssets(){
+ const d=S.debt;if(!d){modal={type:'finance'};paintFinance();return;}
+ const debtor=G.player(S,d.playerId),isBorrower=me===d.playerId,isLender=d.loanId&&me===d.creditorId;
+ if(!isBorrower&&!isLender){toast('Essa cobrança não pertence a você.',true);modal={type:'finance'};paintFinance();return;}
+ const loan=d.loanId?S.loans.find(l=>l.id===d.loanId):null;
+ const assets=G.owned(S,d.playerId).filter(t=>G.transferableForDebt(S,t.id));
+ const priority=loan?.collateralId!=null&&S.properties[loan.collateralId]?.owner===d.playerId?loan.collateralId:null;
+ let body=`<div class="finance-warning"><b>${esc(debtor.name)} deve ${money(d.amount)}</b><p class="helper">${esc(d.reason)}. Avaliação: preço original + custo integral das construções − principal da hipoteca.</p></div>`;
+ if(S.assetOffer)body+='<button class="btn accent full finance-gap" data-ui="assetReview">Ver proposta pendente</button>';
+ for(const t of assets){const q=G.debtAssetQuote(S,t.id),lockedPriority=isLender&&priority!=null&&priority!==t.id;body+=`<article class="loan-card"><div class="loan-card-head"><b>${esc(t.name)}</b><span class="pill">${priority===t.id?'GARANTIA':'IMÓVEL'}</span></div><p class="helper">Avaliado em <b>${money(q.value)}</b>.<br>Abate: ${money(q.deduction)} · Troco para o devedor: ${money(q.change)}.</p><div class="finance-menu">${isBorrower?`<button class="btn primary" data-fin="assetOffer" data-tid="${t.id}" ${S.assetOffer?'disabled':''}>${d.creditorId?'Oferecer ao credor':'Entregar ao banco'}</button><button class="btn ghost" data-fin="assetLiquidate" data-tid="${t.id}">Liquidar no banco</button>`:`<button class="btn primary" data-fin="assetForeclose" data-tid="${t.id}" ${lockedPriority||q.change>G.spendable(S,me)?'disabled':''}>Tomar imóvel e pagar troco</button><button class="btn ghost" data-fin="assetForecloseBank" data-tid="${t.id}" ${lockedPriority?'disabled':''}>Liquidar no banco e receber</button>`}</div>${lockedPriority?'<p class="helper">O imóvel em garantia tem prioridade nesta cobrança.</p>':''}</article>`;}
+ if(!assets.length)body+='<p class="bodycopy">Nenhum imóvel livre para esta dívida. Garantias de outros contratos não podem ser utilizadas aqui. Consulte o banco ou declare falência se não houver como pagar.</p>';
+ body+='<p class="helper">Na liquidação, o banco recebe o imóvel sem construções, paga a parcela da dívida e devolve o excedente ao devedor. Uma proposta voluntária para outro jogador precisa ser aceita. Execução forçada só existe para empréstimo vencido.</p>';
+ modalShell(isBorrower?'Pagar dívida com imóveis':'Executar empréstimo vencido',body,'VALORES E TRANSFERÊNCIAS AUTOMÁTICOS');
+}
+let pendingFinanceAction=null;
+function confirmFinanceAction(action,title,body){pendingFinanceAction=action;modal={type:'financeConfirm'};modalShell(title,`<p class="bodycopy">${body}</p><div class="deed-actions"><button class="btn primary" data-fin="confirm">Confirmar</button><button class="btn ghost" data-ui="finance">Voltar sem alterar</button></div>`,'CONFIRA ANTES DE CONFIRMAR');}
+async function financeClick(button){
+ const fin=button.dataset.fin;
+ if(fin==='repay'){
+  const l=S.loans.find(l=>l.id===button.dataset.loan),v=Number(button.dataset.amount);
+  confirmFinanceAction({type:'loanPay',loanId:l.id,amount:v},'Confirmar pagamento',`Pagar <b>${money(v)}</b> de ${money(l.balance)}. Restarão ${money(l.balance-v)} neste contrato. O prazo e os juros contratados não serão alterados.`);return;
+ }
+ if(['assetOffer','assetLiquidate','assetForeclose','assetForecloseBank'].includes(fin)){
+  const tid=Number(button.dataset.tid),q=G.debtAssetQuote(S,tid),isBank=['assetLiquidate','assetForecloseBank'].includes(fin)||!S.debt.creditorId;
+  const action=fin==='assetOffer'?{type:'offerAsset',tileId:tid}:fin==='assetLiquidate'?{type:'liquidateDebt',tileId:tid}:{type:'foreclose',tileId:tid,toBank:isBank};
+  const verb=fin==='assetOffer'&&q.creditorId?'Enviar a proposta de':'Confirmar a transferência de';
+  confirmFinanceAction(action,'Pagamento com imóvel',`${verb} <b>${esc(G.TILES[tid].name)}</b>. Abate da dívida: <b>${money(q.deduction)}</b>. Troco ao devedor: <b>${money(q.change)}</b>. ${isBank?'O imóvel volta ao banco sem construções.':'O novo dono recebe as construções e eventuais obrigações de hipoteca.'}`);return;
+ }
+ const action=fin==='confirm'?pendingFinanceAction:fin==='loanAccept'?{type:'loanReply',accept:true}:fin==='loanReject'?{type:'loanReply',accept:false}:fin==='assetAccept'?{type:'assetReply',accept:true}:fin==='assetReject'?{type:'assetReply',accept:false}:null;
+ if(!action||actionPending)return;
+ actionPending=true;button.disabled=true;
+ try{await act(action);pendingFinanceAction=null;modal={type:'finance'};paintFinance();}catch{}finally{actionPending=false;if(button.isConnected)button.disabled=false;}
+}
+async function ui(name){
+ if(name==='finance'){modal={type:'finance'};paintFinance();return;}
+ if(name==='bankLoanForm'){showLoanForm('bank');return;}
+ if(name==='askLoanForm'){showLoanForm('ask');return;}
+ if(name==='lendLoanForm'){showLoanForm('lend');return;}
+ if(name==='loanReview'){modal={type:'loanReview'};paintLoanReview();return;}
+ if(name==='assetReview'){modal={type:'assetReview'};paintAssetReview();return;}
+ if(name==='debtAssets'){modal={type:'debtAssets'};paintDebtAssets();return;}
+ if(name==='retry'){toast('Tentando reconectar à mesma sala…');await net?.retry();return;}
+ return legacyUi(name);
+}
+function exit(){
+ if(S&&S.phase!=='finished'){modal={type:'exit'};modalShell('Sair e retomar depois?',`<p class="bodycopy">${net?.mode==='local'?'A demonstração não tem salvamento online.':net?.isHost?'A partida ficará pausada para o retorno. O patrimônio está salvo no servidor. Volte com o mesmo código e nome; o anfitrião não funciona como servidor.':'Seu patrimônio, posição e empréstimos permanecem salvos no servidor. Volte com o mesmo código e nome. Sua saída não é uma falência.'}</p><div class="deed-actions"><button class="btn primary" data-ui="confirmExit">Sair agora</button><button class="btn ghost" data-ui="close">Continuar na partida</button></div>`);return;}confirmExit();
+}
+function rules(){
+ modal={type:'rules'};
+ const sections=[
+ ['Objetivo e moeda','Compre ruas brasileiras, receba aluguéis e construa hotéis. Todo dinheiro é fictício, exibido em reais. Cada novo participante recebe R$ 25.000.000. Ao completar uma volta pelo Início, recebe R$ 2.000.000. Os preços são valores de jogo, não cotações imobiliárias.'],
+ ['Entrar, perder a internet e retornar','Abra o mesmo endereço do jogo, informe o código de seis caracteres e o mesmo nome. Maiúsculas e minúsculas não criam outro jogador. Um participante desconectado volta com saldo, terrenos, construções, posição, autorizações e contratos. Entradas com outro nome são novos participantes, quando houver vaga; podem ocorrer durante a partida. Jogadores retirados pelo anfitrião não podem retornar com o nome retirado; falidos não recebem um novo capital e continuam apenas como espectadores.'],
+ ['Salvamento e pausas','O servidor confirma cada transação antes de responder. Uma ausência é detectada em até 60 segundos; a partida e os relógios passam a aguardar o retorno. Guardar dinheiro, imóveis e contratos não depende do navegador do anfitrião. A sala expira após 30 dias sem atividade. O site pode ficar indisponível quando a cota gratuita da hospedagem acabar.'],
+ ['Código e nome não são senha','Use o código somente em um grupo privado de colegas. A identidade salva no navegador permite retorno imediato na mesma sessão. Em outro aparelho, código e nome recuperam um participante offline depois de liberada a conexão anterior, em até 60 segundos. Essa conveniência não é autenticação forte: quem conhece o código e o nome pode assumir uma identidade offline. Não use para dinheiro real ou competições públicas.'],
+ ['Turnos, dados e compra','Na sua vez lance dois dados e avance a soma. Resolva a casa, faça suas operações e encerre o turno. Dados iguais dão outra jogada; três duplas consecutivas levam à Auditoria. Um terreno livre pode ser comprado pelo preço da escritura ou enviado a leilão. Imóvel alheio cobra aluguel automaticamente. A Praça Livre não paga prêmio. Sorte ou Revés, impostos e recebimentos são resolvidos pelo sistema.'],
+ ['Casas e hotéis sem completar cores','O proprietário pode construir a qualquer momento da partida, inclusive fora da sua vez, pela carteira. Não precisa estar sobre o terreno nem completar o grupo. A sequência é terreno → 1 casa → 2 → 3 → 4 → hotel na quinta etapa. São quatro casas substituídas por um hotel, não cinco casas mais um hotel. Companhias não recebem construções. É necessário saldo livre, terreno sem hipoteca e ausência de dívida pendente. Empréstimos em dia não bloqueiam construção. Novas construções não aumentam retroativamente um aluguel já calculado.'],
+ ['Companhias brasileiras','Metrô de São Paulo, Rumo, Correios, Azul, Sabesp e Cemig são companhias temáticas. A cobrança é tarifa da escritura × soma dos dois dados, e não porcentagem. Exemplo: R$ 40.000 × 6 pontos = R$ 240.000 ao proprietário. Não há bônus por possuir outras companhias. Nomes são usados como ambientação independente, sem patrocínio.'],
+ ['Auditoria e autorização','Chegar à Auditoria por movimento normal é apenas visita. Quando enviado, tente dados iguais em três jogadas ou use uma autorização de saída. Sem conseguir, na quarta jogada paga R$ 500.000 e avança os pontos sorteados. A falta de saldo abre uma dívida; depois de resolvida, o deslocamento continua. Ir direto à Auditoria não paga o bônus do Início.'],
+ ['Leilões, trocas e hipotecas','Leilão mínimo de R$ 200.000, com aumentos mínimos de R$ 100.000. São 25 segundos iniciais, e cada lance garante ao menos 8 segundos restantes. Quem passa não volta ao leilão. Trocas requerem aceite da outra parte e têm 60 segundos. Hipoteca paga metade do preço do terreno; resgate custa o principal mais 20%. O imóvel hipotecado não cobra aluguel. Na sua vez, venda construções pela metade do custo antes de hipotecar aquele terreno. Imóveis dados em garantia de empréstimo não podem ser hipotecados ou negociados.'],
+ ['Pagar dívida com um imóvel','Durante uma dívida pendente, selecione Pagar com imóvel. A avaliação é o preço original + custo integral das construções − principal de eventual hipoteca. Para outro jogador, uma proposta voluntária requer o aceite do credor. O imóvel vai com as construções e a hipoteca. O valor abate a dívida; se sobrar, o credor paga o troco ao devedor. Se não puder pagar o troco, a liquidação no banco é alternativa: o banco recebe o imóvel sem construções, paga ao credor e devolve o excedente ao devedor. Um imóvel que garante outro contrato não pode quitar esta dívida.'],
+ ['Empréstimo do banco','No painel Banco & contratos, solicite de R$ 100.000 a R$ 5.000.000. Os juros são fixos de 10% para todo o empréstimo, e o prazo é de 3 rodadas. Exemplo: R$ 1.000.000 recebido na rodada 2 exige R$ 1.100.000 no início da sua vez na rodada 5. Só pode haver um empréstimo do banco por pessoa. A garantia específica é opcional, mas o patrimônio responde pela dívida mesmo sem ela. Não é permitido novo crédito se houver contrato vencido.'],
+ ['Empréstimos entre jogadores','É possível pedir ou oferecer dinheiro. A proposta informa credor, devedor, principal, juros totais de 0% a 50%, prazo de 1 a 10 rodadas e eventual imóvel em garantia. O outro participante precisa aceitar. Sem aceite, nada é transferido. No aceite, o dinheiro sai do credor, entra no devedor e o contrato é registrado para toda a sala. O prazo começa na rodada do aceite. Uma pessoa pode ter até 3 contratos em aberto, incluindo o do banco. O credor precisa de saldo livre e não pode estar com dívida pendente.'],
+ ['Garantias e pagamento antecipado','Um mesmo imóvel só pode garantir um empréstimo. Enquanto estiver em garantia, não pode ser transferido, hipotecado nem ter construções vendidas, mas pode receber mais casas e continuar cobrando aluguel. O contrato pode ser quitado ou amortizado antes do vencimento pelo painel. Os juros fixos já contratados não são recalculados. Quitado, a garantia é liberada automaticamente.'],
+ ['Vencimento e tomada de imóvel','O vencimento acontece no início da vez do devedor na rodada indicada, não durante uma queda de internet. O sistema usa primeiro o dinheiro disponível. Empréstimos do banco sem pagamento integral liquidam automaticamente a garantia ou outros imóveis, devolvendo excedente ao devedor. Entre jogadores, o credor pode executar a garantia e depois outros imóveis livres. Para ficar com um imóvel de valor maior que a dívida, deve pagar o troco; alternativamente, pode liquidá-lo no banco e receber em dinheiro. Não pode tomar imóvel antes do vencimento, por uma dívida já paga ou pertencente a outra pessoa. Um imóvel de valor menor abate apenas sua avaliação, e o restante segue devido.'],
+ ['Falência e ordem das dívidas','Se um empréstimo vencer e o devedor não tiver dinheiro nem imóveis, a falência é automática. Com bens, mas sem meios suficientes para quitar tudo, ele também pode declarar falência. Na liquidação, as garantias pagam primeiro seus respectivos contratos; depois vêm a dívida que bloqueia o turno e os demais contratos em ordem de criação. O que não for recuperado é registrado como perda do credor, e não cria saldo negativo. Empréstimos em que o jogador falido era o credor passam a ter o banco como credor. A conexão cair, por si só, nunca provoca falência.'],
+ ['Poderes do anfitrião','O anfitrião pode retirar um participante, conectado ou não, com confirmação. Retirada é definitiva para esse nome na partida e não deve ser confundida com queda de conexão. Os bens são liquidados para as dívidas existentes, e os imóveis retornam ao banco. Turnos e contratos são ajustados. Não use Retirar para consertar uma queda de internet: aguarde a reconexão.'],
+ ['Vitória e patrimônio','No tradicional, vence o último jogador solvente. No modo rápido, vence o maior patrimônio no limite de rodadas. Patrimônio = dinheiro + avaliação dos imóveis + contratos a receber − contratos a pagar − outras dívidas pendentes. Uma dívida vencida de empréstimo não é descontada duas vezes. Em empate, a vitória é compartilhada.']
+ ];
+ let body='<div class="rules-body"><div class="rule-call"><b>Metrópole — Brasil Milionário 4.0</b><br>Reconexão com patrimônio, dívidas em imóveis e contratos com prazo. Regras próprias desta adaptação. Não é um produto oficial da Estrela.</div>'+sections.map(([title,text],i)=>`<section class="rule-section"><span class="rule-number">${String(i+1).padStart(2,'0')}</span><h2>${esc(title)}</h2><p>${esc(text)}</p></section>`).join('');
+ body+='<h2>Escrituras e valores</h2><div class="rule-table-wrap"><table class="rule-table"><thead><tr><th>Imóvel</th><th>Compra</th><th>Construção / tarifa</th><th>Aluguel vazio</th><th>Hotel</th></tr></thead><tbody>'+G.TILES.filter(t=>t.price).map(t=>`<tr><td>${esc(t.name)}</td><td>${money(t.price)}</td><td>${money(t.group?G.GROUPS[t.group].build:t.rate)}</td><td>${t.rents?money(t.rents[0]):'Tarifa × dados'}</td><td>${t.rents?money(t.rents[G.HOTEL_LEVEL]):'Não se aplica'}</td></tr>`).join('')+'</tbody></table></div><p class="small">Esta edição conecta cada participante ao servidor por HTTPS, sem PeerJS ou WebRTC. Requisições periódicas sincronizam a sala. Repetir uma requisição não repete a cobrança. A hospedagem gratuita tem limite de uso; não há assinatura ou cobrança contratada pelo jogo. Salas 3.1 não são importadas automaticamente; comece uma nova sala 4.0.</p></div>';
+ modalShell('Regras completas',body,'BRASIL MILIONÁRIO · 4.0');
+}
+window.addEventListener('metro-notice',e=>toast(String(e.detail),true));
+document.addEventListener('click',async e=>{const button=e.target.closest('[data-fin]');if(!button||button.disabled)return;try{await financeClick(button);}catch(e){toast(e.message,true);}});
+document.addEventListener('input',e=>{if(['loanAmount','loanRate','loanTerm'].includes(e.target.id))updateLoanQuote();});
+document.addEventListener('change',e=>{if(e.target.id==='loanPartner'){refreshLoanCollateral();updateLoanQuote();}});
+document.addEventListener('submit',async e=>{
+ if(e.target.id!=='loanForm')return;e.preventDefault();if(actionPending)return;
+ const kind=e.target.dataset.kind,parties=loanParties(),amount=Number($('#loanAmount').value),collateralId=$('#loanCollateral').value===''?null:Number($('#loanCollateral').value);
+ if(!$('#loanConsent').checked)return;
+ const action=kind==='bank'?{type:'bankLoan',amount,collateralId}:{type:'loanOffer',...parties,amount,rate:Number($('#loanRate').value),term:Number($('#loanTerm').value),collateralId};
+ const button=e.target.querySelector('[type="submit"]');button.disabled=true;actionPending=true;
+ try{await act(action);modal={type:kind==='bank'?'finance':'loanReview'};kind==='bank'?paintFinance():paintLoanReview();}catch{}finally{actionPending=false;if(button.isConnected)button.disabled=false;}
+});
+
+home();
+})();
+
+</script></body></html>
