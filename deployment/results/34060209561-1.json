@@ -1,0 +1,19 @@
+{
+  "runId": "34060209561-1",
+  "siteId": "8785ef5e-0899-40a0-94f7-17d8e50524b1",
+  "siteUrl": "https://celadon-biscotti-4a8f9d.netlify.app",
+  "exitCode": 0,
+  "apiReachable": true,
+  "info": {
+    "app": "metropole",
+    "apiVersion": 4,
+    "engineVersion": 31,
+    "transport": "https",
+    "storage": "netlify-blobs",
+    "maxPlayers": 6,
+    "savedOnServer": true,
+    "requiresPeerJS": false,
+    "leaseMs": 60000
+  },
+  "finishedAt": "2026-09-06T21:12:23.104Z"
+}
