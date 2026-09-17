@@ -1,7 +1,9 @@
 name: Build ALB Coin V2
 on:
   push:
-    branches: [ albcoin-v2-realbuild ]
+    branches: [ main ]
+    paths:
+      - 'albcoin/**'
   workflow_dispatch:
 permissions:
   contents: read
