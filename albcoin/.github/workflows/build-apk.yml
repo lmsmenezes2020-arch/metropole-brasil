@@ -1,0 +1,32 @@
+name: Build ALB Coin V2
+on:
+  push:
+    branches: [ albcoin-v2-realbuild ]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build release APK
+        working-directory: albcoin
+        run: gradle assembleRelease
+      - name: Verify APK
+        working-directory: albcoin
+        run: |
+          test -s app/build/outputs/apk/release/app-release.apk
+          unzip -t app/build/outputs/apk/release/app-release.apk >/dev/null
+          sha256sum app/build/outputs/apk/release/app-release.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ALB-Coin-Online-V2-real-build
+          path: albcoin/app/build/outputs/apk/release/app-release.apk
