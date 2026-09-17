@@ -31,3 +31,30 @@ jobs:
           git commit -m 'Importar interface e motor originais do Metrópole 4.0 com SHA-256 verificado'
           git pull --rebase origin main
           git push origin HEAD:main
+  android-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build ALB Coin V2
+        working-directory: albcoin
+        run: gradle assembleRelease
+      - name: Validate APK
+        working-directory: albcoin
+        run: |
+          test -s app/build/outputs/apk/release/app-release.apk
+          unzip -t app/build/outputs/apk/release/app-release.apk >/dev/null
+          sha256sum app/build/outputs/apk/release/app-release.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ALB-Coin-Online-V2-real-build
+          path: albcoin/app/build/outputs/apk/release/app-release.apk
