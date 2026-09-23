@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALB Coin - Economia Escolar</title>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; }
+  input, select, button, textarea { font-family: inherit; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useCallback } = React;
+const SUPABASE_URL="https://xldwflijjdbiovubhfsr.supabase.co";
+const SUPABASE_KEY="sb_publishable_Bn_s_0pKU7pC7n2CmVHZfw_241B0Fax";
+const ALB_SESSION_KEY="albcoin_session_v3";
+async function albRpc(fn,args={}){const r=await fetch(SUPABASE_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify(args)});const t=await r.text();let d;try{d=t?JSON.parse(t):null}catch{d=t}if(!r.ok)throw new Error(d?.message||d?.hint||d?.details||d?.error||"Erro no Supabase");return d;}
+async function albLoadState(token){return albRpc("alb_get_state",{p_token:token});}
+function albApplyState(x,s){if(!s)return;if(s.users)x.setUsers(s.users);if(s.admins)x.setAdmins(s.admins);if(s.settings)x.setSettings(s.settings);if(s.transactions)x.setTransactions(s.transactions);if(s.messages)x.setMessages(s.messages);if(s.challenges)x.setChallenges(s.challenges);if(s.theme)x.setTheme(s.theme);}
+
+
+
+const SYSTEM_ADMIN = { username:"admin1", password:"9012", id:"admin1", apelido:"Administrador Principal", role:"admin" };
+
+const DEMO_USERS = {
+  "prof.demo":  { apelido:"Prof. Demo",  turma:"10º A", password:"1234", role:"professor", coins:10000, savings:0, lastInterestUpdate:Date.now() },
+  "aluno.demo": { apelido:"Aluno Demo",  turma:"10º A", password:"1234", role:"aluno",     coins:50,    savings:0, lastInterestUpdate:Date.now() },
+  "aluno2":     { apelido:"Ana Pereira", turma:"10º A", password:"1234", role:"aluno",     coins:30,    savings:0, lastInterestUpdate:Date.now() },
+};
+
+const DEMO_MESSAGES = [
+  { id:"m1", text:"Excelente participação na aula!" },
+  { id:"m2", text:"Bom trabalho no teste!" },
+  { id:"m3", text:"Comportamento exemplar." },
+];
+
+const DEFAULT_THEME = {
+  loginBg:     "linear-gradient(135deg,#0f172a,#1e3a5f,#312e81)",
+  loginAccent: "#3b82f6",
+  adminBg:     "#f8fafc",
+  adminCard:   "#ffffff",
+  adminAccent: "#2563eb",
+  profBg:      "#f8fafc",
+  profPanel:   "#0f172a",
+  profAccent:  "#2563eb",
+  alunoBg:     "#f8fafc",
+  alunoHeader: "linear-gradient(135deg,#1d4ed8,#312e81)",
+  alunoCard:   "#ffffff",
+  alunoSafe:   "linear-gradient(135deg,#4f46e5,#6366f1)",
+  fontFamily:  "system-ui, sans-serif",
+  borderRadius:"28px",
+};
+
+function genId() { return Date.now().toString(36)+Math.random().toString(36).slice(2); }
+function fmt(v)  { return Number(v||0).toFixed(2); }
+function fmtALB(v){ return `${fmt(v)} ALB`; }
+
+/* ══════════════════════════════════════════════════
+   ROOT
+══════════════════════════════════════════════════ */
+function ALBCoin() {
+  const [view,         setView]         = useState("login");
+  const [currentUser,  setCurrentUser]  = useState(null);
+  const [users,        setUsers]        = useState(DEMO_USERS);
+  const [admins,       setAdmins]       = useState({});
+  const [settings,     setSettings]     = useState({ rate:5, interval:1, unit:60000 });
+  const [transactions, setTransactions] = useState([]);
+  const [messages,     setMessages]     = useState(DEMO_MESSAGES);
+  const [challenges,   setChallenges]   = useState([]);   // desafios criados pelo admin
+  const [theme,        setTheme]        = useState(DEFAULT_THEME);
+  const [loginForm,    setLoginForm]    = useState({ username:"", password:"" });
+  const [loginError,   setLoginError]   = useState("");
+  const [toast,        setToast]        = useState(null);
+
+  const notify = (msg, type="ok") => { setToast({msg,type}); setTimeout(()=>setToast(null),3200); };
+
+  const processInterest = useCallback((uid,snap,cfg)=>{
+    const u=snap[uid]; if(!u||!u.savings) return snap;
+    const now=Date.now(), last=u.lastInterestUpdate||now;
+    const passed=Math.floor((now-last)/(cfg.interval*cfg.unit));
+    if(passed<1) return snap;
+    const interest=parseFloat((u.savings*(cfg.rate/100)*passed).toFixed(2));
+    return {...snap,[uid]:{...u,savings:parseFloat((u.savings+interest).toFixed(2)),lastInterestUpdate:now}};
+  },[]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const u=loginForm.username.trim().toLowerCase(), p=loginForm.password.trim();
+    setLoginError("");
+    try{
+      const session=await albRpc("alb_login",{p_username:u,p_password:p});
+      localStorage.setItem(ALB_SESSION_KEY,String(session.token));
+      const snap=await albLoadState(session.token);
+      albApplyState({setUsers,setAdmins,setSettings,setTransactions,setMessages,setChallenges,setTheme},snap);
+      const profile=(snap?.users||{})[session.username]||{};
+      setCurrentUser({id:session.username,apelido:profile.apelido||session.username,role:session.role,turma:profile.turma||""});
+      setView(session.role);
+    }catch(err){setLoginError(err.message||"Credenciais inválidas.");}
+  };
+
+  const logout=()=>{ localStorage.removeItem(ALB_SESSION_KEY); setCurrentUser(null); setView("login"); setLoginForm({username:"",password:""}); setLoginError(""); };
+
+  const sessionToken=()=>localStorage.getItem(ALB_SESSION_KEY);
+  const refreshFromServer=async()=>{const t=sessionToken();if(!t)return;const snap=await albLoadState(t);albApplyState({setUsers,setAdmins,setSettings,setTransactions,setMessages,setChallenges,setTheme},snap);};
+  const shared = { users,setUsers,admins,setAdmins,settings,setSettings,transactions,setTransactions,
+    messages,setMessages,challenges,setChallenges,theme,setTheme,currentUser,notify,logout,processInterest,sessionToken,refreshFromServer };
+
+  return (
+    <div style={{fontFamily:theme.fontFamily}}>
+      <Toast toast={toast}/>
+      {view==="login"     && <LoginView  {...shared} form={loginForm} setForm={setLoginForm} onLogin={handleLogin} error={loginError}/>}
+      {view==="admin"     && <AdminView  {...shared}/>}
+      {view==="professor" && <ProfView   {...shared}/>}
+      {view==="aluno"     && <AlunoView  {...shared}/>}
+    </div>
+  );
+}
+
+/* ── TOAST ── */
+function Toast({toast}){
+  if(!toast) return null;
+  return <div style={{position:"fixed",top:20,right:20,zIndex:9999,background:toast.type==="ok"?"#22c55e":"#ef4444",color:"#fff",padding:"12px 24px",borderRadius:16,fontWeight:700,fontSize:13,boxShadow:"0 8px 32px rgba(0,0,0,.2)",zIndex:10000}}>{toast.msg}</div>;
+}
+
+/* ── MODAL ── */
+function Modal({title,children,onClose,maxWidth=460}){
+  return(
+    <div onClick={onClose} style={{position:"fixed",inset:0,zIndex:500,background:"rgba(0,0,0,.6)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
+      <div onClick={e=>e.stopPropagation()} style={{background:"#fff",borderRadius:28,padding:32,width:"100%",maxWidth,boxShadow:"0 32px 80px rgba(0,0,0,.3)",maxHeight:"90vh",overflowY:"auto"}}>
+        {title&&<h3 style={{fontSize:19,fontWeight:900,color:"#1e293b",marginBottom:18}}>{title}</h3>}
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ── FIELD ── */
+function Field({label,value,onChange,placeholder="",type="text",required=true,step,min,dark=false,style={}}){
+  const s={width:"100%",padding:"12px 15px",borderRadius:13,fontSize:13,fontWeight:600,outline:"none",boxSizing:"border-box",
+    ...(dark?{background:"#1e293b",border:"none",color:"#fff"}:{background:"#f8fafc",border:"1px solid #e2e8f0",color:"#1e293b"}),...style};
+  return(
+    <div style={{marginBottom:13}}>
+      <label style={{fontSize:10,fontWeight:700,color:dark?"#475569":"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>{label}</label>
+      <input type={type} value={value} onChange={onChange} placeholder={placeholder} required={required} step={step} min={min} style={s}
+        onFocus={e=>{if(!dark)e.target.style.borderColor="#3b82f6";}} onBlur={e=>{if(!dark)e.target.style.borderColor="#e2e8f0";}}/>
+    </div>
+  );
+}
+
+/* ── BTN ── */
+function Btn({onClick,children,color="#2563eb",light=false,danger=false,type="button",full=false,small=false}){
+  const bg=danger?"#ef4444":light?"#f1f5f9":color;
+  const fg=light?"#64748b":"#fff";
+  return(
+    <button type={type} onClick={onClick} style={{padding:small?"7px 12px":"11px 16px",background:bg,border:"none",borderRadius:12,fontWeight:700,fontSize:small?10:11,cursor:"pointer",color:fg,width:full?"100%":undefined,textTransform:"uppercase",letterSpacing:.5,flexShrink:0}}>
+      {children}
+    </button>
+  );
+}
+
+/* ── COLOR PICKER FIELD ── */
+function ColorField({label,value,onChange}){
+  return(
+    <div style={{marginBottom:12}}>
+      <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>{label}</label>
+      <div style={{display:"flex",gap:8,alignItems:"center"}}>
+        <input type="color" value={value.startsWith("#")?value:"#3b82f6"} onChange={e=>onChange(e.target.value)}
+          style={{width:40,height:36,border:"1px solid #e2e8f0",borderRadius:10,cursor:"pointer",padding:2,background:"#f8fafc"}}/>
+        <input value={value} onChange={e=>onChange(e.target.value)} placeholder="#3b82f6 ou gradiente"
+          style={{flex:1,padding:"9px 12px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:12,fontSize:12,fontWeight:600,outline:"none"}}
+          onFocus={e=>e.target.style.borderColor="#3b82f6"} onBlur={e=>e.target.style.borderColor="#e2e8f0"}/>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   LOGIN
+══════════════════════════════════════════════════ */
+function LoginView({form,setForm,onLogin,error,theme}){
+  return(
+    <div style={{minHeight:"100vh",background:theme.loginBg,display:"flex",alignItems:"center",justifyContent:"center",padding:16,fontFamily:theme.fontFamily}}>
+      <div style={{width:"100%",maxWidth:400}}>
+        <div style={{textAlign:"center",marginBottom:28}}>
+          <div style={{width:76,height:76,background:theme.loginAccent,borderRadius:22,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 18px",fontSize:36,fontWeight:900,color:"#fff",transform:"rotate(3deg)",boxShadow:`0 16px 40px ${theme.loginAccent}66`}}>₳</div>
+          <h1 style={{fontSize:34,fontWeight:900,color:"#fff",letterSpacing:"-1px",margin:0}}>ALB Coin</h1>
+          <p style={{color:"rgba(147,197,253,.7)",fontSize:11,marginTop:5,letterSpacing:3,textTransform:"uppercase"}}>Economia Escolar</p>
+        </div>
+        <div style={{background:"rgba(255,255,255,.07)",border:"1px solid rgba(255,255,255,.12)",borderRadius:28,padding:32,backdropFilter:"blur(20px)"}}>
+          <form onSubmit={onLogin}>
+            {[["Utilizador","username","text"],["Palavra-passe","password","password"]].map(([lbl,field,tp])=>(
+              <div key={field} style={{marginBottom:field==="password"?20:14}}>
+                <label style={{fontSize:10,fontWeight:900,color:"rgba(147,197,253,.7)",textTransform:"uppercase",letterSpacing:2,display:"block",marginBottom:7}}>{lbl}</label>
+                <input type={tp} value={form[field]} onChange={e=>setForm(p=>({...p,[field]:e.target.value}))} placeholder={tp==="password"?"••••••••":"Nome de utilizador"} required
+                  style={{width:"100%",padding:"13px 17px",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:15,color:"#fff",fontSize:14,outline:"none",boxSizing:"border-box"}}/>
+              </div>
+            ))}
+            <button type="submit" style={{width:"100%",padding:"15px",background:theme.loginAccent,border:"none",borderRadius:15,color:"#fff",fontWeight:900,fontSize:14,cursor:"pointer"}}>ENTRAR NO SISTEMA</button>
+          </form>
+          {error&&<div style={{marginTop:14,padding:11,background:"rgba(239,68,68,.15)",border:"1px solid rgba(239,68,68,.3)",borderRadius:11,color:"#fca5a5",fontSize:12,fontWeight:700,textAlign:"center"}}>{error}</div>}
+          <div style={{marginTop:18,textAlign:"center",borderTop:"1px solid rgba(255,255,255,.08)",paddingTop:14}}>
+            <p style={{color:"rgba(255,255,255,.3)",fontSize:11,fontWeight:700,marginBottom:3}}>🔑 Admin: admin1 / 9012</p>
+            <p style={{color:"rgba(255,255,255,.2)",fontSize:10}}>Demo: prof.demo / 1234 · aluno.demo / 1234</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   ADMIN
+══════════════════════════════════════════════════ */
+function AdminView({users,setUsers,admins,setAdmins,settings,setSettings,transactions,setTransactions,messages,setMessages,challenges,setChallenges,theme,setTheme,notify,logout,currentUser,sessionToken,refreshFromServer}){
+  const [tab,setTab]=useState("users");
+
+  // modais gerais
+  const [newUserM,setNewUserM]=useState(false);
+  const [newAdminM,setNewAdminM]=useState(false);
+  const [editM,setEditM]=useState(null);
+  const [pwM,setPwM]=useState(null);
+  const [sendM,setSendM]=useState(null);
+
+  // forms
+  const [filter,setFilter]=useState("todas");
+  const [newU,setNewU]=useState({id:"",apelido:"",turma:"",password:"",role:"aluno"});
+  const [newA,setNewA]=useState({id:"",apelido:"",password:""});
+  const [ecoF,setEcoF]=useState({...settings});
+  const [newMsg,setNewMsg]=useState("");
+
+  // desafios
+  const [chalM,setChalM]=useState(null); // modal criar/editar desafio
+  const [chalForm,setChalForm]=useState({title:"",question:"",type:"aberta",options:"",answer:"",reward:10,turma:"todas",deadline:""});
+  const [answersM,setAnswersM]=useState(null); // ver respostas
+
+  // tema
+  const [themeSection,setThemeSection]=useState("login");
+  const [localTheme,setLocalTheme]=useState({...theme});
+
+  const isSuperAdmin=currentUser?.id===SYSTEM_ADMIN.id;
+  const turmas=[...new Set(Object.values(users).map(u=>u.turma).filter(Boolean))].sort();
+  const list=Object.entries(users).filter(([,u])=>filter==="todas"||u.turma===filter);
+
+  const createUser=async(e)=>{
+    e.preventDefault();const id=newU.id.trim().toLowerCase();if(!id){notify("ID inválido.","err");return;}
+    try{await albRpc("alb_create_user",{p_token:sessionToken(),p_username:id,p_apelido:newU.apelido,p_turma:newU.turma,p_password:newU.password,p_role:newU.role});await refreshFromServer();setNewU({id:"",apelido:"",turma:"",password:"",role:"aluno"});setNewUserM(false);notify("Utilizador criado no Supabase!");}catch(err){notify(err.message||"Erro ao criar utilizador.","err");}
+  };
+  const createAdmin=(e)=>{
+    e.preventDefault(); const id=newA.id.trim().toLowerCase();
+    if(!id||admins[id]||id===SYSTEM_ADMIN.username){notify("ID já existe.","err");return;}
+    setAdmins(p=>({...p,[id]:{apelido:newA.apelido,password:newA.password,role:"admin"}}));
+    setNewA({id:"",apelido:"",password:""});setNewAdminM(false);notify("Admin criado!");
+  };
+  const applyAll=()=>{
+    setUsers(p=>{const u={...p};Object.keys(u).forEach(id=>{if(u[id].role==="aluno"&&u[id].savings>0){const i=parseFloat((u[id].savings*(settings.rate/100)).toFixed(2));u[id]={...u[id],savings:parseFloat((u[id].savings+i).toFixed(2)),lastInterestUpdate:Date.now()};}});return u;});
+    notify("Juros aplicados!");
+  };
+  const saveEdit=(e)=>{
+    e.preventDefault();
+    const coins=parseFloat(parseFloat(editM.coins).toFixed(2)),savings=parseFloat(parseFloat(editM.savings).toFixed(2));
+    if(isNaN(coins)||coins<0||isNaN(savings)||savings<0){notify("Valores inválidos.","err");return;}
+    setUsers(p=>({...p,[editM.id]:{...p[editM.id],apelido:editM.apelido,turma:editM.turma,role:editM.role,coins,savings}}));
+    setEditM(null);notify("Perfil atualizado!");
+  };
+  const saveSend=(e)=>{
+    e.preventDefault(); const amt=parseFloat(parseFloat(sendM.amount).toFixed(2));
+    if(isNaN(amt)||amt<=0){notify("Valor inválido.","err");return;}
+    setUsers(p=>({...p,[sendM.id]:{...p[sendM.id],coins:parseFloat(((p[sendM.id].coins||0)+amt).toFixed(2))}}));
+    setTransactions(p=>[...p,{id:genId(),to:sendM.id,from:"admin",amount:amt,reason:sendM.reason||"Atribuição Admin",date:Date.now()}]);
+    setSendM(null);notify(`${fmtALB(amt)} enviados para ${sendM.apelido}!`);
+  };
+
+  // DESAFIOS
+  const saveChallenge=(e)=>{
+    e.preventDefault();
+    const opts=chalForm.type==="multipla"?chalForm.options.split("\n").map(o=>o.trim()).filter(Boolean):[];
+    if(chalForm.type==="multipla"&&opts.length<2){notify("Adiciona pelo menos 2 opções.","err");return;}
+    const ch={
+      id: chalM==="new"?genId():chalM.id,
+      title:chalForm.title, question:chalForm.question,
+      type:chalForm.type, options:opts,
+      answer:chalForm.answer.trim().toLowerCase(),
+      reward:parseFloat(chalForm.reward)||0,
+      turma:chalForm.turma, deadline:chalForm.deadline,
+      status:"active", createdAt:Date.now(),
+      responses:{} // uid -> {answer, correct, date, rewarded}
+    };
+    if(chalM==="new") setChallenges(p=>[...p,ch]);
+    else setChallenges(p=>p.map(c=>c.id===ch.id?{...c,...ch,responses:c.responses}:c));
+    setChalM(null); notify(chalM==="new"?"Desafio criado!":"Desafio atualizado!");
+  };
+
+  const toggleChallenge=(id)=>{
+    setChallenges(p=>p.map(c=>c.id===id?{...c,status:c.status==="active"?"closed":"active"}:c));
+  };
+  const deleteChallenge=(id)=>{
+    if(confirm("Eliminar desafio?")) setChallenges(p=>p.filter(c=>c.id!==id));
+  };
+
+  // resposta manual aceite pelo admin (pergunta aberta)
+  const manualReward=(chalId,uid)=>{
+    const ch=challenges.find(c=>c.id===chalId);
+    if(!ch||ch.responses[uid]?.rewarded) return;
+    const amt=parseFloat(ch.reward);
+    setUsers(p=>({...p,[uid]:{...p[uid],coins:parseFloat(((p[uid].coins||0)+amt).toFixed(2))}}));
+    setTransactions(p=>[...p,{id:genId(),to:uid,from:"admin",amount:amt,reason:`Desafio: ${ch.title}`,date:Date.now()}]);
+    setChallenges(p=>p.map(c=>c.id===chalId?{...c,responses:{...c.responses,[uid]:{...c.responses[uid],rewarded:true}}}:c));
+    notify(`${fmtALB(amt)} enviados para ${users[uid]?.apelido}!`);
+  };
+
+  // TEMA
+  const applyTheme=()=>{ setTheme({...localTheme}); notify("Design atualizado!"); };
+  const resetTheme=()=>{ setLocalTheme({...DEFAULT_THEME}); setTheme({...DEFAULT_THEME}); notify("Design reposto."); };
+
+  const THEME_SECTIONS={
+    login:["loginBg","loginAccent"],
+    admin:["adminBg","adminCard","adminAccent"],
+    professor:["profBg","profPanel","profAccent"],
+    aluno:["alunoBg","alunoHeader","alunoCard","alunoSafe"],
+  };
+  const THEME_LABELS={
+    loginBg:"Fundo do Login",loginAccent:"Cor de Destaque (Login)",
+    adminBg:"Fundo Admin",adminCard:"Cartão Admin",adminAccent:"Destaque Admin",
+    profBg:"Fundo Professor",profPanel:"Painel Lateral",profAccent:"Destaque Professor",
+    alunoBg:"Fundo Aluno",alunoHeader:"Header do Aluno",alunoCard:"Cartão",alunoSafe:"Cofre",
+  };
+
+  const cardBtns=(uid,u)=>(
+    <div style={{display:"flex",gap:3}}>
+      <button onClick={()=>setSendM({id:uid,apelido:u.apelido,amount:"",reason:""})} title="Enviar moedas"
+        style={{padding:"4px 7px",background:"#dcfce7",border:"1px solid #bbf7d0",borderRadius:7,cursor:"pointer",fontSize:12,color:"#166534"}}>₳</button>
+      <button onClick={()=>setEditM({id:uid,apelido:u.apelido,turma:u.turma||"",role:u.role,coins:fmt(u.coins),savings:fmt(u.savings)})} title="Editar"
+        style={{padding:"4px 7px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:7,cursor:"pointer",fontSize:12,color:"#2563eb"}}>✎</button>
+      <button onClick={()=>setPwM({id:uid,apelido:u.apelido,pw:""})} title="Senha"
+        style={{padding:"4px 7px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:7,cursor:"pointer",fontSize:12,color:"#d97706"}}>🔑</button>
+      <button onClick={()=>{if(confirm(`Eliminar ${uid}?`)){setUsers(p=>{const n={...p};delete n[uid];return n;});notify("Eliminado.");}}} title="Eliminar"
+        style={{padding:"4px 7px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:7,cursor:"pointer",fontSize:12,color:"#ef4444"}}>✕</button>
+    </div>
+  );
+
+  const TABS=[["users","👥 Utilizadores"],["admins","🛡️ Admins"],["challenges","🏆 Desafios"],["messages","💬 Mensagens"],["economy","📊 Economia"],["design","🎨 Design"]];
+
+  return(
+    <div style={{minHeight:"100vh",background:theme.adminBg,padding:"24px 18px",maxWidth:1020,margin:"0 auto",fontFamily:theme.fontFamily}}>
+
+      {/* header */}
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:24}}>
+        <div>
+          <h2 style={{fontSize:24,fontWeight:900,color:"#1e293b",letterSpacing:"-0.5px",margin:0}}>Painel Admin</h2>
+          <p style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:2,marginTop:3}}>{currentUser?.apelido}</p>
+        </div>
+        <button onClick={logout} style={{background:"#fff",border:"1px solid #e2e8f0",padding:"9px 16px",borderRadius:13,fontSize:11,fontWeight:900,cursor:"pointer",color:"#64748b"}}>SAIR</button>
+      </div>
+
+      {/* tabs */}
+      <div style={{display:"flex",gap:4,background:"#e2e8f0",padding:5,borderRadius:18,width:"fit-content",marginBottom:22,flexWrap:"wrap"}}>
+        {TABS.map(([k,l])=>(
+          <button key={k} onClick={()=>setTab(k)} style={{padding:"8px 16px",borderRadius:12,border:"none",fontWeight:700,fontSize:11,cursor:"pointer",
+            background:tab===k?"#fff":"transparent",color:tab===k?"#1e293b":"#64748b",boxShadow:tab===k?"0 1px 4px rgba(0,0,0,.1)":"none"}}>{l}</button>
+        ))}
+      </div>
+
+      {/* ══ UTILIZADORES ══ */}
+      {tab==="users"&&<>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14,flexWrap:"wrap",gap:8}}>
+          <div style={{display:"flex",alignItems:"center",gap:8}}>
+            <span style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase"}}>Turma:</span>
+            <select value={filter} onChange={e=>setFilter(e.target.value)} style={{background:"#fff",border:"1px solid #e2e8f0",borderRadius:11,padding:"7px 12px",fontSize:11,fontWeight:700,cursor:"pointer",outline:"none"}}>
+              <option value="todas">TODAS</option>{turmas.map(t=><option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+          <Btn onClick={()=>setNewUserM(true)} color={theme.adminAccent}>⊕ Novo Utilizador</Btn>
+        </div>
+        <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:20}}>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(230px,1fr))",gap:11}}>
+            {list.map(([uid,u])=>(
+              <div key={uid} style={{background:"#f8fafc",borderRadius:18,padding:15,border:"1px solid #f1f5f9"}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:9}}>
+                  <span style={{fontSize:9,fontWeight:900,textTransform:"uppercase",padding:"3px 8px",borderRadius:6,background:u.role==="professor"?"#f3e8ff":"#dbeafe",color:u.role==="professor"?"#7c3aed":"#1d4ed8"}}>{u.role}</span>
+                  {cardBtns(uid,u)}
+                </div>
+                <p style={{fontWeight:900,color:"#1e293b",fontSize:13,marginBottom:2}}>{u.apelido}</p>
+                <p style={{fontSize:10,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1}}>{u.turma||"Sem Turma"} · {uid}</p>
+                <div style={{marginTop:9,paddingTop:7,borderTop:"1px solid #e2e8f0"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
+                    <span style={{fontSize:10,fontWeight:700,color:"#94a3b8"}}>Carteira</span>
+                    <span style={{fontSize:11,fontWeight:900,color:"#2563eb"}}>{fmtALB(u.coins)}</span>
+                  </div>
+                  {u.role==="aluno"&&<div style={{display:"flex",justifyContent:"space-between"}}>
+                    <span style={{fontSize:10,fontWeight:700,color:"#94a3b8"}}>Cofre</span>
+                    <span style={{fontSize:11,fontWeight:900,color:"#4f46e5"}}>{fmtALB(u.savings)}</span>
+                  </div>}
+                </div>
+              </div>
+            ))}
+            {list.length===0&&<p style={{color:"#cbd5e1",gridColumn:"1/-1",textAlign:"center",padding:24}}>Nenhum utilizador encontrado.</p>}
+          </div>
+        </div>
+      </>}
+
+      {/* ══ ADMINS ══ */}
+      {tab==="admins"&&(
+        <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:22}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
+            <p style={{fontSize:10,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,margin:0}}>Administradores</p>
+            {isSuperAdmin&&<Btn onClick={()=>setNewAdminM(true)} color="#7c3aed">⊕ Novo Admin</Btn>}
+          </div>
+          <div style={{background:"linear-gradient(135deg,#1e293b,#0f172a)",borderRadius:16,padding:15,marginBottom:11,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <div>
+              <div style={{display:"flex",gap:7,marginBottom:4}}>
+                <span style={{fontSize:9,background:"#fbbf24",color:"#78350f",padding:"3px 8px",borderRadius:6,fontWeight:900,textTransform:"uppercase"}}>Super Admin</span>
+              </div>
+              <p style={{fontWeight:900,color:"#fff",fontSize:13,margin:"0 0 2px"}}>{SYSTEM_ADMIN.apelido}</p>
+              <p style={{fontSize:10,color:"rgba(255,255,255,.4)",fontWeight:700,margin:0}}>ID: {SYSTEM_ADMIN.username} · Não editável</p>
+            </div>
+            <span style={{fontSize:22}}>🛡️</span>
+          </div>
+          {Object.entries(admins).map(([uid,a])=>(
+            <div key={uid} style={{background:"#f8fafc",borderRadius:16,padding:15,marginBottom:9,display:"flex",justifyContent:"space-between",alignItems:"center",border:"1px solid #f1f5f9"}}>
+              <div>
+                <span style={{fontSize:9,background:"#ede9fe",color:"#6d28d9",padding:"3px 8px",borderRadius:6,fontWeight:900,textTransform:"uppercase",marginBottom:5,display:"inline-block"}}>Admin</span>
+                <p style={{fontWeight:900,color:"#1e293b",fontSize:13,margin:"0 0 2px"}}>{a.apelido}</p>
+                <p style={{fontSize:10,color:"#94a3b8",fontWeight:700,margin:0}}>ID: {uid}</p>
+              </div>
+              {isSuperAdmin&&<div style={{display:"flex",gap:6}}>
+                <button onClick={()=>setPwM({id:uid,apelido:a.apelido,pw:"",isAdmin:true})} style={{padding:"6px 9px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:8,cursor:"pointer",fontSize:12,color:"#d97706"}}>🔑</button>
+                <button onClick={()=>{if(confirm(`Eliminar admin ${uid}?`)){setAdmins(p=>{const n={...p};delete n[uid];return n;});notify("Admin eliminado.");}}} style={{padding:"6px 9px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:8,cursor:"pointer",fontSize:12,color:"#ef4444"}}>✕</button>
+              </div>}
+            </div>
+          ))}
+          {Object.keys(admins).length===0&&<p style={{color:"#cbd5e1",textAlign:"center",padding:20,fontSize:13}}>Nenhum admin extra criado.</p>}
+        </div>
+      )}
+
+      {/* ══ DESAFIOS ══ */}
+      {tab==="challenges"&&(
+        <div>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+            <div>
+              <h3 style={{fontSize:14,fontWeight:900,color:"#1e293b",margin:0}}>Desafios & Perguntas</h3>
+              <p style={{fontSize:11,color:"#94a3b8",margin:"3px 0 0"}}>Cria desafios para os alunos responderem e ganharem ALB Coin</p>
+            </div>
+            <Btn onClick={()=>{setChalForm({title:"",question:"",type:"aberta",options:"",answer:"",reward:10,turma:"todas",deadline:""});setChalM("new");}} color="#f59e0b">⊕ Novo Desafio</Btn>
+          </div>
+
+          {challenges.length===0&&(
+            <div style={{background:theme.adminCard,borderRadius:22,border:"2px dashed #e2e8f0",padding:40,textAlign:"center"}}>
+              <div style={{fontSize:40,marginBottom:12}}>🏆</div>
+              <p style={{fontSize:14,fontWeight:700,color:"#94a3b8",marginBottom:6}}>Nenhum desafio criado ainda</p>
+              <p style={{fontSize:12,color:"#cbd5e1"}}>Clica em "Novo Desafio" para criar perguntas e desafios para os alunos.</p>
+            </div>
+          )}
+
+          <div style={{display:"flex",flexDirection:"column",gap:12}}>
+            {challenges.map(ch=>{
+              const respCount=Object.keys(ch.responses).length;
+              const correctCount=Object.values(ch.responses).filter(r=>r.correct||r.rewarded).length;
+              return(
+                <div key={ch.id} style={{background:theme.adminCard,borderRadius:20,border:"1px solid #f1f5f9",padding:20}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}}>
+                    <div style={{flex:1}}>
+                      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6,flexWrap:"wrap"}}>
+                        <span style={{fontSize:10,fontWeight:900,padding:"3px 10px",borderRadius:8,textTransform:"uppercase",
+                          background:ch.status==="active"?"#dcfce7":"#f1f5f9",color:ch.status==="active"?"#166534":"#64748b"}}>
+                          {ch.status==="active"?"● Ativo":"○ Fechado"}
+                        </span>
+                        <span style={{fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:8,background:"#fef3c7",color:"#92400e",textTransform:"uppercase"}}>
+                          {ch.type==="multipla"?"Múltipla Escolha":ch.type==="verdadeiro_falso"?"V/F":"Resposta Aberta"}
+                        </span>
+                        <span style={{fontSize:10,fontWeight:700,color:"#4f46e5"}}>🎁 {fmtALB(ch.reward)}</span>
+                        {ch.turma!=="todas"&&<span style={{fontSize:10,fontWeight:700,color:"#0891b2"}}>📚 {ch.turma}</span>}
+                      </div>
+                      <h4 style={{fontSize:15,fontWeight:900,color:"#1e293b",margin:"0 0 4px"}}>{ch.title}</h4>
+                      <p style={{fontSize:12,color:"#64748b",margin:"0 0 8px",lineHeight:1.4}}>{ch.question}</p>
+                      {ch.type==="multipla"&&<div style={{display:"flex",flexWrap:"wrap",gap:6}}>{ch.options.map((o,i)=><span key={i} style={{fontSize:11,padding:"3px 10px",borderRadius:8,background:o.toLowerCase()===ch.answer?"#dcfce7":"#f1f5f9",color:o.toLowerCase()===ch.answer?"#166534":"#64748b",fontWeight:700}}>{o.toLowerCase()===ch.answer?"✓ ":""}{o}</span>)}</div>}
+                      {ch.deadline&&<p style={{fontSize:10,color:"#94a3b8",marginTop:6}}>⏰ Prazo: {new Date(ch.deadline).toLocaleString("pt-PT")}</p>}
+                    </div>
+                    <div style={{display:"flex",gap:6,alignItems:"center",flexShrink:0}}>
+                      <button onClick={()=>setAnswersM(ch)} style={{padding:"7px 12px",background:"#dbeafe",border:"none",borderRadius:10,cursor:"pointer",fontSize:11,fontWeight:700,color:"#1d4ed8"}}>
+                        👁 {respCount} resp.
+                      </button>
+                      <button onClick={()=>{setChalForm({title:ch.title,question:ch.question,type:ch.type,options:ch.options.join("\n"),answer:ch.answer,reward:ch.reward,turma:ch.turma,deadline:ch.deadline});setChalM(ch);}}
+                        style={{padding:"7px 9px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,cursor:"pointer",fontSize:12,color:"#2563eb"}}>✎</button>
+                      <button onClick={()=>toggleChallenge(ch.id)}
+                        style={{padding:"7px 9px",background:ch.status==="active"?"#fef3c7":"#dcfce7",border:"none",borderRadius:10,cursor:"pointer",fontSize:12,color:ch.status==="active"?"#92400e":"#166534",fontWeight:700}}>
+                        {ch.status==="active"?"Fechar":"Reabrir"}
+                      </button>
+                      <button onClick={()=>deleteChallenge(ch.id)} style={{padding:"7px 9px",background:"#fff",border:"1px solid #e2e8f0",borderRadius:10,cursor:"pointer",fontSize:12,color:"#ef4444"}}>✕</button>
+                    </div>
+                  </div>
+                  {/* barra de progresso */}
+                  <div style={{marginTop:12,display:"flex",alignItems:"center",gap:10}}>
+                    <div style={{flex:1,background:"#f1f5f9",borderRadius:8,height:6,overflow:"hidden"}}>
+                      <div style={{width:respCount>0?`${(correctCount/Math.max(respCount,1))*100}%`:"0%",height:"100%",background:"#22c55e",borderRadius:8,transition:"width .5s"}}/>
+                    </div>
+                    <span style={{fontSize:10,fontWeight:700,color:"#94a3b8",whiteSpace:"nowrap"}}>{correctCount}/{respCount} corretos</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ══ MENSAGENS ══ */}
+      {tab==="messages"&&(
+        <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:22}}>
+          <p style={{fontSize:10,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,marginBottom:18}}>Mensagens Prontas para Professores</p>
+          <form onSubmit={e=>{e.preventDefault();const t=newMsg.trim();if(!t)return;setMessages(p=>[...p,{id:genId(),text:t}]);setNewMsg("");notify("Mensagem adicionada!");}} style={{display:"flex",gap:9,marginBottom:20}}>
+            <input value={newMsg} onChange={e=>setNewMsg(e.target.value)} placeholder="Nova mensagem pronta..." required
+              style={{flex:1,padding:"11px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:600,outline:"none"}}
+              onFocus={e=>e.target.style.borderColor="#3b82f6"} onBlur={e=>e.target.style.borderColor="#e2e8f0"}/>
+            <Btn type="submit" color={theme.adminAccent}>+ Adicionar</Btn>
+          </form>
+          {messages.length===0&&<p style={{color:"#cbd5e1",textAlign:"center",padding:20,fontSize:13}}>Nenhuma mensagem criada.</p>}
+          <div style={{display:"flex",flexDirection:"column",gap:7}}>
+            {messages.map((m,i)=>(
+              <div key={m.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 15px",background:"#f8fafc",borderRadius:14,border:"1px solid #f1f5f9"}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <span style={{fontSize:10,fontWeight:900,color:"#94a3b8",minWidth:20}}>#{i+1}</span>
+                  <p style={{fontSize:13,fontWeight:600,color:"#1e293b",margin:0}}>{m.text}</p>
+                </div>
+                <button onClick={()=>{if(confirm("Eliminar?"))setMessages(p=>p.filter(x=>x.id!==m.id));}}
+                  style={{padding:"4px 7px",background:"#fee2e2",border:"1px solid #fecaca",borderRadius:7,cursor:"pointer",fontSize:11,color:"#dc2626",marginLeft:10}}>✕</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ══ ECONOMIA ══ */}
+      {tab==="economy"&&(
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:18}}>
+          <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:22}}>
+            <h3 style={{fontSize:11,fontWeight:900,color:"#4f46e5",textTransform:"uppercase",letterSpacing:2,marginBottom:16}}>Configuração do Banco</h3>
+            <form onSubmit={e=>{e.preventDefault();setSettings({rate:parseFloat(ecoF.rate),interval:parseInt(ecoF.interval),unit:parseInt(ecoF.unit)});notify("Economia atualizada!");}}>
+              <Field label="Taxa de Juro (%)" type="number" step="0.01" value={ecoF.rate} onChange={e=>setEcoF(p=>({...p,rate:e.target.value}))} placeholder="5"/>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                <Field label="Intervalo" type="number" value={ecoF.interval} onChange={e=>setEcoF(p=>({...p,interval:e.target.value}))} placeholder="1"/>
+                <div style={{marginBottom:13}}>
+                  <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Unidade</label>
+                  <select value={ecoF.unit} onChange={e=>setEcoF(p=>({...p,unit:e.target.value}))} style={{width:"100%",padding:"12px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                    <option value={60000}>Minutos</option><option value={3600000}>Horas</option><option value={86400000}>Dias</option>
+                  </select>
+                </div>
+              </div>
+              <Btn type="submit" color="#4f46e5" full>Atualizar Sistema</Btn>
+            </form>
+          </div>
+          <div style={{background:"linear-gradient(135deg,#4f46e5,#2563eb)",borderRadius:22,padding:26,textAlign:"center",color:"#fff",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+            <div style={{width:56,height:56,background:"rgba(255,255,255,.15)",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:13}}>⚡</div>
+            <h3 style={{fontSize:16,fontWeight:900,marginBottom:7}}>Juros Instantâneos</h3>
+            <p style={{fontSize:12,opacity:.7,marginBottom:16,lineHeight:1.5}}>Aplica a taxa a todos os cofres agora.</p>
+            <div style={{background:"rgba(255,255,255,.1)",borderRadius:12,padding:"11px 14px",width:"100%",marginBottom:16,textAlign:"left"}}>
+              <p style={{fontSize:12,color:"rgba(199,210,254,.9)",marginBottom:4}}>Taxa: <strong style={{color:"#fff"}}>{settings.rate}%</strong></p>
+              <p style={{fontSize:12,color:"rgba(199,210,254,.9)",margin:0}}>Alunos c/ cofre: <strong style={{color:"#fff"}}>{Object.values(users).filter(u=>u.role==="aluno"&&u.savings>0).length}</strong></p>
+            </div>
+            <button onClick={applyAll} style={{width:"100%",padding:"12px",background:"#fff",border:"none",borderRadius:12,color:"#4f46e5",fontWeight:900,fontSize:12,cursor:"pointer"}}>EXECUTAR AGORA</button>
+          </div>
+        </div>
+      )}
+
+      {/* ══ DESIGN ══ */}
+      {tab==="design"&&(
+        <div style={{display:"grid",gridTemplateColumns:"300px 1fr",gap:18}}>
+          {/* controles */}
+          <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:22}}>
+            <h3 style={{fontSize:11,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,marginBottom:18}}>🎨 Editor de Design</h3>
+
+            {/* secção */}
+            <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:18}}>
+              {Object.keys(THEME_SECTIONS).map(s=>(
+                <button key={s} onClick={()=>setThemeSection(s)} style={{padding:"7px 12px",borderRadius:10,border:"none",fontWeight:700,fontSize:10,cursor:"pointer",textTransform:"uppercase",
+                  background:themeSection===s?"#1e293b":"#f1f5f9",color:themeSection===s?"#fff":"#64748b"}}>
+                  {s}
+                </button>
+              ))}
+            </div>
+
+            {/* cores da secção */}
+            {THEME_SECTIONS[themeSection].map(key=>(
+              <ColorField key={key} label={THEME_LABELS[key]||key} value={localTheme[key]||""} onChange={v=>setLocalTheme(p=>({...p,[key]:v}))}/>
+            ))}
+
+            {/* tipografia & border */}
+            <div style={{borderTop:"1px solid #f1f5f9",paddingTop:14,marginTop:6}}>
+              <div style={{marginBottom:12}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Fonte</label>
+                <select value={localTheme.fontFamily} onChange={e=>setLocalTheme(p=>({...p,fontFamily:e.target.value}))}
+                  style={{width:"100%",padding:"10px 13px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:12,fontSize:13,fontWeight:600,outline:"none"}}>
+                  <option value="system-ui, sans-serif">Sistema (Padrão)</option>
+                  <option value="'Georgia', serif">Georgia (Serif)</option>
+                  <option value="'Courier New', monospace">Courier (Mono)</option>
+                  <option value="'Arial', sans-serif">Arial</option>
+                  <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
+                </select>
+              </div>
+              <div style={{marginBottom:14}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Arredondamento dos Cartões</label>
+                <select value={localTheme.borderRadius} onChange={e=>setLocalTheme(p=>({...p,borderRadius:e.target.value}))}
+                  style={{width:"100%",padding:"10px 13px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:12,fontSize:13,fontWeight:600,outline:"none"}}>
+                  <option value="8px">Quadrado (8px)</option>
+                  <option value="16px">Suave (16px)</option>
+                  <option value="28px">Arredondado (28px)</option>
+                  <option value="40px">Pill (40px)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style={{display:"flex",gap:8}}>
+              <button onClick={resetTheme} style={{flex:1,padding:"10px",background:"#f1f5f9",border:"none",borderRadius:12,fontWeight:700,fontSize:11,cursor:"pointer",color:"#64748b",textTransform:"uppercase"}}>Repor</button>
+              <button onClick={applyTheme} style={{flex:2,padding:"10px",background:theme.adminAccent,border:"none",borderRadius:12,fontWeight:900,fontSize:11,cursor:"pointer",color:"#fff",textTransform:"uppercase"}}>✓ Aplicar Design</button>
+            </div>
+          </div>
+
+          {/* pré-visualização */}
+          <div style={{background:theme.adminCard,borderRadius:22,border:"1px solid #f1f5f9",padding:22}}>
+            <h4 style={{fontSize:11,fontWeight:900,color:"#94a3b8",textTransform:"uppercase",letterSpacing:2,marginBottom:16}}>Pré-visualização</h4>
+
+            {/* login preview */}
+            <div style={{marginBottom:16}}>
+              <p style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,marginBottom:8}}>Login</p>
+              <div style={{background:localTheme.loginBg,borderRadius:16,padding:20,textAlign:"center"}}>
+                <div style={{width:44,height:44,background:localTheme.loginAccent,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 10px",fontSize:20,fontWeight:900,color:"#fff"}}>₳</div>
+                <p style={{color:"#fff",fontWeight:900,fontSize:16,margin:"0 0 10px",fontFamily:localTheme.fontFamily}}>ALB Coin</p>
+                <div style={{background:"rgba(255,255,255,.1)",borderRadius:10,padding:12}}>
+                  <div style={{background:"rgba(255,255,255,.12)",borderRadius:8,padding:"9px 12px",marginBottom:7,textAlign:"left",fontSize:11,color:"rgba(255,255,255,.5)"}}>Utilizador</div>
+                  <div style={{background:localTheme.loginAccent,borderRadius:8,padding:10,fontSize:11,color:"#fff",fontWeight:700}}>ENTRAR</div>
+                </div>
+              </div>
+            </div>
+
+            {/* aluno preview */}
+            <div style={{marginBottom:16}}>
+              <p style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,marginBottom:8}}>Painel Aluno</p>
+              <div style={{background:localTheme.alunoBg,borderRadius:16,padding:14}}>
+                <div style={{background:localTheme.alunoHeader,borderRadius:parseInt(localTheme.borderRadius)/1.5+"px",padding:16,marginBottom:12,color:"#fff"}}>
+                  <p style={{fontSize:10,opacity:.6,margin:"0 0 4px",fontFamily:localTheme.fontFamily}}>PAINEL DO ALUNO</p>
+                  <p style={{fontSize:16,fontWeight:900,margin:0,fontFamily:localTheme.fontFamily}}>Olá, João! 👋</p>
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                  <div style={{background:localTheme.alunoCard,borderRadius:parseInt(localTheme.borderRadius)/1.5+"px",padding:12,textAlign:"center",border:"1px solid #f1f5f9"}}>
+                    <p style={{fontSize:9,color:"#94a3b8",fontWeight:700,margin:"0 0 4px",fontFamily:localTheme.fontFamily}}>CARTEIRA</p>
+                    <p style={{fontSize:18,fontWeight:900,color:"#2563eb",margin:0,fontFamily:localTheme.fontFamily}}>50.00</p>
+                  </div>
+                  <div style={{background:localTheme.alunoSafe,borderRadius:parseInt(localTheme.borderRadius)/1.5+"px",padding:12,textAlign:"center"}}>
+                    <p style={{fontSize:9,color:"rgba(199,210,254,.8)",fontWeight:700,margin:"0 0 4px",fontFamily:localTheme.fontFamily}}>COFRE</p>
+                    <p style={{fontSize:18,fontWeight:900,color:"#fff",margin:0,fontFamily:localTheme.fontFamily}}>20.00</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* professor preview */}
+            <div>
+              <p style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,marginBottom:8}}>Painel Professor</p>
+              <div style={{background:localTheme.profBg,borderRadius:16,padding:14}}>
+                <div style={{background:localTheme.profPanel,borderRadius:parseInt(localTheme.borderRadius)/1.5+"px",padding:16,color:"#fff"}}>
+                  <p style={{fontSize:9,color:"#475569",fontWeight:700,margin:"0 0 4px",fontFamily:localTheme.fontFamily}}>SALDO PARA RECOMPENSAS</p>
+                  <p style={{fontSize:22,fontWeight:900,background:"linear-gradient(135deg,#60a5fa,#818cf8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",margin:"0 0 10px",fontFamily:localTheme.fontFamily}}>10000.00 ALB</p>
+                  <div style={{background:"rgba(255,255,255,.05)",borderRadius:10,padding:10,fontSize:11,color:"#475569"}}>[ Formulário de envio ]</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ MODAIS ═══ */}
+
+      {/* Novo Utilizador */}
+      {newUserM&&(
+        <Modal title="Registar Novo Utilizador" onClose={()=>setNewUserM(false)}>
+          <form onSubmit={createUser}>
+            <Field label="ID de Acesso"  value={newU.id}       onChange={e=>setNewU(p=>({...p,id:e.target.value}))}       placeholder="ex: joao.silva"/>
+            <Field label="Nome Completo" value={newU.apelido}  onChange={e=>setNewU(p=>({...p,apelido:e.target.value}))}  placeholder="Nome"/>
+            <Field label="Turma"         value={newU.turma}    onChange={e=>setNewU(p=>({...p,turma:e.target.value}))}    placeholder="10º A"/>
+            <Field label="Palavra-passe" value={newU.password} onChange={e=>setNewU(p=>({...p,password:e.target.value}))} placeholder="Senha inicial"/>
+            <div style={{marginBottom:13}}>
+              <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Cargo</label>
+              <select value={newU.role} onChange={e=>setNewU(p=>({...p,role:e.target.value}))} style={{width:"100%",padding:"12px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                <option value="aluno">ALUNO</option><option value="professor">PROFESSOR</option>
+              </select>
+            </div>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setNewUserM(false)}>Cancelar</Btn><Btn type="submit" full>Criar Conta</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Novo Admin */}
+      {newAdminM&&(
+        <Modal title="Criar Novo Administrador" onClose={()=>setNewAdminM(false)}>
+          <div style={{background:"#fef3c7",border:"1px solid #fde68a",borderRadius:12,padding:"11px 13px",marginBottom:14}}>
+            <p style={{fontSize:11,fontWeight:700,color:"#92400e",margin:0}}>⚠️ Os admins têm acesso total ao painel. Partilha com cautela.</p>
+          </div>
+          <form onSubmit={createAdmin}>
+            <Field label="ID de Acesso" value={newA.id}       onChange={e=>setNewA(p=>({...p,id:e.target.value}))}       placeholder="ex: admin.joao"/>
+            <Field label="Nome"         value={newA.apelido}  onChange={e=>setNewA(p=>({...p,apelido:e.target.value}))}  placeholder="Nome"/>
+            <Field label="Palavra-passe" value={newA.password} onChange={e=>setNewA(p=>({...p,password:e.target.value}))} placeholder="Senha"/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setNewAdminM(false)}>Cancelar</Btn><Btn type="submit" color="#7c3aed" full>Criar Admin</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Enviar moedas */}
+      {sendM&&(
+        <Modal title={`Enviar ALB → ${sendM.apelido}`} onClose={()=>setSendM(null)}>
+          <p style={{fontSize:12,color:"#94a3b8",marginBottom:13}}>Saldo actual: <strong style={{color:"#2563eb"}}>{fmtALB(users[sendM.id]?.coins)}</strong></p>
+          <form onSubmit={saveSend}>
+            <Field label="Valor (ALB)" type="number" step="0.01" min="0.01" value={sendM.amount} onChange={e=>setSendM(p=>({...p,amount:e.target.value}))} placeholder="0.00"/>
+            <Field label="Motivo" value={sendM.reason} onChange={e=>setSendM(p=>({...p,reason:e.target.value}))} placeholder="Atribuição especial" required={false}/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setSendM(null)}>Cancelar</Btn><Btn type="submit" color="#22c55e" full>Enviar</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Editar perfil */}
+      {editM&&(
+        <Modal title="Editar Perfil" onClose={()=>setEditM(null)}>
+          <form onSubmit={saveEdit}>
+            <Field label="Nome"  value={editM.apelido} onChange={e=>setEditM(p=>({...p,apelido:e.target.value}))}/>
+            <Field label="Turma" value={editM.turma}   onChange={e=>setEditM(p=>({...p,turma:e.target.value}))}/>
+            <div style={{marginBottom:13}}>
+              <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Cargo</label>
+              <select value={editM.role} onChange={e=>setEditM(p=>({...p,role:e.target.value}))} style={{width:"100%",padding:"12px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                <option value="aluno">ALUNO</option><option value="professor">PROFESSOR</option>
+              </select>
+            </div>
+            <div style={{background:"#f8fafc",borderRadius:13,padding:"13px 14px",marginBottom:13,border:"1px solid #e2e8f0"}}>
+              <p style={{fontSize:10,fontWeight:900,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,marginBottom:9}}>💰 Ajuste de Saldo</p>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
+                <Field label="Carteira (ALB)" type="number" step="0.01" min="0" value={editM.coins}   onChange={e=>setEditM(p=>({...p,coins:e.target.value}))}/>
+                <Field label="Cofre (ALB)"    type="number" step="0.01" min="0" value={editM.savings} onChange={e=>setEditM(p=>({...p,savings:e.target.value}))}/>
+              </div>
+            </div>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setEditM(null)}>Cancelar</Btn><Btn type="submit" full>Atualizar</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Senha */}
+      {pwM&&(
+        <Modal title={`Senha: ${pwM.apelido}`} onClose={()=>setPwM(null)}>
+          <form onSubmit={e=>{e.preventDefault();if(pwM.isAdmin)setAdmins(p=>({...p,[pwM.id]:{...p[pwM.id],password:pwM.pw}}));else setUsers(p=>({...p,[pwM.id]:{...p[pwM.id],password:pwM.pw}}));setPwM(null);notify("Senha atualizada!");}}>
+            <Field label="Nova Senha" value={pwM.pw} onChange={e=>setPwM(p=>({...p,pw:e.target.value}))} placeholder="Nova senha"/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setPwM(null)}>Cancelar</Btn><Btn type="submit" full>Guardar</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Criar/Editar Desafio */}
+      {chalM&&(
+        <Modal title={chalM==="new"?"Novo Desafio":"Editar Desafio"} onClose={()=>setChalM(null)} maxWidth={540}>
+          <form onSubmit={saveChallenge}>
+            <Field label="Título do Desafio" value={chalForm.title} onChange={e=>setChalForm(p=>({...p,title:e.target.value}))} placeholder="Ex: Quiz de Matemática"/>
+            <div style={{marginBottom:13}}>
+              <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Pergunta / Enunciado</label>
+              <textarea value={chalForm.question} onChange={e=>setChalForm(p=>({...p,question:e.target.value}))} required placeholder="Escreve aqui a pergunta ou desafio para os alunos..." rows={3}
+                style={{width:"100%",padding:"11px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:600,outline:"none",boxSizing:"border-box",resize:"vertical",lineHeight:1.5}}
+                onFocus={e=>e.target.style.borderColor="#3b82f6"} onBlur={e=>e.target.style.borderColor="#e2e8f0"}/>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:13}}>
+              <div>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Tipo de Resposta</label>
+                <select value={chalForm.type} onChange={e=>setChalForm(p=>({...p,type:e.target.value,options:"",answer:""}))} style={{width:"100%",padding:"11px 13px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                  <option value="aberta">Resposta Aberta</option>
+                  <option value="multipla">Múltipla Escolha</option>
+                  <option value="verdadeiro_falso">Verdadeiro / Falso</option>
+                </select>
+              </div>
+              <Field label="Recompensa (ALB)" type="number" step="0.01" min="0.01" value={chalForm.reward} onChange={e=>setChalForm(p=>({...p,reward:e.target.value}))} placeholder="10.00"/>
+            </div>
+
+            {chalForm.type==="multipla"&&(
+              <div style={{marginBottom:13}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Opções (uma por linha)</label>
+                <textarea value={chalForm.options} onChange={e=>setChalForm(p=>({...p,options:e.target.value}))} required placeholder={"Lisboa\nPorto\nFaro\nBraga"} rows={4}
+                  style={{width:"100%",padding:"11px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:600,outline:"none",boxSizing:"border-box",resize:"vertical"}}
+                  onFocus={e=>e.target.style.borderColor="#3b82f6"} onBlur={e=>e.target.style.borderColor="#e2e8f0"}/>
+              </div>
+            )}
+
+            {chalForm.type!=="aberta"&&(
+              <div style={{marginBottom:13}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>
+                  {chalForm.type==="verdadeiro_falso"?"Resposta Correta":"Resposta Correta (texto exato)"}
+                </label>
+                {chalForm.type==="verdadeiro_falso"?(
+                  <select value={chalForm.answer} onChange={e=>setChalForm(p=>({...p,answer:e.target.value}))} required style={{width:"100%",padding:"11px 13px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                    <option value="">Selecionar...</option><option value="verdadeiro">Verdadeiro</option><option value="falso">Falso</option>
+                  </select>
+                ):(
+                  <Field label="" value={chalForm.answer} onChange={e=>setChalForm(p=>({...p,answer:e.target.value}))} placeholder="Resposta correta (será comparada em minúsculas)" required/>
+                )}
+              </div>
+            )}
+
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:13}}>
+              <div>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Turma Alvo</label>
+                <select value={chalForm.turma} onChange={e=>setChalForm(p=>({...p,turma:e.target.value}))} style={{width:"100%",padding:"11px 13px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:700,outline:"none",boxSizing:"border-box"}}>
+                  <option value="todas">Todas as Turmas</option>
+                  {turmas.map(t=><option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+              <Field label="Prazo (opcional)" type="datetime-local" value={chalForm.deadline} onChange={e=>setChalForm(p=>({...p,deadline:e.target.value}))} required={false}/>
+            </div>
+
+            {chalForm.type==="aberta"&&(
+              <div style={{background:"#fef3c7",border:"1px solid #fde68a",borderRadius:12,padding:"11px 13px",marginBottom:13}}>
+                <p style={{fontSize:11,fontWeight:700,color:"#92400e",margin:0}}>📝 Resposta aberta: as respostas serão avaliadas manualmente pelo admin, que decide quem recebe a recompensa.</p>
+              </div>
+            )}
+
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setChalM(null)}>Cancelar</Btn><Btn type="submit" color="#f59e0b" full>{chalM==="new"?"Criar Desafio":"Guardar"}</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* Ver Respostas */}
+      {answersM&&(
+        <Modal title={`Respostas: ${answersM.title}`} onClose={()=>setAnswersM(null)} maxWidth={540}>
+          <div style={{background:"#f8fafc",borderRadius:12,padding:"11px 14px",marginBottom:16}}>
+            <p style={{fontSize:12,color:"#64748b",margin:"0 0 4px",fontWeight:700}}>{answersM.question}</p>
+            <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+              <span style={{fontSize:11,color:"#4f46e5",fontWeight:700}}>🎁 {fmtALB(answersM.reward)}</span>
+              <span style={{fontSize:11,color:"#64748b",fontWeight:700}}>
+                {answersM.type==="aberta"?"Resposta Aberta":answersM.type==="verdadeiro_falso"?"V/F":"Múltipla Escolha"}
+              </span>
+              {answersM.type!=="aberta"&&<span style={{fontSize:11,color:"#22c55e",fontWeight:700}}>✓ Correto: {answersM.answer}</span>}
+            </div>
+          </div>
+
+          {Object.keys(answersM.responses).length===0&&<p style={{color:"#cbd5e1",textAlign:"center",padding:24,fontSize:13}}>Ainda nenhuma resposta.</p>}
+          <div style={{display:"flex",flexDirection:"column",gap:9}}>
+            {Object.entries(answersM.responses).map(([uid,resp])=>{
+              const u=users[uid];
+              return(
+                <div key={uid} style={{background:"#f8fafc",borderRadius:14,padding:"13px 15px",border:`1px solid ${resp.rewarded?"#bbf7d0":resp.correct===false?"#fecaca":"#f1f5f9"}`}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:8}}>
+                    <div style={{flex:1}}>
+                      <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:5}}>
+                        <p style={{fontWeight:900,color:"#1e293b",fontSize:13,margin:0}}>{u?.apelido||uid}</p>
+                        <span style={{fontSize:9,padding:"2px 7px",borderRadius:6,fontWeight:900,textTransform:"uppercase",
+                          background:resp.rewarded?"#dcfce7":resp.correct===false?"#fee2e2":"#f1f5f9",
+                          color:resp.rewarded?"#166534":resp.correct===false?"#dc2626":"#64748b"}}>
+                          {resp.rewarded?"✓ Recompensado":resp.correct===false?"✗ Errado":resp.correct?"✓ Correto":"Pendente"}
+                        </span>
+                      </div>
+                      <p style={{fontSize:12,color:"#475569",margin:"0 0 3px",fontStyle:"italic"}}>"{resp.answer}"</p>
+                      <p style={{fontSize:10,color:"#94a3b8",margin:0}}>{new Date(resp.date).toLocaleString("pt-PT")}</p>
+                    </div>
+                    {/* botão recompensar manualmente (resposta aberta ou correto não recompensado ainda) */}
+                    {!resp.rewarded&&(answersM.type==="aberta"||resp.correct)&&(
+                      <button onClick={()=>{manualReward(answersM.id,uid);setAnswersM(p=>({...p,responses:{...p.responses,[uid]:{...p.responses[uid],rewarded:true}}}));}}
+                        style={{padding:"7px 12px",background:"#22c55e",border:"none",borderRadius:10,cursor:"pointer",fontSize:11,fontWeight:700,color:"#fff",flexShrink:0}}>
+                        🎁 Recompensar
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   PROFESSOR
+══════════════════════════════════════════════════ */
+function ProfView({currentUser,users,setUsers,transactions,setTransactions,messages,theme,notify,logout,sessionToken}){
+  const [form,setForm]=useState({to:"",amount:"",reason:""});
+  const [usePreset,setUsePreset]=useState(false);
+  const [pwM,setPwM]=useState(false);
+  const [pw,setPw]=useState("");
+  const prof=users[currentUser.id]||currentUser;
+  const students=Object.entries(users).filter(([,u])=>u.role==="aluno");
+
+  const send=async(e)=>{
+    e.preventDefault();const amt=parseFloat(parseFloat(form.amount).toFixed(2));if(!form.to||isNaN(amt)||amt<=0)return;if(!form.reason.trim()){notify("Insere um motivo.","err");return;}
+    try{const snap=await albRpc("alb_transfer",{p_token:sessionToken(),p_to:form.to,p_amount:amt,p_reason:form.reason});if(snap?.users)setUsers(p=>({...p,...snap.users}));if(snap?.transactions)setTransactions(snap.transactions);setForm({to:"",amount:"",reason:""});notify("ALB Coin enviado e gravado no Supabase!");}catch(err){notify(err.message||"Não foi possível enviar ALB Coin.","err");}
+  };
+
+  return(
+    <div style={{minHeight:"100vh",background:theme.profBg,padding:"24px 18px",maxWidth:960,margin:"0 auto",fontFamily:theme.fontFamily}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:28}}>
+        <div>
+          <h2 style={{fontSize:24,fontWeight:900,color:"#1e293b",margin:0}}>{prof.apelido}</h2>
+          <div style={{display:"flex",alignItems:"center",gap:11,marginTop:4}}>
+            <span style={{fontSize:11,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5}}>Turma: {prof.turma||"Geral"}</span>
+            <button onClick={()=>setPwM(true)} style={{fontSize:10,fontWeight:900,color:theme.profAccent,background:"none",border:"none",cursor:"pointer",textTransform:"uppercase"}}>Alterar Senha</button>
+          </div>
+        </div>
+        <button onClick={logout} style={{background:"#fff",border:"1px solid #e2e8f0",padding:"9px 16px",borderRadius:13,fontSize:11,fontWeight:900,cursor:"pointer",color:"#64748b"}}>SAIR</button>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"330px 1fr",gap:22}}>
+        <div style={{background:theme.profPanel,borderRadius:theme.borderRadius,padding:24,color:"#fff"}}>
+          <p style={{fontSize:10,fontWeight:900,color:"#475569",textTransform:"uppercase",letterSpacing:2,marginBottom:5}}>Saldo para Recompensas</p>
+          <div style={{fontSize:36,fontWeight:900,background:"linear-gradient(135deg,#60a5fa,#818cf8)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",marginBottom:22}}>
+            {fmt(users[currentUser.id]?.coins)} <span style={{fontSize:12,WebkitTextFillColor:"rgba(148,163,184,.5)"}}>ALB</span>
+          </div>
+          <form onSubmit={send} style={{display:"flex",flexDirection:"column",gap:12}}>
+            <div>
+              <label style={{fontSize:10,fontWeight:700,color:"#475569",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:5}}>Destinatário</label>
+              <select value={form.to} onChange={e=>setForm(p=>({...p,to:e.target.value}))} required
+                style={{width:"100%",padding:"11px 13px",background:"#1e293b",border:"none",borderRadius:12,color:form.to?"#fff":"#475569",fontSize:13,outline:"none",boxSizing:"border-box"}}>
+                <option value="">Escolher aluno...</option>
+                {students.map(([uid,u])=><option key={uid} value={uid}>{u.apelido} ({u.turma})</option>)}
+              </select>
+            </div>
+            <Field label="Quantia (ALB)" type="number" step="0.01" min="0.01" value={form.amount} onChange={e=>setForm(p=>({...p,amount:e.target.value}))} placeholder="0.00" dark/>
+            <div>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:5}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#475569",textTransform:"uppercase",letterSpacing:1.5}}>Motivo</label>
+                {messages.length>0&&(
+                  <button type="button" onClick={()=>{setUsePreset(p=>!p);setForm(p=>({...p,reason:""}));}}
+                    style={{fontSize:9,fontWeight:900,padding:"3px 8px",borderRadius:6,border:"none",cursor:"pointer",textTransform:"uppercase",background:usePreset?theme.profAccent:"rgba(255,255,255,.1)",color:"#fff"}}>
+                    {usePreset?"✎ Escrever":"📋 Prontas"}
+                  </button>
+                )}
+              </div>
+              {usePreset&&messages.length>0?(
+                <select value={form.reason} onChange={e=>setForm(p=>({...p,reason:e.target.value}))} required
+                  style={{width:"100%",padding:"11px 13px",background:"#1e293b",border:"none",borderRadius:12,color:form.reason?"#fff":"#475569",fontSize:13,outline:"none",boxSizing:"border-box"}}>
+                  <option value="">Selecionar mensagem...</option>
+                  {messages.map(m=><option key={m.id} value={m.text}>{m.text}</option>)}
+                </select>
+              ):(
+                <input value={form.reason} onChange={e=>setForm(p=>({...p,reason:e.target.value}))} placeholder="Ex: Participação" required
+                  style={{width:"100%",padding:"11px 13px",background:"#1e293b",border:"none",borderRadius:12,color:"#fff",fontSize:13,outline:"none",boxSizing:"border-box"}}/>
+              )}
+            </div>
+            <button type="submit" style={{padding:"13px",background:theme.profAccent,border:"none",borderRadius:12,color:"#fff",fontWeight:900,fontSize:13,cursor:"pointer",marginTop:4}}>ENVIAR ALB COIN</button>
+          </form>
+        </div>
+
+        <div style={{background:"#fff",borderRadius:theme.borderRadius,border:"1px solid #f1f5f9",overflow:"hidden"}}>
+          <div style={{padding:"18px 20px",borderBottom:"1px solid #f1f5f9",background:"#fafafa",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <h4 style={{fontSize:11,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,margin:0}}>Todos os Alunos</h4>
+            <span style={{fontSize:10,background:"#dbeafe",color:"#1d4ed8",padding:"4px 11px",borderRadius:20,fontWeight:900}}>{students.length} Alunos</span>
+          </div>
+          <div style={{overflowY:"auto",maxHeight:480}}>
+            {students.length===0&&<p style={{color:"#cbd5e1",textAlign:"center",padding:36,fontSize:13}}>Nenhum aluno registado.</p>}
+            {students.map(([uid,u])=>(
+              <div key={uid} style={{padding:"14px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1px solid #f8fafc"}}>
+                <div>
+                  <p style={{fontWeight:900,color:"#1e293b",fontSize:14,marginBottom:2}}>{u.apelido}</p>
+                  <p style={{fontSize:10,color:"#94a3b8",fontWeight:700,textTransform:"uppercase",letterSpacing:1,margin:0}}>{u.turma}</p>
+                </div>
+                <div style={{textAlign:"right"}}>
+                  <p style={{fontSize:12,fontWeight:900,color:"#2563eb",margin:0}}>{fmtALB(u.coins)}</p>
+                  {u.savings>0&&<p style={{fontSize:10,color:"#4f46e5",fontWeight:700,margin:"2px 0 0"}}>cofre: {fmtALB(u.savings)}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {pwM&&(
+        <Modal onClose={()=>setPwM(false)} title="Alterar a minha senha">
+          <form onSubmit={e=>{e.preventDefault();setUsers(p=>({...p,[currentUser.id]:{...p[currentUser.id],password:pw}}));setPwM(false);setPw("");notify("Senha atualizada!");}}>
+            <Field label="Nova Senha" value={pw} onChange={e=>setPw(e.target.value)} placeholder="Nova senha"/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setPwM(false)}>Cancelar</Btn><Btn type="submit" full>Guardar</Btn></div>
+          </form>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════
+   ALUNO
+══════════════════════════════════════════════════ */
+function AlunoView({currentUser,users,setUsers,transactions,setTransactions,settings,challenges,setChallenges,theme,notify,logout,sessionToken}){
+  const [modal,setModal]=useState(null);
+  const [amt,setAmt]=useState("");
+  const [pwM,setPwM]=useState(false);
+  const [pw,setPw]=useState("");
+  const [chalTab,setChalTab]=useState("open"); // open | done
+  const [answerModal,setAnswerModal]=useState(null);
+  const [answer,setAnswer]=useState("");
+
+  const u=users[currentUser.id]||{};
+  const myTxs=transactions.filter(t=>t.to===currentUser.id).sort((a,b)=>b.date-a.date).slice(0,20);
+  const unitLabel={"60000":"MIN","3600000":"HORA","86400000":"DIA"};
+
+  // desafios visíveis para este aluno  const myTurma=u.turma||"";
+  const openChallenges=challenges.filter(c=>
+    c.status==="active" &&
+    (c.turma==="todas"||c.turma===myTurma) &&
+    !c.responses[currentUser.id] &&
+    (!c.deadline||new Date(c.deadline)>new Date())
+  );
+  const doneChallenges=challenges.filter(c=>c.responses[currentUser.id]);
+
+  const doSavings=async(e)=>{
+    e.preventDefault();const n=parseFloat(parseFloat(amt).toFixed(2));if(isNaN(n)||n<=0)return;
+    try{const snap=await albRpc("alb_move_savings",{p_token:sessionToken(),p_amount:n,p_mode:modal==="save"?"save":"withdraw"});if(snap?.users?.[currentUser.id])setUsers(p=>({...p,[currentUser.id]:snap.users[currentUser.id]}));notify(modal==="save"?"Depositado no cofre!":"Levantado do cofre!");setModal(null);setAmt("");}catch(err){notify(err.message||"Operação no cofre falhou.","err");}
+  };
+
+  const submitAnswer=async(e)=>{
+    e.preventDefault();const ch=answerModal;const ans=answer.trim();if(!ans){notify("Escreve uma resposta.","err");return;}
+    try{const snap=await albRpc("alb_submit_answer",{p_token:sessionToken(),p_challenge_id:ch.id,p_answer:ans});if(snap?.users?.[currentUser.id])setUsers(p=>({...p,[currentUser.id]:snap.users[currentUser.id]}));if(Array.isArray(snap?.transactions))setTransactions(snap.transactions);if(Array.isArray(snap?.challenges))setChallenges(p=>p.map(c=>c.id===ch.id?(snap.challenges.find(x=>x.id===ch.id)||c):c));const resp=Array.isArray(snap?.challenges)?snap.challenges[0]?.responses?.[currentUser.id]:null;if(resp?.rewarded)notify("🎉 Correto! +"+fmtALB(ch.reward)+" recebidos!");else if(ch.type==="aberta")notify("Resposta enviada! O admin irá avaliar.");else notify("Resposta incorreta.","err");setAnswerModal(null);setAnswer("");}catch(err){notify(err.message||"Não foi possível enviar a resposta.","err");}
+  };
+
+  return(
+    <div style={{minHeight:"100vh",background:theme.alunoBg,padding:"20px 16px",maxWidth:900,margin:"0 auto",fontFamily:theme.fontFamily}}>
+
+      {/* header */}
+      <div style={{background:theme.alunoHeader,borderRadius:theme.borderRadius,padding:28,color:"#fff",marginBottom:18,display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12}}>
+        <div>
+          <p style={{fontSize:10,fontWeight:900,color:"rgba(147,197,253,.6)",textTransform:"uppercase",letterSpacing:3,marginBottom:6}}>Painel do Aluno</p>
+          <h2 style={{fontSize:30,fontWeight:900,letterSpacing:"-1px",marginBottom:10}}>Olá, {u.apelido||currentUser.apelido}!</h2>
+          <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
+            <span style={{fontSize:10,background:"rgba(255,255,255,.15)",padding:"4px 12px",borderRadius:9,fontWeight:900,textTransform:"uppercase",letterSpacing:2}}>{u.turma||"TURMA"}</span>
+            {openChallenges.length>0&&<span style={{fontSize:10,background:"#f59e0b",color:"#fff",padding:"4px 12px",borderRadius:9,fontWeight:900}}>🏆 {openChallenges.length} desafio{openChallenges.length>1?"s":""} disponível{openChallenges.length>1?"is":""}!</span>}
+            <button onClick={()=>setPwM(true)} style={{fontSize:10,color:"rgba(255,255,255,.5)",background:"none",border:"none",cursor:"pointer",fontWeight:900,textTransform:"uppercase",textDecoration:"underline"}}>Alterar Senha</button>
+          </div>
+        </div>
+        <button onClick={logout} style={{padding:"8px 16px",background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.15)",borderRadius:12,color:"#fff",fontWeight:900,fontSize:10,cursor:"pointer",textTransform:"uppercase"}}>SAIR</button>
+      </div>
+
+      {/* saldo cards */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:13,marginBottom:16}}>
+        <div style={{background:theme.alunoCard,borderRadius:theme.borderRadius,padding:22,border:"1px solid #f1f5f9",textAlign:"center"}}>
+          <p style={{fontSize:10,fontWeight:900,color:"#94a3b8",textTransform:"uppercase",letterSpacing:2,marginBottom:5}}>Carteira</p>
+          <div style={{fontSize:32,fontWeight:900,color:"#2563eb",margin:"5px 0 12px",letterSpacing:"-1px"}}>{fmt(u.coins)}</div>
+          <p style={{fontSize:9,color:"#cbd5e1",marginBottom:12}}>ALB Coin</p>
+          <button onClick={()=>setModal("save")} style={{width:"100%",padding:"10px",background:"#f0f9ff",border:"1px solid #bfdbfe",borderRadius:12,color:"#2563eb",fontWeight:900,fontSize:10,cursor:"pointer",textTransform:"uppercase"}}>DEPOSITAR</button>
+        </div>
+        <div style={{background:theme.alunoSafe,borderRadius:theme.borderRadius,padding:22,textAlign:"center",color:"#fff"}}>
+          <p style={{fontSize:10,fontWeight:900,color:"rgba(199,210,254,.8)",textTransform:"uppercase",letterSpacing:2,marginBottom:5}}>Cofre</p>
+          <div style={{fontSize:32,fontWeight:900,margin:"5px 0 12px",letterSpacing:"-1px"}}>{fmt(u.savings)}</div>
+          <p style={{fontSize:9,color:"rgba(199,210,254,.5)",marginBottom:12}}>ALB Coin</p>
+          <button onClick={()=>setModal("withdraw")} style={{width:"100%",padding:"10px",background:"rgba(255,255,255,.15)",border:"1px solid rgba(255,255,255,.2)",borderRadius:12,color:"#fff",fontWeight:900,fontSize:10,cursor:"pointer",textTransform:"uppercase"}}>LEVANTAR</button>
+        </div>
+        <div style={{background:theme.alunoCard,borderRadius:theme.borderRadius,padding:22,border:"1px solid #f1f5f9"}}>
+          <p style={{fontSize:10,fontWeight:900,color:"#94a3b8",textTransform:"uppercase",letterSpacing:2,marginBottom:14}}>Sistema</p>
+          <div style={{display:"flex",flexDirection:"column",gap:9}}>
+            {[["Juros",`+${settings.rate}%`,"#dcfce7","#166534"],["Ciclo",`${settings.interval} ${unitLabel[String(settings.unit)]||"UN"}`,"#f8fafc","#1e293b"],["Total",fmtALB((u.coins||0)+(u.savings||0)),"#f8fafc","#1e293b"]].map(([l,v,bg,c])=>(
+              <div key={l} style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                <span style={{fontSize:12,fontWeight:700,color:"#64748b"}}>{l}</span>
+                <span style={{fontSize:11,fontWeight:900,background:bg,color:c,padding:"3px 9px",borderRadius:8}}>{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* DESAFIOS */}
+      <div style={{background:theme.alunoCard,borderRadius:theme.borderRadius,padding:22,border:"1px solid #f1f5f9",marginBottom:16}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16,flexWrap:"wrap",gap:8}}>
+          <h3 style={{fontSize:11,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,margin:0}}>🏆 Desafios & Perguntas</h3>
+          <div style={{display:"flex",gap:5}}>
+            {[["open","Disponíveis"],["done","Realizados"]].map(([k,l])=>(
+              <button key={k} onClick={()=>setChalTab(k)} style={{padding:"6px 13px",borderRadius:10,border:"none",fontWeight:700,fontSize:10,cursor:"pointer",textTransform:"uppercase",
+                background:chalTab===k?"#1e293b":"#f1f5f9",color:chalTab===k?"#fff":"#64748b"}}>
+                {l} {k==="open"?`(${openChallenges.length})`:`(${doneChallenges.length})`}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {chalTab==="open"&&(
+          openChallenges.length===0
+            ?<div style={{textAlign:"center",padding:28,color:"#cbd5e1"}}>
+              <div style={{fontSize:32,marginBottom:8}}>🎯</div>
+              <p style={{fontSize:13,fontWeight:700}}>Nenhum desafio disponível agora.</p>
+              <p style={{fontSize:11}}>O professor ou admin irá publicar novos desafios em breve!</p>
+            </div>
+            :<div style={{display:"flex",flexDirection:"column",gap:10}}>
+              {openChallenges.map(ch=>(
+                <div key={ch.id} style={{background:"#f8fafc",borderRadius:16,padding:16,border:"1px solid #f1f5f9"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:8}}>
+                    <div style={{flex:1}}>
+                      <div style={{display:"flex",gap:7,marginBottom:6,flexWrap:"wrap"}}>
+                        <span style={{fontSize:9,fontWeight:900,padding:"3px 9px",borderRadius:7,background:"#fef3c7",color:"#92400e",textTransform:"uppercase"}}>
+                          {ch.type==="multipla"?"Múltipla Escolha":ch.type==="verdadeiro_falso"?"V / F":"Resposta Aberta"}
+                        </span>
+                        <span style={{fontSize:9,fontWeight:900,padding:"3px 9px",borderRadius:7,background:"#dcfce7",color:"#166534"}}>🎁 {fmtALB(ch.reward)}</span>
+                      </div>
+                      <h4 style={{fontSize:14,fontWeight:900,color:"#1e293b",margin:"0 0 4px"}}>{ch.title}</h4>
+                      <p style={{fontSize:12,color:"#64748b",margin:"0 0 6px",lineHeight:1.4}}>{ch.question}</p>
+                      {ch.deadline&&<p style={{fontSize:10,color:"#94a3b8"}}>⏰ Prazo: {new Date(ch.deadline).toLocaleString("pt-PT")}</p>}
+                    </div>
+                    <button onClick={()=>{setAnswerModal(ch);setAnswer("");}}
+                      style={{padding:"9px 18px",background:"#f59e0b",border:"none",borderRadius:11,cursor:"pointer",fontSize:12,fontWeight:900,color:"#fff",flexShrink:0}}>
+                      Responder →
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+        )}
+
+        {chalTab==="done"&&(
+          doneChallenges.length===0
+            ?<div style={{textAlign:"center",padding:24,color:"#cbd5e1"}}><p style={{fontSize:13,fontWeight:700}}>Ainda não respondeste a nenhum desafio.</p></div>
+            :<div style={{display:"flex",flexDirection:"column",gap:9}}>
+              {doneChallenges.map(ch=>{
+                const resp=ch.responses[currentUser.id];
+                return(
+                  <div key={ch.id} style={{background:"#f8fafc",borderRadius:14,padding:14,border:`1px solid ${resp.rewarded?"#bbf7d0":resp.correct===false?"#fecaca":"#f1f5f9"}`}}>
+                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
+                      <div>
+                        <div style={{display:"flex",gap:7,marginBottom:5,flexWrap:"wrap"}}>
+                          <span style={{fontSize:9,fontWeight:900,padding:"3px 9px",borderRadius:7,textTransform:"uppercase",
+                            background:resp.rewarded?"#dcfce7":resp.correct===false?"#fee2e2":"#fef3c7",
+                            color:resp.rewarded?"#166534":resp.correct===false?"#dc2626":"#92400e"}}>
+                            {resp.rewarded?"✓ Recompensado":resp.correct===false?"✗ Incorreto":resp.correct?"✓ Correto":"⏳ A avaliar"}
+                          </span>
+                        </div>
+                        <h4 style={{fontSize:13,fontWeight:900,color:"#1e293b",margin:"0 0 3px"}}>{ch.title}</h4>
+                        <p style={{fontSize:11,color:"#64748b",margin:0}}>Resposta: <em>"{resp.answer}"</em></p>
+                      </div>
+                      {resp.rewarded&&<span style={{fontSize:13,fontWeight:900,color:"#22c55e"}}>+{fmtALB(ch.reward)}</span>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+        )}
+      </div>
+
+      {/* histórico */}
+      <div style={{background:theme.alunoCard,borderRadius:theme.borderRadius,padding:22,border:"1px solid #f1f5f9"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
+          <h3 style={{fontSize:11,fontWeight:900,color:"#1e293b",textTransform:"uppercase",letterSpacing:2,margin:0}}>Movimentos</h3>
+          <span style={{fontSize:10,color:"#94a3b8",fontWeight:700}}>{myTxs.length} transações</span>
+        </div>
+        {myTxs.length===0&&<p style={{color:"#cbd5e1",textAlign:"center",padding:22,fontSize:13}}>Nenhuma transação ainda.</p>}
+        <div style={{display:"flex",flexDirection:"column",gap:7}}>
+          {myTxs.map(t=>(
+            <div key={t.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 15px",background:"#f8fafc",borderRadius:14,borderLeft:"4px solid #3b82f6"}}>
+              <div>
+                <p style={{fontSize:11,fontWeight:900,textTransform:"uppercase",color:"#1e293b",marginBottom:2}}>{t.reason}</p>
+                <p style={{fontSize:9,color:"#94a3b8",margin:0}}>{new Date(t.date).toLocaleString("pt-PT")}</p>
+              </div>
+              <span style={{fontSize:13,fontWeight:900,color:"#2563eb"}}>+{fmtALB(t.amount)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* modal cofre */}
+      {modal&&(
+        <Modal onClose={()=>{setModal(null);setAmt("");}}>
+          <h3 style={{fontSize:18,fontWeight:900,color:"#1e293b",marginBottom:6}}>{modal==="save"?"Depositar no Cofre":"Levantar do Cofre"}</h3>
+          <p style={{fontSize:12,color:"#94a3b8",marginBottom:14}}>{modal==="save"?`Disponível: ${fmtALB(u.coins)}`:`No cofre: ${fmtALB(u.savings)}`}</p>
+          <form onSubmit={doSavings}>
+            <input type="number" step="0.01" min="0.01" value={amt} onChange={e=>setAmt(e.target.value)} placeholder="0.00" required
+              style={{width:"100%",padding:"15px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:15,fontSize:26,fontWeight:900,textAlign:"center",outline:"none",boxSizing:"border-box",marginBottom:14}}/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>{setModal(null);setAmt("");}}>Voltar</Btn><Btn type="submit" color="#4f46e5" full>Confirmar</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* modal responder desafio */}
+      {answerModal&&(
+        <Modal title={answerModal.title} onClose={()=>{setAnswerModal(null);setAnswer("");}}>
+          <div style={{background:"#f8fafc",borderRadius:12,padding:"12px 14px",marginBottom:14}}>
+            <p style={{fontSize:13,color:"#475569",margin:"0 0 8px",lineHeight:1.5,fontWeight:600}}>{answerModal.question}</p>
+            <span style={{fontSize:11,fontWeight:900,color:"#22c55e"}}>🎁 Recompensa: {fmtALB(answerModal.reward)}</span>
+          </div>
+          <form onSubmit={submitAnswer}>
+            {answerModal.type==="multipla"&&(
+              <div style={{display:"flex",flexDirection:"column",gap:7,marginBottom:14}}>
+                {answerModal.options.map((opt,i)=>(
+                  <label key={i} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 14px",background:answer===opt?"#dbeafe":"#f8fafc",borderRadius:12,cursor:"pointer",border:`1px solid ${answer===opt?"#93c5fd":"#e2e8f0"}`,transition:"all .15s"}}>
+                    <input type="radio" name="opt" value={opt} checked={answer===opt} onChange={e=>setAnswer(e.target.value)} style={{accentColor:"#2563eb"}}/>
+                    <span style={{fontSize:13,fontWeight:600,color:"#1e293b"}}>{opt}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+            {answerModal.type==="verdadeiro_falso"&&(
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:14}}>
+                {["Verdadeiro","Falso"].map(opt=>(
+                  <label key={opt} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:9,padding:"14px",background:answer.toLowerCase()===opt.toLowerCase()?"#dbeafe":"#f8fafc",borderRadius:14,cursor:"pointer",border:`1px solid ${answer.toLowerCase()===opt.toLowerCase()?"#93c5fd":"#e2e8f0"}`,fontWeight:700,fontSize:14,color:"#1e293b"}}>
+                    <input type="radio" name="tf" value={opt.toLowerCase()} checked={answer.toLowerCase()===opt.toLowerCase()} onChange={e=>setAnswer(e.target.value)} style={{accentColor:"#2563eb"}}/>{opt}
+                  </label>
+                ))}
+              </div>
+            )}
+            {answerModal.type==="aberta"&&(
+              <div style={{marginBottom:14}}>
+                <label style={{fontSize:10,fontWeight:700,color:"#94a3b8",textTransform:"uppercase",letterSpacing:1.5,display:"block",marginBottom:6}}>A tua resposta</label>
+                <textarea value={answer} onChange={e=>setAnswer(e.target.value)} required placeholder="Escreve aqui a tua resposta..." rows={3}
+                  style={{width:"100%",padding:"11px 14px",background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:13,fontSize:13,fontWeight:600,outline:"none",boxSizing:"border-box",resize:"vertical",lineHeight:1.5}}
+                  onFocus={e=>e.target.style.borderColor="#3b82f6"} onBlur={e=>e.target.style.borderColor="#e2e8f0"}/>
+              </div>
+            )}
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>{setAnswerModal(null);setAnswer("");}}>Cancelar</Btn><Btn type="submit" color="#f59e0b" full>Enviar Resposta</Btn></div>
+          </form>
+        </Modal>
+      )}
+
+      {/* modal senha */}
+      {pwM&&(
+        <Modal onClose={()=>setPwM(false)} title="Alterar a minha senha">
+          <form onSubmit={e=>{e.preventDefault();setUsers(p=>({...p,[currentUser.id]:{...p[currentUser.id],password:pw}}));setPwM(false);setPw("");notify("Senha atualizada!");}}>
+            <Field label="Nova Senha" value={pw} onChange={e=>setPw(e.target.value)} placeholder="Nova senha"/>
+            <div style={{display:"flex",gap:9}}><Btn light onClick={()=>setPwM(false)}>Cancelar</Btn><Btn type="submit" full>Guardar</Btn></div>
+          </form>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<ALBCoin />);
+</script>
+</body>
+</html>
