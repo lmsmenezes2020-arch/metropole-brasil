@@ -1,5 +1,7 @@
 name: Build ALB Coin V3
 on:
+  push:
+    branches: [albcoin-v3]
   workflow_dispatch:
 permissions:
   contents: read
